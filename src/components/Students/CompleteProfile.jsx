@@ -377,14 +377,18 @@ const CompleteProfile = ({ onProfileComplete }) => {
                 <label>
                   <input
                     type="checkbox"
-                    name="interestedInPlacements"
+                    name="placementPreferences.interestedInPlacements"
                     checked={profile.placementPreferences.interestedInPlacements}
-                    onChange={(e) => handleChange({
-                      target: {
-                        name: e.target.name,
-                        value: e.target.checked
-                      }
-                    })}
+                    onChange={(e) => {
+                      const { name, checked } = e.target;
+                      setProfile(prev => ({
+                        ...prev,
+                        placementPreferences: {
+                          ...prev.placementPreferences,
+                          interestedInPlacements: checked
+                        }
+                      }));
+                    }}
                   />
                   Are you interested in Campus Placements Opportunities?
                 </label>
@@ -393,14 +397,18 @@ const CompleteProfile = ({ onProfileComplete }) => {
                 <label>
                   <input
                     type="checkbox"
-                    name="willingToRelocate"
+                    name="placementPreferences.willingToRelocate"
                     checked={profile.placementPreferences.willingToRelocate}
-                    onChange={(e) => handleChange({
-                      target: {
-                        name: e.target.name,
-                        value: e.target.checked
-                      }
-                    })}
+                    onChange={(e) => {
+                      const { name, checked } = e.target;
+                      setProfile(prev => ({
+                        ...prev,
+                        placementPreferences: {
+                          ...prev.placementPreferences,
+                          willingToRelocate: checked
+                        }
+                      }));
+                    }}
                   />
                   Are you willing to relocate for job opportunities in cities like Pune, Mumbai, etc.?
                 </label>

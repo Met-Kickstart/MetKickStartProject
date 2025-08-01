@@ -78,7 +78,7 @@ const AdminDashboard = ({ onLogout }) => {
         return <Overview />;
       
       case 'student-management':
-        return <StudentManagement />;
+        return <StudentManagement setActiveTab={setActiveTab} />;
       
       case 'create-drive':
         return <CreatePlacementDrive />;

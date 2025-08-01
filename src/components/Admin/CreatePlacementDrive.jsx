@@ -23,7 +23,6 @@ const CreateDrive = () => {
     tenthPercentage: '',
     twelfthPercentage: '',
     graduationCGPA: "",
-    minCGPA: "",
     activeBacklogs: "",
     mbaSpecializations: [],
     rounds: "",
@@ -73,6 +72,13 @@ const CreateDrive = () => {
   };
 
   return (
+    <div className="create-drive">
+          <div className="page-header">
+            <div className="header-content">
+              <h2> Create Drive</h2>
+              <p>Create A New Placement Drive</p>
+            </div>
+          </div>
     <div className="create-drive-page">
       <div className="form-container">
         <form onSubmit={handleSubmit} className="drive-form">
@@ -257,18 +263,6 @@ const CreateDrive = () => {
                   />
                 </div>
                 <div className="input-group">
-                  <label>Minimum CGPA</label>
-                  <input
-                    type="text"
-                    name="minCGPA"
-                    value={formData.minCGPA}
-                    onChange={handleInputChange}
-                    placeholder="e.g., 7.0"
-                  />
-                </div>
-              </div>
-              <div className="input-row">
-                <div className="input-group">
                   <label>Active Backlogs</label>
                   <input
                     type="text"
@@ -292,13 +286,15 @@ const CreateDrive = () => {
             </div>
             <div className="card-content">
               <div className="input-group">
-                <label>Selection Rounds</label>
-                <textarea
+                <label>Number of Selection Rounds</label>
+                <input
+                  type="number"
                   name="rounds"
                   value={formData.rounds}
                   onChange={handleInputChange}
-                  placeholder="Describe the selection process rounds (e.g., 1. Aptitude Test, 2. Technical Interview, 3. HR Round)"
-                  rows="4"
+                  placeholder="Enter number of rounds (1-10)"
+                  min="1"
+                  max="10"
                   required
                 />
               </div>
@@ -321,6 +317,7 @@ const CreateDrive = () => {
         </form>
       </div>
     </div>
+  </div>
   );
 };
 

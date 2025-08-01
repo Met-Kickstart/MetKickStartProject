@@ -1,42 +1,38 @@
 import React, { useState } from 'react';
-import { FaSearch, FaUserGraduate, FaEdit, FaTrash } from 'react-icons/fa';
+import { FaSearch, FaUserGraduate, FaEdit, FaFileExcel } from 'react-icons/fa';
+import * as XLSX from 'xlsx';
 import './StudentManagement.css';
 
 const StudentManagement = () => {
   const [students, setStudents] = useState([
     {
       id: 1,
-      name: 'John Doe',
-      course: 'MBA',
-      specialization: ['Finance', 'Marketing'],
-      batch: '2024-2026',
-      status: 'Placed',
-      email: 'john.doe@example.com',
-      cgpa: '8.5'
+      rollNo: "2023MBA001",
+      name: "John Doe",
+      contactNo: "9876543210",
+      officialEmail: "john.doe@met.edu",
+      specialization: "Finance",
+      status: "Placed"
     },
     {
       id: 2,
-      name: 'Jane Smith',
-      course: 'MCA',
-      year: '2025',
-      status: 'Not Placed',
-      branch: 'Computer Applications',
-      email: 'jane.smith@example.com'
+      rollNo: "2023MBA002", 
+      name: "Jane Smith",
+      contactNo: "9876543211",
+      officialEmail: "jane.smith@met.edu",
+      specialization: "Marketing",
+      status: "In Progress"
     }
   ]);
 
   const [filters, setFilters] = useState({
     search: '',
-    course: '',
-    specialization: '', // Changed from array to string
-    batch: '',
+    specialization: '',
     status: ''
   });
 
-  const courses = ['MBA', 'MCA'];
   const specializations = ['Finance', 'Marketing', 'HR', 'Operations'];
-  const batches = ['2024-2026', '2025-2027', '2026-2028'];
-  const statuses = ['Placed', 'Not Placed', 'In Process'];
+  const statuses = ['Placed', 'In Progress', 'Not Placed'];
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -47,15 +43,18 @@ const StudentManagement = () => {
   };
 
   const filteredStudents = students.filter(student => {
-    const matchesSearch = student.name.toLowerCase().includes(filters.search.toLowerCase());
-    const matchesCourse = !filters.course || student.course === filters.course;
-    const matchesBatch = !filters.batch || student.batch === filters.batch;
-    const matchesStatus = !filters.status || student.status === filters.status;
+    const matchesSearch = 
+      student.name.toLowerCase().includes(filters.search.toLowerCase()) ||
+      student.rollNo.toLowerCase().includes(filters.search.toLowerCase()) ||
+      student.officialEmail.toLowerCase().includes(filters.search.toLowerCase());
+      
     const matchesSpecialization = !filters.specialization || 
-      student.specialization.includes(filters.specialization);
+      student.specialization === filters.specialization;
+      
+    const matchesStatus = !filters.status || 
+      student.status === filters.status;
 
-    return matchesSearch && matchesCourse && matchesBatch && 
-           matchesStatus && matchesSpecialization;
+    return matchesSearch && matchesSpecialization && matchesStatus;
   });
 
   const handleEdit = (studentId) => {
@@ -69,6 +68,43 @@ const StudentManagement = () => {
     }
   };
 
+  const handleStatusChange = (studentId, newStatus) => {
+    setStudents(prevStudents =>
+      prevStudents.map(student =>
+        student.id === studentId
+          ? { ...student, status: newStatus }
+          : student
+      )
+    );
+  };
+
+  const handleFileImport = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        const data = evt.target.result;
+        const workbook = XLSX.read(data, { type: 'array' });
+        const sheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[sheetName];
+        const jsonData = XLSX.utils.sheet_to_json(worksheet);
+        
+        const newStudents = jsonData.map((row, index) => ({
+          id: students.length + index + 1,
+          rollNo: row['Roll No'] || '',
+          name: row['Name'] || '',
+          contactNo: row['Contact No'] || '',
+          officialEmail: row['Official Email ID'] || '',
+          specialization: row['Specialization'] || '',
+          status: row['Status'] || 'Not Placed'
+        }));
+
+        setStudents(prevStudents => [...prevStudents, ...newStudents]);
+      };
+      reader.readAsArrayBuffer(file);
+    }
+  };
+
   return (
     <div className="student-management">
       <div className="page-header">
@@ -76,7 +112,18 @@ const StudentManagement = () => {
           <h2><FaUserGraduate /> Student Management</h2>
           <p>Manage and track student records</p>
         </div>
-        <button className="add-student-btn">Add New Student</button>
+        <div className="import-section">
+          <label htmlFor="fileInput" className="import-btn">
+            <FaFileExcel /> Import Excel
+            <input
+              id="fileInput"
+              type="file"
+              accept=".xlsx, .xls"
+              onChange={handleFileImport}
+              style={{ display: 'none' }}
+            />
+          </label>
+        </div>
       </div>
 
       <div className="filters-section">
@@ -94,19 +141,6 @@ const StudentManagement = () => {
         <div className="filter-controls">
           <div className="filter-group">
             <select
-              name="course"
-              value={filters.course}
-              onChange={handleFilterChange}
-            >
-              <option value="">All Courses</option>
-              {courses.map(course => (
-                <option key={course} value={course}>{course}</option>
-              ))}
-            </select>
-          </div>
-
-          <div className="filter-group">
-            <select
               name="specialization"
               value={filters.specialization}
               onChange={handleFilterChange}
@@ -114,19 +148,6 @@ const StudentManagement = () => {
               <option value="">All Specializations</option>
               {specializations.map(spec => (
                 <option key={spec} value={spec}>{spec}</option>
-              ))}
-            </select>
-          </div>
-
-          <div className="filter-group">
-            <select
-              name="batch"
-              value={filters.batch}
-              onChange={handleFilterChange}
-            >
-              <option value="">All Batches</option>
-              {batches.map(batch => (
-                <option key={batch} value={batch}>{batch}</option>
               ))}
             </select>
           </div>
@@ -150,42 +171,34 @@ const StudentManagement = () => {
         <table>
           <thead>
             <tr>
+              <th>Roll No</th>
               <th>Name</th>
-              <th>Course</th>
-              <th>Branch</th>
-              <th>Year</th>
-              <th>Email</th>
+              <th>Contact No</th>
+              <th>Official Email ID</th>
+              <th>Specialization</th>
               <th>Status</th>
-              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {filteredStudents.map(student => (
               <tr key={student.id}>
+                <td>{student.rollNo}</td>
                 <td>{student.name}</td>
-                <td>{student.course}</td>
-                <td>{student.branch}</td>
-                <td>{student.year}</td>
-                <td>{student.email}</td>
+                <td>{student.contactNo}</td>
+                <td>{student.officialEmail}</td>
+                <td>{student.specialization}</td>
                 <td>
-                  <span className={`status-badge ${student.status.toLowerCase().replace(' ', '-')}`}>
-                    {student.status}
-                  </span>
-                </td>
-                <td className="actions">
-                  <button
-                    className="edit-btn"
-                    onClick={() => handleEdit(student.id)}
+                  <select
+                    value={student.status}
+                    onChange={(e) => handleStatusChange(student.id, e.target.value)}
+                    className={`status-select ${student.status.toLowerCase().replace(' ', '-')}`}
                   >
-                    <FaEdit />
-                  </button>
-                  <button
-                    className="delete-btn"
-                    onClick={() => handleDelete(student.id)}
-                  >
-                    <FaTrash />
-                  </button>
+                    {statuses.map(status => (
+                      <option key={status} value={status}>{status}</option>
+                    ))}
+                  </select>
                 </td>
+                
               </tr>
             ))}
           </tbody>

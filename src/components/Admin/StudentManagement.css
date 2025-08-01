@@ -279,6 +279,12 @@ td {
   .filter-group {
     width: 100%;
   }
+
+  .import-btn {
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+  }
 }
 
 tbody tr:hover {
@@ -297,4 +303,62 @@ tbody tr:hover {
   --card-shadow: 0 4px 25px rgba(0, 0, 0, 0.07);
   --card-hover-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   --border-radius-md: 8px;
+}
+
+.status-select {
+  padding: 0.5rem;
+  border-radius: 20px;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  width: 120px;
+  text-align: center;
+  background: var(--primary-red);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.status-select:hover {
+  background: var(--primary-red-dark);
+}
+
+.status-select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.2);
+}
+
+.status-select option {
+  background: white;
+  color: var(--dark-text);
+}
+
+.import-section {
+  display: flex;
+  align-items: center;
+}
+
+.import-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--primary-red);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(211, 47, 47, 0.2);
+}
+
+.import-btn:hover {
+  background: var(--primary-red-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(211, 47, 47, 0.3);
+}
+
+.import-btn svg {
+  font-size: 1.2rem;
 }
