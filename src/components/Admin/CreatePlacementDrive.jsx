@@ -1,8 +1,14 @@
-// CreateDrive.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Upload, Building, Mail, Phone, Calendar, MapPin, DollarSign } from "lucide-react";
+import { 
+  Building,
+  Mail,
+  Calendar,
+  MapPin,
+  FileText,
+  ListOrdered 
+} from "lucide-react";
 import "./CreateDrive.css";
 
 const CreateDrive = () => {
@@ -14,26 +20,22 @@ const CreateDrive = () => {
     driveDate: "",
     applicationDeadline: "",
     salary: "",
-    jobType: "Full-time",
-    experience: "Fresher",
-    eligibilityCriteria: {
-      minCGPA: "",
-      maxBacklogs: "",
-      graduationYear: "",
-    },
-    contactEmail: "",
-    hrContact: "",
+    tenthPercentage: '',
+    twelfthPercentage: '',
+    graduationCGPA: "",
+    minCGPA: "",
+    activeBacklogs: "",
     mbaSpecializations: [],
+    rounds: "",
+    jobDescription: ""
   });
 
-  const [jdFile, setJdFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const specializations = [
     "HR",
     "Finance",
     "Marketing",
     "Operations",
-  
   ];
 
   const toggleSpecialization = (spec) => {
@@ -47,39 +49,17 @@ const CreateDrive = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name.includes(".")) {
-      const [parent, child] = name.split(".");
-      setFormData((prev) => ({
-        ...prev,
-        [parent]: { ...prev[parent], [child]: value },
-      }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setJdFile(file);
-    }
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!jdFile) {
-      alert("Please upload a Job Description file.");
-      return;
-    }
-
+    
     try {
       setLoading(true);
-      const data = new FormData();
-      data.append("jd_file", jdFile);
-      data.append("driveData", JSON.stringify(formData));
-
-      await axios.post("http://localhost:8000/api/drives/", data, {
-        headers: { "Content-Type": "multipart/form-data" },
+      
+      await axios.post("http://localhost:8000/api/drives/", formData, {
+        headers: { "Content-Type": "application/json" },
       });
 
       alert("Drive created successfully!");
@@ -134,61 +114,43 @@ const CreateDrive = () => {
               <h3>MBA Specialization Required</h3>
             </div>
             <div className="card-content">
-            <div className="specialization-container">
-              {specializations.map((spec) => (
-                <label key={spec} className="spec-checkbox-label">
-                  <input
-                    type="checkbox"
-                    name="mbaSpecializations"
-                    value={spec}
-                    checked={formData.mbaSpecializations.includes(spec)}
-                    onChange={(e) => {
-                      const { checked, value } = e.target;
-                      setFormData((prev) => {
-                        const mbaSpecializations = checked
-                          ? [...prev.mbaSpecializations, value]
-                          : prev.mbaSpecializations.filter((s) => s !== value);
-                        return { ...prev, mbaSpecializations };
-                      });
-                    }}
-                  />
-                  <span></span>
-                  {spec}
-                </label>
-              ))}
-            </div>
+              <div className="specialization-container">
+                {specializations.map((spec) => (
+                  <label key={spec} className="spec-checkbox-label">
+                    <input
+                      type="checkbox"
+                      name="mbaSpecializations"
+                      value={spec}
+                      checked={formData.mbaSpecializations.includes(spec)}
+                      onChange={() => toggleSpecialization(spec)}
+                    />
+                    <span></span>
+                    {spec}
+                  </label>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Job Description Upload Card */}
+          {/* Job Description Card */}
           <div className="form-card">
             <div className="card-header">
-              <Upload size={24} />
-              <h3>Job Description Document</h3>
+              <div className="icon-wrapper">
+                <FileText size={24} />
+              </div>
+              <h3>Job Description</h3>
             </div>
             <div className="card-content">
-              <div className="file-upload-area">
-                <input
-                  type="file"
-                  id="jd-file"
-                  accept=".pdf,.doc,.docx"
-                  onChange={handleFileChange}
-                  hidden
+              <div className="input-group">
+                <label>Detailed Job Description</label>
+                <textarea
+                  name="jobDescription"
+                  value={formData.jobDescription}
+                  onChange={handleInputChange}
+                  placeholder="Enter detailed job description, responsibilities, and requirements..."
+                  rows="6"
+                  required
                 />
-                <label htmlFor="jd-file" className="file-upload-label">
-                  <div className="upload-icon">
-                    <Upload size={32} />
-                  </div>
-                  <div className="upload-text">
-                    <strong>Click to upload</strong> or drag and drop
-                    <span>PDF, DOC, DOCX (max 10MB)</span>
-                  </div>
-                </label>
-                {jdFile && (
-                  <div className="file-selected">
-                    <span>📄 {jdFile.name}</span>
-                  </div>
-                )}
               </div>
             </div>
           </div>
@@ -241,10 +203,7 @@ const CreateDrive = () => {
                   />
                 </div>
                 <div className="input-group">
-                  <label>
-                    <DollarSign size={16} />
-                    Salary Package
-                  </label>
+                  <label>Salary Package</label>
                   <input
                     type="text"
                     name="salary"
@@ -257,63 +216,91 @@ const CreateDrive = () => {
             </div>
           </div>
 
-          {/* Contact & Eligibility Card */}
+          {/* Eligibility Card */}
           <div className="form-card">
             <div className="card-header">
               <Mail size={24} />
-              <h3>Contact & Eligibility</h3>
+              <h3>Eligibility</h3>
             </div>
             <div className="card-content">
               <div className="input-row">
                 <div className="input-group">
-                  <label>
-                    <Mail size={16} />
-                    Contact Email
-                  </label>
+                  <label>10th Percentage</label>
                   <input
-                    type="email"
-                    name="contactEmail"
-                    value={formData.contactEmail}
+                    type="text"
+                    name="tenthPercentage"
+                    value={formData.tenthPercentage}
                     onChange={handleInputChange}
-                    placeholder="hr@company.com"
-                    required
+                    placeholder="e.g., 85"
                   />
                 </div>
                 <div className="input-group">
-                  <label>
-                    <Phone size={16} />
-                    HR Contact
-                  </label>
+                  <label>12th Percentage</label>
                   <input
-                    type="tel"
-                    name="hrContact"
-                    value={formData.hrContact}
+                    type="text"
+                    name="twelfthPercentage"
+                    value={formData.twelfthPercentage}
                     onChange={handleInputChange}
-                    placeholder="+91 9876543210"
+                    placeholder="e.g., 80"
                   />
                 </div>
               </div>
               <div className="input-row">
                 <div className="input-group">
-                  <label>Minimum CGPA</label>
+                  <label>Graduation CGPA</label>
                   <input
                     type="text"
-                    name="eligibilityCriteria.minCGPA"
-                    value={formData.eligibilityCriteria.minCGPA}
+                    name="graduationCGPA"
+                    value={formData.graduationCGPA}
                     onChange={handleInputChange}
-                    placeholder="7.0"
+                    placeholder="e.g., 7.5"
                   />
                 </div>
                 <div className="input-group">
-                  <label>Max Backlogs</label>
+                  <label>Minimum CGPA</label>
                   <input
                     type="text"
-                    name="eligibilityCriteria.maxBacklogs"
-                    value={formData.eligibilityCriteria.maxBacklogs}
+                    name="minCGPA"
+                    value={formData.minCGPA}
                     onChange={handleInputChange}
-                    placeholder="0"
+                    placeholder="e.g., 7.0"
                   />
                 </div>
+              </div>
+              <div className="input-row">
+                <div className="input-group">
+                  <label>Active Backlogs</label>
+                  <input
+                    type="text"
+                    name="activeBacklogs"
+                    value={formData.activeBacklogs}
+                    onChange={handleInputChange}
+                    placeholder="e.g., 0"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Rounds Card */}
+          <div className="form-card">
+            <div className="card-header">
+              <div className="icon-wrapper">
+                <ListOrdered size={24} />
+              </div>
+              <h3>Selection Process</h3>
+            </div>
+            <div className="card-content">
+              <div className="input-group">
+                <label>Selection Rounds</label>
+                <textarea
+                  name="rounds"
+                  value={formData.rounds}
+                  onChange={handleInputChange}
+                  placeholder="Describe the selection process rounds (e.g., 1. Aptitude Test, 2. Technical Interview, 3. HR Round)"
+                  rows="4"
+                  required
+                />
               </div>
             </div>
           </div>

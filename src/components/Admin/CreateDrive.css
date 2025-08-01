@@ -192,6 +192,24 @@ body {
   color: #999;
 }
 
+.input-group textarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.5;
+}
+
+.input-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-red);
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.15);
+}
+
 /* =========================================
    Specialization Pills & File Upload - FIXED
    ========================================= */

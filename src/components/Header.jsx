@@ -1,7 +1,7 @@
 import React from 'react';
-import { FaGraduationCap, FaSignInAlt, FaMoon, FaSun } from 'react-icons/fa';
+import { FaGraduationCap, FaSignInAlt } from 'react-icons/fa';
 
-const Header = ({ theme, toggleTheme, onLoginClick, isLoggedIn, onLogoutClick, profileLogo }) => {
+const Header = ({ onLoginClick, isLoggedIn, onLogoutClick, profileLogo }) => {
   return (
     <header className="header">
       <div className="header-container">
@@ -59,9 +59,7 @@ const Header = ({ theme, toggleTheme, onLoginClick, isLoggedIn, onLogoutClick, p
               Login <FaSignInAlt />
             </a>
           )}
-          <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle dark mode">
-            {theme === 'dark' ? <FaSun /> : <FaMoon />}
-          </button>
+          {/* Remove theme toggle button */}
         </div>
       </div>
     </header>

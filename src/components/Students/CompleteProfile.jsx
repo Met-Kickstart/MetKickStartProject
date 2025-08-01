@@ -1,23 +1,39 @@
 import React, { useState } from 'react';
-import { Upload, Building, Mail, Phone, Calendar, BookOpen, GraduationCap, Percent, Award, Linkedin, Globe } from 'lucide-react';
+import { Upload, Building, Mail, Phone, BookOpen, GraduationCap, Percent, Linkedin, Globe, User } from 'lucide-react';
 import './CompleteProfile.css';
 
 const CompleteProfile = ({ onProfileComplete }) => {
   const [profile, setProfile] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    tenthMarks: '',
-    twelfthMarks: '',
-    graduationStream: '',
-    graduationDegree: '',
-    university: '',
-    graduationPercentage: '',
-    specialization: '',
-    currentSemester: '',
-    currentCGPA: '',
-    linkedinUrl: '',
-    resumeFile: null
+    rollNo: '',
+    fullName: '',
+    contactNo: '',
+    officialEmail: '',
+    personalEmail: '',
+    academics: {
+      tenthPercentage: '',
+      twelfthPercentage: '',
+      graduationStream: '',
+      graduationDegree: '',
+      university: '',
+      graduationCGPA: '',
+      mbaFirstYearCGPA: '',
+      mbaSpecialization: ''
+    },
+    placementPreferences: {
+      interestedInPlacements: false,
+      willingToRelocate: false
+    },
+    ojt: {
+      companyName: '',
+      projectTitle: '',
+      joiningDate: '',
+      companyGuide: {
+        name: '',
+        contactNo: '',
+        emailId: ''
+      },
+      collegeGuideName: ''
+    }
   });
 
   const [linkedinVerified, setLinkedinVerified] = useState(false);
@@ -74,10 +90,21 @@ const CompleteProfile = ({ onProfileComplete }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProfile(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    if (name.includes('.')) {
+      const [parent, child] = name.split('.');
+      setProfile(prev => ({
+        ...prev,
+        [parent]: {
+          ...prev[parent],
+          [child]: value
+        }
+      }));
+    } else {
+      setProfile(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
   };
 
   const handleFileChange = (e) => {
@@ -100,8 +127,8 @@ const CompleteProfile = ({ onProfileComplete }) => {
   const validateProfile = () => {
     const requiredFields = [
       'name', 'email', 'phone', 'tenthMarks', 
-      'twelfthMarks', 'graduationDetails', 'graduationPercentage',
-      'currentSemester', 'currentCGPA'
+      'twelfthMarks', 'graduationDetails', 'graduationPercentage'
+      // Remove currentSemester and currentCGPA from here
     ];
     
     for (const field of requiredFields) {
@@ -124,57 +151,72 @@ const CompleteProfile = ({ onProfileComplete }) => {
         </div>
 
         <form className="drive-form" onSubmit={handleSubmit}>
-          {/* Personal Information Card */}
+          {/* Basic Information Card */}
           <div className="form-card">
             <div className="card-header">
               <div className="icon-wrapper">
-                <GraduationCap size={24} />
+                <User size={24} />
               </div>
-              <h3>Personal Information</h3>
+              <h3>Basic Information</h3>
             </div>
             <div className="card-content">
               <div className="input-row">
                 <div className="input-group">
-                  <label>
-                    <Building size={20} />
-                    Full Name
-                  </label>
+                  <label>Roll No</label>
                   <input
                     type="text"
-                    name="name"
-                    value={profile.name}
+                    name="rollNo"
+                    value={profile.rollNo}
                     onChange={handleChange}
-                    placeholder="Enter your full name"
+                    placeholder="Enter roll number"
                     required
                   />
                 </div>
                 <div className="input-group">
-                  <label>
-                    <Mail size={20} />
-                    Email Address
-                  </label>
+                  <label>Full Name</label>
                   <input
-                    type="email"
-                    name="email"
-                    value={profile.email}
+                    type="text"
+                    name="fullName"
+                    value={profile.fullName}
                     onChange={handleChange}
-                    placeholder="Enter your email address"
+                    placeholder="Enter full name"
                     required
                   />
                 </div>
               </div>
               <div className="input-row">
                 <div className="input-group">
-                  <label>
-                    <Phone size={20} />
-                    Phone Number
-                  </label>
+                  <label>Contact No</label>
                   <input
                     type="tel"
-                    name="phone"
-                    value={profile.phone}
+                    name="contactNo"
+                    value={profile.contactNo}
                     onChange={handleChange}
-                    placeholder="Enter your phone number"
+                    placeholder="Enter contact number"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="input-row">
+                <div className="input-group">
+                  <label>Official Email ID</label>
+                  <input
+                    type="email"
+                    name="officialEmail"
+                    value={profile.officialEmail}
+                    onChange={handleChange}
+                    placeholder="Enter official email"
+                    required
+                  />
+                </div>
+                <div className="input-group">
+                  <label>Personal Email ID</label>
+                  <input
+                    type="email"
+                    name="personalEmail"
+                    value={profile.personalEmail}
+                    onChange={handleChange}
+                    placeholder="Enter personal email"
                     required
                   />
                 </div>
@@ -182,43 +224,39 @@ const CompleteProfile = ({ onProfileComplete }) => {
             </div>
           </div>
 
-          {/* Academic Information Card */}
+          {/* Academic Details Card */}
           <div className="form-card">
             <div className="card-header">
               <div className="icon-wrapper">
-                <BookOpen size={24} />
+                <GraduationCap size={24} />
               </div>
-              <h3>Academic Information</h3>
+              <h3>Academic Details</h3>
             </div>
             <div className="card-content">
               <div className="input-row">
                 <div className="input-group">
-                  <label>
-                    <Percent size={20} />
-                    10th Marks (%)
-                  </label>
+                  <label>10th Percentage</label>
                   <input
                     type="number"
-                    name="tenthMarks"
-                    value={profile.tenthMarks}
+                    name="academics.tenthPercentage"
+                    value={profile.academics.tenthPercentage}
                     onChange={handleChange}
                     placeholder="Enter 10th percentage"
+                    step="0.01"
                     min="0"
                     max="100"
                     required
                   />
                 </div>
                 <div className="input-group">
-                  <label>
-                    <Percent size={20} />
-                    12th Marks (%)
-                  </label>
+                  <label>12th Percentage</label>
                   <input
                     type="number"
-                    name="twelfthMarks"
-                    value={profile.twelfthMarks}
+                    name="academics.twelfthPercentage"
+                    value={profile.academics.twelfthPercentage}
                     onChange={handleChange}
                     placeholder="Enter 12th percentage"
+                    step="0.01"
                     min="0"
                     max="100"
                     required
@@ -227,69 +265,240 @@ const CompleteProfile = ({ onProfileComplete }) => {
               </div>
               <div className="input-row">
                 <div className="input-group">
-                  <label>
-                    <GraduationCap size={20} />
-                    Graduation Stream
-                  </label>
+                  <label>Graduation Stream</label>
                   <select
-                    name="graduationStream"
-                    value={profile.graduationStream}
+                    name="academics.graduationStream"
+                    value={profile.academics.graduationStream}
                     onChange={handleChange}
                     required
                   >
                     <option value="">Select Stream</option>
-                    {graduationStreams.map(stream => (
-                      <option key={stream} value={stream}>{stream}</option>
-                    ))}
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Information Technology">Information Technology</option>
+                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    <option value="Civil Engineering">Civil Engineering</option>
+                    <option value="Electronics Engineering">Electronics Engineering</option>
+                    <option value="Commerce">Commerce</option>
+                    <option value="Science">Science</option>
+                    <option value="Arts">Arts</option>
+                    <option value="Other">Other</option>
                   </select>
                 </div>
                 <div className="input-group">
-                  <label>
-                    <GraduationCap size={20} />
-                    Degree
-                  </label>
+                  <label>Graduation Degree</label>
                   <select
-                    name="graduationDegree"
-                    value={profile.graduationDegree}
+                    name="academics.graduationDegree"
+                    value={profile.academics.graduationDegree}
                     onChange={handleChange}
                     required
                   >
                     <option value="">Select Degree</option>
-                    {degrees.map(degree => (
-                      <option key={degree} value={degree}>{degree}</option>
-                    ))}
+                    <option value="B.Tech">B.Tech</option>
+                    <option value="B.E.">B.E.</option>
+                    <option value="BCA">BCA</option>
+                    <option value="B.Sc">B.Sc</option>
+                    <option value="B.Com">B.Com</option>
+                    <option value="BA">BA</option>
+                    <option value="Other">Other</option>
                   </select>
                 </div>
               </div>
-
               <div className="input-row">
                 <div className="input-group">
-                  <label>
-                    <Globe size={20} />
-                    University
-                  </label>
+                  <label>University</label>
                   <input
                     type="text"
-                    name="university"
-                    value={profile.university}
+                    name="academics.university"
+                    value={profile.academics.university}
                     onChange={handleChange}
                     placeholder="Enter university name"
                     required
                   />
                 </div>
                 <div className="input-group">
-                  <label>
-                    <Percent size={20} />
-                    Graduation Percentage
-                  </label>
+                  <label>Graduation CGPA</label>
                   <input
                     type="number"
-                    name="graduationPercentage"
-                    value={profile.graduationPercentage}
+                    name="academics.graduationCGPA"
+                    value={profile.academics.graduationCGPA}
                     onChange={handleChange}
-                    placeholder="Enter graduation percentage"
+                    placeholder="Enter graduation CGPA"
+                    step="0.01"
                     min="0"
-                    max="100"
+                    max="10"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="input-row">
+                <div className="input-group">
+                  <label>MBA First Year CGPA</label>
+                  <input
+                    type="number"
+                    name="academics.mbaFirstYearCGPA"
+                    value={profile.academics.mbaFirstYearCGPA}
+                    onChange={handleChange}
+                    placeholder="Enter MBA first year CGPA"
+                    step="0.01"
+                    min="0"
+                    max="10"
+                    required
+                  />
+                </div>
+                <div className="input-group">
+                  <label>MBA Specialization</label>
+                  <select
+                    name="academics.mbaSpecialization"
+                    value={profile.academics.mbaSpecialization}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">Select Specialization</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="HR">HR</option>
+                    <option value="Operations">Operations</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Placement Preferences Card */}
+          <div className="form-card">
+            <div className="card-header">
+              <div className="icon-wrapper">
+                <Building size={24} />
+              </div>
+              <h3>Placement Preferences</h3>
+            </div>
+            <div className="card-content">
+              <div className="checkbox-group">
+                <label>
+                  <input
+                    type="checkbox"
+                    name="interestedInPlacements"
+                    checked={profile.placementPreferences.interestedInPlacements}
+                    onChange={(e) => handleChange({
+                      target: {
+                        name: e.target.name,
+                        value: e.target.checked
+                      }
+                    })}
+                  />
+                  Are you interested in Campus Placements Opportunities?
+                </label>
+              </div>
+              <div className="checkbox-group">
+                <label>
+                  <input
+                    type="checkbox"
+                    name="willingToRelocate"
+                    checked={profile.placementPreferences.willingToRelocate}
+                    onChange={(e) => handleChange({
+                      target: {
+                        name: e.target.name,
+                        value: e.target.checked
+                      }
+                    })}
+                  />
+                  Are you willing to relocate for job opportunities in cities like Pune, Mumbai, etc.?
+                </label>
+              </div>
+            </div>
+          </div>
+
+          {/* OJT Details Card */}
+          <div className="form-card">
+            <div className="card-header">
+              <div className="icon-wrapper">
+                <Building size={24} />
+              </div>
+              <h3>OJT Details</h3>
+            </div>
+            <div className="card-content">
+              <div className="input-row">
+                <div className="input-group">
+                  <label>Company Name</label>
+                  <input
+                    type="text"
+                    name="ojt.companyName"
+                    value={profile.ojt.companyName}
+                    onChange={handleChange}
+                    placeholder="Enter OJT company name"
+                    required
+                  />
+                </div>
+                <div className="input-group">
+                  <label>Project Title</label>
+                  <input
+                    type="text"
+                    name="ojt.projectTitle"
+                    value={profile.ojt.projectTitle}
+                    onChange={handleChange}
+                    placeholder="Enter OJT project title"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="input-row">
+                <div className="input-group">
+                  <label>Joining Date</label>
+                  <input
+                    type="date"
+                    name="ojt.joiningDate"
+                    value={profile.ojt.joiningDate}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+              <div className="input-row">
+                <div className="input-group">
+                  <label>Company Guide Name</label>
+                  <input
+                    type="text"
+                    name="ojt.companyGuide.name"
+                    value={profile.ojt.companyGuide.name}
+                    onChange={handleChange}
+                    placeholder="Enter company guide name"
+                    required
+                  />
+                </div>
+                <div className="input-group">
+                  <label>Company Guide Contact No</label>
+                  <input
+                    type="tel"
+                    name="ojt.companyGuide.contactNo"
+                    value={profile.ojt.companyGuide.contactNo}
+                    onChange={handleChange}
+                    placeholder="Enter company guide contact"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="input-row">
+                <div className="input-group">
+                  <label>Company Guide Email ID</label>
+                  <input
+                    type="email"
+                    name="ojt.companyGuide.emailId"
+                    value={profile.ojt.companyGuide.emailId}
+                    onChange={handleChange}
+                    placeholder="Enter company guide email"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="input-row">
+                <div className="input-group">
+                  <label>College Guide Name</label>
+                  <input
+                    type="text"
+                    name="ojt.collegeGuideName"
+                    value={profile.ojt.collegeGuideName}
+                    onChange={handleChange}
+                    placeholder="Enter college guide name"
                     required
                   />
                 </div>
@@ -334,55 +543,6 @@ const CompleteProfile = ({ onProfileComplete }) => {
                   {linkedinVerified && (
                     <span className="verification-success">LinkedIn profile verified successfully!</span>
                   )}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Current Academic Status */}
-          <div className="form-card">
-            <div className="card-header">
-              <div className="icon-wrapper">
-                <Award size={24} />
-              </div>
-              <h3>Current Academic Status</h3>
-            </div>
-            <div className="card-content">
-              <div className="input-row">
-                <div className="input-group">
-                  <label>
-                    <Calendar size={20} />
-                    Current Semester
-                  </label>
-                  <select
-                    name="currentSemester"
-                    value={profile.currentSemester}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">Select Semester</option>
-                    <option value="1">Semester 1</option>
-                    <option value="2">Semester 2</option>
-                    <option value="3">Semester 3</option>
-                    <option value="4">Semester 4</option>
-                  </select>
-                </div>
-                <div className="input-group">
-                  <label>
-                    <Award size={20} />
-                    Current CGPA
-                  </label>
-                  <input
-                    type="number"
-                    name="currentCGPA"
-                    value={profile.currentCGPA}
-                    onChange={handleChange}
-                    placeholder="Enter current CGPA"
-                    step="0.01"
-                    min="0"
-                    max="10"
-                    required
-                  />
                 </div>
               </div>
             </div>
