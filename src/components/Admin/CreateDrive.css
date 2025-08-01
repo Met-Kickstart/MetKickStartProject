@@ -1,0 +1,402 @@
+/* =========================================
+   Global Styles & Variables
+   ========================================= */
+:root {
+  --primary-red: #d32f2f;
+  --primary-red-dark: #b71c1c;
+  --light-red-bg: #fff5f5;
+  --light-gray-bg: #f8f9fa;
+  --white-card: #ffffff;
+  --dark-text: #212529;
+  --light-text: #6c757d;
+  --border-color: #dee2e6;
+  --card-shadow: 0 4px 25px rgba(0, 0, 0, 0.07);
+  --card-hover-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  --border-radius-lg: 16px;
+  --border-radius-md: 8px;
+  --font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--light-gray-bg);
+  color: var(--dark-text);
+  margin: 0;
+}
+
+/* =========================================
+   Main Page Layout
+   ========================================= */
+.create-drive-page {
+  min-height: 100vh;
+  padding: 0;
+  background-color: var(--light-gray-bg);
+}
+
+.form-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* =========================================
+   Headers
+   ========================================= */
+.met-header {
+  background: linear-gradient(90deg, var(--primary-red), var(--primary-red-dark));
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(183, 28, 28, 0.2);
+}
+
+.met-header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.met-header p {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.page-header {
+  text-align: left;
+  margin-bottom: 2rem;
+  padding: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.header-content h2 {
+  color: var(--dark-text);
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.header-content p {
+  color: var(--light-text);
+  font-size: 1.1rem;
+}
+
+/* =========================================
+   Form Card Styling
+   ========================================= */
+.drive-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form-card {
+  background: var(--white-card);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  box-shadow: var(--card-shadow);
+  border-top: 4px solid var(--primary-red);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--card-hover-shadow);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.card-header h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--primary-red-dark);
+  margin: 0;
+}
+
+.card-header .icon-wrapper {
+  background-color: var(--light-red-bg);
+  color: var(--primary-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  flex-shrink: 0;
+}
+
+/* =========================================
+   Input & Form Element Styling
+   ========================================= */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.input-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--dark-text);
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.input-group label svg {
+  color: var(--light-text);
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background: var(--white-card);
+  box-sizing: border-box;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  outline: none;
+  border-color: var(--primary-red);
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.15);
+}
+
+.input-group input::placeholder {
+  color: #999;
+}
+
+/* =========================================
+   Specialization Pills & File Upload - FIXED
+   ========================================= */
+.specialization-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.spec-checkbox-label {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--dark-text);
+  user-select: none;
+  font-size: 1rem;
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.spec-checkbox-label input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.spec-checkbox-label input[type="checkbox"] + span {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--white-card);
+  transition: all 0.3s ease;
+}
+
+.spec-checkbox-label input[type="checkbox"]:checked + span {
+  background: var(--primary-red);
+  border-color: var(--primary-red);
+}
+
+.spec-checkbox-label input[type="checkbox"]:checked + span::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.spec-checkbox-label:hover input[type="checkbox"] + span {
+  border-color: var(--primary-red);
+}
+
+.spec-pill:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.15);
+}
+
+.file-upload-area {
+  border: 2px dashed var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: 2.5rem;
+  text-align: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  background-color: var(--light-gray-bg);
+}
+
+.file-upload-area:hover {
+  border-color: var(--primary-red);
+  background-color: var(--light-red-bg);
+}
+
+.file-upload-label {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.upload-icon {
+  color: var(--primary-red);
+}
+
+.upload-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.upload-text span {
+  font-size: 0.9rem;
+  color: var(--light-text);
+}
+
+.file-selected {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.2rem;
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  border-radius: var(--border-radius-md);
+  color: #2e7d32;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* =========================================
+   Action Buttons
+   ========================================= */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 0.9rem 2.5rem;
+  border-radius: var(--border-radius-md);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: var(--primary-red);
+  color: white;
+  box-shadow: 0 4px 15px rgba(211, 47, 47, 0.2);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-red-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(211, 47, 47, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--white-card);
+  color: var(--dark-text);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background: #f1f3f5;
+  border-color: #adb5bd;
+}
+
+/* =========================================
+   Responsive Design
+   ========================================= */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 1.5rem 1rem;
+  }
+  
+  .header-content h2 {
+    font-size: 1.8rem;
+  }
+  
+  .input-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-actions {
+    flex-direction: column-reverse;
+    gap: 0.8rem;
+  }
+  
+  .btn-primary, .btn-secondary {
+    width: 100%;
+  }
+  
+  .form-card {
+    padding: 1.5rem;
+  }
+  
+  .specialization-container {
+    justify-content: center;
+  }
+  
+  .spec-pill {
+    min-width: 100px;
+    padding: 0.7rem 1.5rem;
+  }
+}

@@ -1,0 +1,32 @@
+.student-dashboard {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--light-gray-bg);
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.welcome-section {
+  text-align: center;
+  margin: 2rem 0;
+  padding: 2rem;
+  background: var(--white-card);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--card-shadow);
+}
+
+.welcome-section h1 {
+  color: var(--dark-text);
+  margin-bottom: 1rem;
+}
+
+.welcome-section p {
+  color: var(--light-text);
+}

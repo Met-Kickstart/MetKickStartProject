@@ -1,0 +1,300 @@
+.student-management {
+  padding: 1.5rem;
+  background-color: var(--light-gray-bg);
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header-content h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary-red-dark);
+  margin: 0;
+}
+
+.header-content p {
+  color: var(--light-text);
+  margin: 0.5rem 0 0;
+}
+
+.add-student-btn {
+  background: var(--primary-red);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.add-student-btn:hover {
+  background: var(--primary-red-dark);
+}
+
+.filters-section {
+  background: var(--white-card);
+  padding: 1.5rem;
+  border-radius: var(--border-radius-md);
+  margin-bottom: 1.5rem;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.search-box {
+  flex: 1;
+  position: relative;
+}
+
+.search-box svg {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--light-text);
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.9rem 1rem 0.9rem 2.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background: var(--white-card);
+  box-sizing: border-box;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--primary-red);
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.15);
+}
+
+.search-box input::placeholder {
+  color: #999;
+}
+
+.filter-controls {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+.filter-group select {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background: var(--white-card);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.filter-group select:focus {
+  outline: none;
+  border-color: var(--primary-red);
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.15);
+}
+
+.filter-group select:hover {
+  border-color: var(--primary-red);
+}
+
+.filter-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--dark-text);
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.students-table {
+  background: var(--white-card);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: var(--light-gray-bg);
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.status-badge.placed {
+  background: #4caf50;
+  color: white;
+}
+
+.status-badge.not-placed {
+  background: #ff9800;
+  color: white;
+}
+
+.status-badge.in-process {
+  background: #2196f3;
+  color: white;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 0.5rem;
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-btn {
+  background: #2196f3;
+  color: white;
+}
+
+.delete-btn {
+  background: #f44336;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #1976d2;
+}
+
+.delete-btn:hover {
+  background: #d32f2f;
+}
+
+.specialization-filter {
+  background: var(--white-card);
+  padding: 1.5rem;
+  border-radius: var(--border-radius-md);
+  margin-bottom: 2rem;
+  box-shadow: var(--card-shadow);
+  border-top: 4px solid var(--primary-red);
+}
+
+.specialization-filter h3 {
+  color: var(--primary-red-dark);
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.spec-filter,
+.spec-pills,
+.spec-pill {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .filters-section {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .filter-controls {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .filter-group {
+    flex: 1;
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .students-table {
+    overflow-x: auto;
+  }
+
+  table {
+    font-size: 0.875rem;
+  }
+
+  .page-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .specialization-filter {
+    padding: 1rem;
+  }
+
+  .spec-pills {
+    gap: 0.4rem;
+  }
+
+  .spec-pill {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .filter-controls {
+    flex-direction: column;
+  }
+  
+  .filter-group {
+    width: 100%;
+  }
+}
+
+tbody tr:hover {
+  background-color: var(--light-red-bg);
+}
+
+:root {
+  --primary-red: #d32f2f;
+  --primary-red-dark: #b71c1c;
+  --light-red-bg: #fff5f5;
+  --light-gray-bg: #f8f9fa;
+  --white-card: #ffffff;
+  --dark-text: #212529;
+  --light-text: #6c757d;
+  --border-color: #dee2e6;
+  --card-shadow: 0 4px 25px rgba(0, 0, 0, 0.07);
+  --card-hover-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  --border-radius-md: 8px;
+}
