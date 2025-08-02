@@ -98,7 +98,8 @@ const StudentManagement = () => {
           specialization: row['Specialization'] || '',
           status: row['Status'] || 'Not Placed'
         }));
-
+        
+        console.log('Importing file:', newStudents);
         setStudents(prevStudents => [...prevStudents, ...newStudents]);
       };
       reader.readAsArrayBuffer(file);
