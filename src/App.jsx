@@ -1,9 +1,20 @@
+// src/App.jsx
 import React, { useState } from 'react';
-import { HashRouter as Router, Routes, Route, useNavigate, Navigate } from 'react-router-dom';
-import Welcome from './pages/welcome';
-import StudentDashboard from './pages/StudentDashboard';
-import AdminDashboard from './pages/AdminDashboard';
-import LoginModal from './components/LoginModal';
+import {
+  HashRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+  Navigate,
+} from 'react-router-dom';
+
+import Welcome           from './pages/Welcome';
+import StudentDashboard  from './pages/StudentDashboard';
+import AdminDashboard    from './pages/AdminDashboard';
+
+// route guards (see next code block)
+import StudentRoute from './routes/StudentRoute';
+import AdminRoute   from './routes/AdminRoute';
 
 function AppWrapper() {
   return (
@@ -15,12 +26,14 @@ function AppWrapper() {
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userRole, setUserRole] = useState(null);
+  const [userRole,   setUserRole]   = useState(null);
   const navigate = useNavigate();
 
+  // ——— authentication helpers ———
   const handleLoginSuccess = (role) => {
-    setUserRole(role);
     setIsLoggedIn(true);
+    setUserRole(role);
+
     if (role === 'student') {
       navigate('/student-dashboard');
     } else if (role === 'admin') {
@@ -29,40 +42,40 @@ function App() {
   };
 
   const handleLogout = () => {
-    setUserRole(null);
     setIsLoggedIn(false);
+    setUserRole(null);
     navigate('/');
   };
 
+  // ——— routes ———
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Welcome onLoginSuccess={handleLoginSuccess} />} />
-        <Route
-          path="/student-dashboard"
-          element={
-            isLoggedIn && userRole === 'student' ? (
-              <StudentDashboard onLogout={handleLogout} />
-            ) : (
-              <Navigate to="/" replace />
-            )
-          }
-        />
-        <Route
-          path="/admin-dashboard"
-          element={
-            isLoggedIn && userRole === 'admin' ? (
-              <AdminDashboard onLogout={handleLogout} />
-            ) : (
-              <Welcome
-                onLoginSuccess={handleLoginSuccess}
-              />
-            )
-          }
-        />
-        {/* ...other routes... */}
-      </Routes>
-    </>
+    <Routes>
+      <Route
+        path="/"
+        element={<Welcome onLoginSuccess={handleLoginSuccess} />}
+      />
+
+      <Route
+        path="/student-dashboard"
+        element={
+          <StudentRoute isLoggedIn={isLoggedIn} role={userRole}>
+            <StudentDashboard onLogout={handleLogout} />
+          </StudentRoute>
+        }
+      />
+
+      <Route
+        path="/admin-dashboard"
+        element={
+          <AdminRoute isLoggedIn={isLoggedIn} role={userRole}>
+            <AdminDashboard onLogout={handleLogout} />
+          </AdminRoute>
+        }
+      />
+
+      {/* fallback */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
 

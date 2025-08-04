@@ -58,7 +58,7 @@ const Footer = () => {
             <Link to="/twitter" target="_blank" rel="noopener noreferrer"><FaTwitter /></Link>
             <Link to="/linkedin" target="_blank" rel="noopener noreferrer"><FaLinkedinIn /></Link>
             <Link to="/instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></Link>
-            <Link to="/youtube" target="https://www.youtube.com/watch?v=tJXSgP9csCY&pp=ygUibWV0IGluc3RpdHV0ZSBvZiBtYW5hZ2VtZW50IG5hc2hpa9IHCQnHCQGHKiGM7w%3D%3D" rel="noopener noreferrer"><FaYoutube /></Link>
+            <Link to="/youtube" target="_blank" rel="noopener noreferrer"><FaYoutube /></Link>
           </div>
         </div>
       </div>
