@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { 
   FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaYoutube, 
   FaAngleRight, FaMapMarkerAlt, FaPhone, FaEnvelope, FaHeart 
@@ -30,22 +31,22 @@ const Footer = () => {
         <div className="footer-col">
           <h4>Quick Links</h4>
           <ul className="footer-links">
-            <li><a href="#"><FaAngleRight /> About Us</a></li>
-            <li><a href="#"><FaAngleRight /> Academic Programs</a></li>
-            <li><a href="#"><FaAngleRight /> Admissions</a></li>
-            <li><a href="#"><FaAngleRight /> Research</a></li>
-            <li><a href="#"><FaAngleRight /> Campus Life</a></li>
+            <li><Link to="/about"><FaAngleRight /> About Us</Link></li>
+            <li><Link to="/programs"><FaAngleRight /> Academic Programs</Link></li>
+            <li><Link to="/admissions"><FaAngleRight /> Admissions</Link></li>
+            <li><Link to="/research"><FaAngleRight /> Research</Link></li>
+            <li><Link to="/campus-life"><FaAngleRight /> Campus Life</Link></li>
           </ul>
         </div>
         
         <div className="footer-col">
           <h4>Placement Resources</h4>
           <ul className="footer-links">
-            <li><a href="#"><FaAngleRight /> Placement Brochure</a></li>
-            <li><a href="#"><FaAngleRight /> Recruiter Information</a></li>
-            <li><a href="#"><FaAngleRight /> Student Preparation</a></li>
-            <li><a href="#"><FaAngleRight /> Past Recruiters</a></li>
-            <li><a href="#"><FaAngleRight /> Placement Policy</a></li>
+            <li><Link to="/placement-brochure"><FaAngleRight /> Placement Brochure</Link></li>
+            <li><Link to="/recruiter-info"><FaAngleRight /> Recruiter Information</Link></li>
+            <li><Link to="/student-preparation"><FaAngleRight /> Student Preparation</Link></li>
+            <li><Link to="/past-recruiters"><FaAngleRight /> Past Recruiters</Link></li>
+            <li><Link to="/placement-policy"><FaAngleRight /> Placement Policy</Link></li>
           </ul>
         </div>
         
@@ -53,11 +54,11 @@ const Footer = () => {
           <h4>Connect With Us</h4>
           <p>Follow us on social media for updates and announcements.</p>
           <div className="social-links">
-            <a href="#"><FaFacebookF /></a>
-            <a href="#"><FaTwitter /></a>
-            <a href="#"><FaLinkedinIn /></a>
-            <a href="#"><FaInstagram /></a>
-            <a href="#"><FaYoutube /></a>
+            <Link to="/facebook" target="_blank" rel="noopener noreferrer"><FaFacebookF /></Link>
+            <Link to="/twitter" target="_blank" rel="noopener noreferrer"><FaTwitter /></Link>
+            <Link to="/linkedin" target="_blank" rel="noopener noreferrer"><FaLinkedinIn /></Link>
+            <Link to="/instagram" target="_blank" rel="noopener noreferrer"><FaInstagram /></Link>
+            <Link to="/youtube" target="https://www.youtube.com/watch?v=tJXSgP9csCY&pp=ygUibWV0IGluc3RpdHV0ZSBvZiBtYW5hZ2VtZW50IG5hc2hpa9IHCQnHCQGHKiGM7w%3D%3D" rel="noopener noreferrer"><FaYoutube /></Link>
           </div>
         </div>
       </div>

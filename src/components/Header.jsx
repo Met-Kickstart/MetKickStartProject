@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaGraduationCap, FaSignInAlt } from 'react-icons/fa';
 
 const Header = ({ onLoginClick, isLoggedIn, onLogoutClick, profileLogo }) => {
   return (
     <header className="header">
       <div className="header-container">
-        <a href="#" className="logo">
+        <Link to="/" className="logo">
           <div className="logo-icon">
             <FaGraduationCap color="white" />
           </div>
@@ -13,34 +14,34 @@ const Header = ({ onLoginClick, isLoggedIn, onLogoutClick, profileLogo }) => {
             <h1>METkickstart</h1>
             <p>Adgaon, Nashik - Placement Portal</p>
           </div>
-        </a>
+        </Link>
 
         <div className="nav-links">
-          <a href="#about" onClick={(e) => {
+          <Link to="/" onClick={(e) => {
             e.preventDefault();
             const el = document.getElementById('about');
             if (el) el.scrollIntoView({ behavior: 'smooth' });
-          }}>About Institute</a>
-          <a href="#drives" onClick={(e) => {
+          }}>About Institute</Link>
+          <Link to="/" onClick={(e) => {
             e.preventDefault();
             const el = document.getElementById('drives');
             if (el) el.scrollIntoView({ behavior: 'smooth' });
-          }}>Placement Drives</a>
-          <a href="#stats" onClick={(e) => {
+          }}>Placement Drives</Link>
+          <Link to="/" onClick={(e) => {
             e.preventDefault();
             const el = document.getElementById('stats');
             if (el) el.scrollIntoView({ behavior: 'smooth' });
-          }}>Placement Stats</a>
-          <a href="#achievements" onClick={(e) => {
+          }}>Placement Stats</Link>
+          <Link to="/" onClick={(e) => {
             e.preventDefault();
             const el = document.getElementById('achievements');
             if (el) el.scrollIntoView({ behavior: 'smooth' });
-          }}>Our Achievements</a>
-          <a href="#contact" onClick={(e) => {
+          }}>Our Achievements</Link>
+          <Link to="/" onClick={(e) => {
             e.preventDefault();
             const el = document.getElementById('contact');
             if (el) el.scrollIntoView({ behavior: 'smooth' });
-          }}>Contact</a>
+          }}>Contact</Link>
           {isLoggedIn ? (
             <>
               {profileLogo && (
@@ -50,16 +51,16 @@ const Header = ({ onLoginClick, isLoggedIn, onLogoutClick, profileLogo }) => {
                   style={{ width: '32px', height: '32px', borderRadius: '50%', marginRight: '10px' }}
                 />
               )}
-              <a href="#" className="login-btn" onClick={(e) => { e.preventDefault(); onLogoutClick(); }}>
+              <Link to="/" className="login-btn" onClick={(e) => { e.preventDefault(); onLogoutClick(); }}>
                 Logout
-              </a>
+              </Link>
             </>
           ) : (
-            <a href="#" className="login-btn" onClick={(e) => { e.preventDefault(); onLoginClick(); }}>
+            <Link to="/" className="login-btn" onClick={(e) => { e.preventDefault(); onLoginClick(); }}>
               Login <FaSignInAlt />
-            </a>
+            </Link>
           )}
-          {/* Remove theme toggle button */}
+         
         </div>
       </div>
     </header>
