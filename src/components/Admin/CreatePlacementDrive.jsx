@@ -219,6 +219,18 @@ const CreateDrive = () => {
                   />
                 </div>
               </div>
+              <div className="input-row">
+               <div className="input-group">
+                  <label>Vacancy</label>
+                  <input
+                    type="text"
+                    name="salary"
+                    value={formData.vacancy}
+                    onChange={handleInputChange}
+                    placeholder="0...10, 20, etc."
+                  />
+                </div>
+              </div>
             </div>
           </div>
 

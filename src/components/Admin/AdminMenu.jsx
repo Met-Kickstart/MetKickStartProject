@@ -8,7 +8,7 @@ const AdminMenu = ({ activeTab, setActiveTab }) => {
     { id: 'student-management', label: 'Student Management', icon: <FaUsers /> },
     { id: 'placement-drives', label: 'Placement Drives', icon: <FaBuilding /> },
     { id: 'statistics', label: 'Statistics', icon: <FaChartPie /> },
-    { id: 'notification', label: 'Email Notification', icon: <FaMailBulk /> }
+    { id: 'email-notification', label: 'Email Notification', icon: <FaMailBulk /> }
   ];
 
   return (
