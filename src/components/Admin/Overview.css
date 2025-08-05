@@ -16,6 +16,11 @@
   --border-radius-md: 8px;
   --success-color: #43a047;
   --font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+  --stat-red: #d32f2f;
+  --stat-blue: #1e88e5;
+  --stat-green: #43a047;
+  --stat-yellow: #ffa000;
+  --stat-orange: #ff5722;
 }
 
 .overview-page {
@@ -49,6 +54,8 @@
   gap: 1rem;
   box-shadow: var(--card-shadow);
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .stat-card:hover {
@@ -64,19 +71,21 @@
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
+  transition: all 0.3s ease;
 }
 
 .stat-details h3 {
   font-size: 1.8rem;
   font-weight: 700;
-  color: var(--dark-text);
-  margin: 0;
+  margin: 0 0 0.25rem 0;
+  transition: all 0.3s ease;
 }
 
 .stat-details p {
   color: var(--light-text);
   margin: 0;
   font-size: 0.9rem;
+  font-weight: 500;
 }
 
 /* Overview Cards */

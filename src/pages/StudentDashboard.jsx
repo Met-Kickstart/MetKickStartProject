@@ -26,7 +26,12 @@ const StudentDashboard = ({ onLogout }) => {
 
   return (
     <div className="student-dashboard">
-      <Header isLoggedIn={true} onLogoutClick={onLogout} />
+      <Header 
+        isLoggedIn={true} 
+        onLogoutClick={onLogout}
+        profileLogo={profile?.profileImage || "https://ui-avatars.com/api/?name=Student&background=random"}
+        simplified={true}
+      />
       
       <div className="dashboard-content">
         <div className="welcome-section">

@@ -30,3 +30,33 @@
 .welcome-section p {
   color: var(--light-text);
 }
+
+@media (max-width: 1024px) {
+  .dashboard-content {
+    padding: 1.5rem;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-content {
+    padding: 1rem;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .welcome-section {
+    padding: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .card-content {
+    padding: 1rem;
+  }
+}

@@ -8,19 +8,46 @@ const StudentManagement = () => {
     {
       id: 1,
       rollNo: "2023MBA001",
-      name: "John Doe",
+      fullName: "John Doe",
       contactNo: "9876543210",
       officialEmail: "john.doe@met.edu",
-      specialization: "Finance",
+      personalEmail: "john.d@gmail.com",
+      academics: {
+        tenthPercentage: "85",
+        twelfthPercentage: "82",
+        graduationStream: "Computer Science",
+        graduationDegree: "B.Tech",
+        university: "Pune University",
+        graduationCGPA: "8.5",
+        mbaFirstYearCGPA: "8.2",
+        mbaSpecialization: "Finance"
+      },
+      companiesAppeared: [
+        { name: "TCS", date: "2024-02-15", round: "Technical" },
+        { name: "Infosys", date: "2024-02-10", round: "HR" }
+      ],
       status: "Placed"
     },
     {
       id: 2,
       rollNo: "2023MBA002", 
-      name: "Jane Smith",
+      fullName: "Jane Smith",
       contactNo: "9876543211",
       officialEmail: "jane.smith@met.edu",
-      specialization: "Marketing",
+      personalEmail: "jane.s@gmail.com",
+      academics: {
+        tenthPercentage: "78",
+        twelfthPercentage: "80",
+        graduationStream: "Information Technology",
+        graduationDegree: "B.Tech",
+        university: "Mumbai University",
+        graduationCGPA: "8.0",
+        mbaFirstYearCGPA: "7.5",
+        mbaSpecialization: "Marketing"
+      },
+      companiesApplied: [
+        { name: "Microsoft", status: "In Progress" }
+      ],
       status: "In Progress"
     }
   ]);
@@ -44,12 +71,13 @@ const StudentManagement = () => {
 
   const filteredStudents = students.filter(student => {
     const matchesSearch = 
-      student.name.toLowerCase().includes(filters.search.toLowerCase()) ||
+      student.fullName.toLowerCase().includes(filters.search.toLowerCase()) ||
       student.rollNo.toLowerCase().includes(filters.search.toLowerCase()) ||
-      student.officialEmail.toLowerCase().includes(filters.search.toLowerCase());
+      student.officialEmail.toLowerCase().includes(filters.search.toLowerCase()) ||
+      student.personalEmail.toLowerCase().includes(filters.search.toLowerCase());
       
     const matchesSpecialization = !filters.specialization || 
-      student.specialization === filters.specialization;
+      student.academics.mbaSpecialization === filters.specialization;
       
     const matchesStatus = !filters.status || 
       student.status === filters.status;
@@ -68,16 +96,6 @@ const StudentManagement = () => {
     }
   };
 
-  const handleStatusChange = (studentId, newStatus) => {
-    setStudents(prevStudents =>
-      prevStudents.map(student =>
-        student.id === studentId
-          ? { ...student, status: newStatus }
-          : student
-      )
-    );
-  };
-
   const handleFileImport = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -92,17 +110,45 @@ const StudentManagement = () => {
         const newStudents = jsonData.map((row, index) => ({
           id: students.length + index + 1,
           rollNo: row['Roll No'] || '',
-          name: row['Name'] || '',
+          fullName: row['Full Name'] || '',
           contactNo: row['Contact No'] || '',
           officialEmail: row['Official Email ID'] || '',
-          specialization: row['Specialization'] || '',
+          personalEmail: row['Personal Email ID'] || '',
+          academics: {
+            tenthPercentage: row['10th Percentage'] || '',
+            twelfthPercentage: row['12th Percentage'] || '',
+            graduationStream: row['Graduation Stream'] || '',
+            graduationDegree: row['Graduation Degree'] || '',
+            university: row['University'] || '',
+            graduationCGPA: row['Graduation CGPA'] || '',
+            mbaFirstYearCGPA: row['MBA First Year CGPA'] || '',
+            mbaSpecialization: row['MBA Specialization'] || ''
+          },
+          companiesApplied: row['Companies Applied'] ? 
+            row['Companies Applied'].split(',').map(company => ({
+              name: company.trim(),
+              date: row[`${company.trim()} Date`] || new Date().toISOString().split('T')[0],
+              round: row[`${company.trim()} Round`] || 'Not Specified'
+            })) : [],
           status: row['Status'] || 'Not Placed'
         }));
         
-        console.log('Importing file:', newStudents);
         setStudents(prevStudents => [...prevStudents, ...newStudents]);
       };
       reader.readAsArrayBuffer(file);
+    }
+  };
+
+  const getStatusBadgeClass = (status) => {
+    switch (status) {
+      case 'Placed':
+        return 'status-placed';
+      case 'In Progress':
+        return 'status-in-progress';
+      case 'Not Placed':
+        return 'status-not-placed';
+      default:
+        return '';
     }
   };
 
@@ -173,10 +219,18 @@ const StudentManagement = () => {
           <thead>
             <tr>
               <th>Roll No</th>
-              <th>Name</th>
+              <th>Full Name</th>
               <th>Contact No</th>
-              <th>Official Email ID</th>
+              <th>Official Email</th>
+              <th>Personal Email</th>
+              <th>10th %</th>
+              <th>12th %</th>
+              <th>Graduation</th>
+              <th>University</th>
+              <th>Grad CGPA</th>
+              <th>MBA CGPA</th>
               <th>Specialization</th>
+              <th>Companies Appeared</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -184,22 +238,31 @@ const StudentManagement = () => {
             {filteredStudents.map(student => (
               <tr key={student.id}>
                 <td>{student.rollNo}</td>
-                <td>{student.name}</td>
+                <td>{student.fullName}</td>
                 <td>{student.contactNo}</td>
                 <td>{student.officialEmail}</td>
-                <td>{student.specialization}</td>
+                <td>{student.personalEmail}</td>
+                <td>{student.academics.tenthPercentage}%</td>
+                <td>{student.academics.twelfthPercentage}%</td>
                 <td>
-                  <select
-                    value={student.status}
-                    onChange={(e) => handleStatusChange(student.id, e.target.value)}
-                    className={`status-select ${student.status.toLowerCase().replace(' ', '-')}`}
-                  >
-                    {statuses.map(status => (
-                      <option key={status} value={status}>{status}</option>
-                    ))}
-                  </select>
+                  {student.academics.graduationDegree} in {student.academics.graduationStream}
                 </td>
-                
+                <td>{student.academics.university}</td>
+                <td>{student.academics.graduationCGPA}</td>
+                <td>{student.academics.mbaFirstYearCGPA}</td>
+                <td>{student.academics.mbaSpecialization}</td>
+                <td>
+                  <div className="companies-count">
+                    <span className="count-badge">
+                      {student.companiesAppeared?.length || 0}
+                    </span>
+                  </div>
+                </td>
+                <td>
+                  <span className={`status-badge ${getStatusBadgeClass(student.status)}`}>
+                    {student.status}
+                  </span>
+                </td>
               </tr>
             ))}
           </tbody>

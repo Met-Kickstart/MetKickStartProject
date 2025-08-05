@@ -1,24 +1,10 @@
 import React, { useState } from 'react';
-import { Upload, Building, Mail, Phone, BookOpen, GraduationCap, Percent, Linkedin, Globe, User } from 'lucide-react';
+import { Upload, Building, Mail, Phone, BookOpen, GraduationCap, Percent, Linkedin, Globe, User, FileText } from 'lucide-react';
+import { FaGooglePlay } from 'react-icons/fa';
 import './CompleteProfile.css';
 
 const CompleteProfile = ({ onProfileComplete }) => {
   const [profile, setProfile] = useState({
-    rollNo: '',
-    fullName: '',
-    contactNo: '',
-    officialEmail: '',
-    personalEmail: '',
-    academics: {
-      tenthPercentage: '',
-      twelfthPercentage: '',
-      graduationStream: '',
-      graduationDegree: '',
-      university: '',
-      graduationCGPA: '',
-      mbaFirstYearCGPA: '',
-      mbaSpecialization: ''
-    },
     placementPreferences: {
       interestedInPlacements: false,
       willingToRelocate: false
@@ -33,7 +19,9 @@ const CompleteProfile = ({ onProfileComplete }) => {
         emailId: ''
       },
       collegeGuideName: ''
-    }
+    },
+    linkedinUrl: '',
+    resumeFile: null
   });
 
   const [linkedinVerified, setLinkedinVerified] = useState(false);
@@ -110,10 +98,25 @@ const CompleteProfile = ({ onProfileComplete }) => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      // Check if file is PDF
+      if (file.type !== 'application/pdf') {
+        setError('Please upload only PDF files');
+        e.target.value = ''; // Reset file input
+        return;
+      }
+      
+      // Check file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        setError('File size should not exceed 5MB');
+        e.target.value = ''; // Reset file input
+        return;
+      }
+
       setProfile(prev => ({
         ...prev,
         resumeFile: file
       }));
+      setError(''); // Clear any existing errors
     }
   };
 
@@ -125,17 +128,18 @@ const CompleteProfile = ({ onProfileComplete }) => {
   };
 
   const validateProfile = () => {
-    const requiredFields = [
-      'name', 'email', 'phone', 'tenthMarks', 
-      'twelfthMarks', 'graduationDetails', 'graduationPercentage'
-      // Remove currentSemester and currentCGPA from here
-    ];
-    
-    for (const field of requiredFields) {
-      if (!profile[field]) {
-        setError(`Please fill in your ${field.replace(/([A-Z])/g, ' $1').toLowerCase()}`);
-        return false;
-      }
+    // Remove validation for basic info and academics
+    if (!profile.placementPreferences.interestedInPlacements) {
+      setError('Please indicate your interest in placements');
+      return false;
+    }
+    if (!profile.linkedinUrl) {
+      setError('Please add and verify your LinkedIn profile');
+      return false;
+    }
+    if (!profile.resumeFile) {
+      setError('Please upload your resume');
+      return false;
     }
     return true;
   };
@@ -151,219 +155,6 @@ const CompleteProfile = ({ onProfileComplete }) => {
         </div>
 
         <form className="drive-form" onSubmit={handleSubmit}>
-          {/* Basic Information Card */}
-          <div className="form-card">
-            <div className="card-header">
-              <div className="icon-wrapper">
-                <User size={24} />
-              </div>
-              <h3>Basic Information</h3>
-            </div>
-            <div className="card-content">
-              <div className="input-row">
-                <div className="input-group">
-                  <label>Roll No</label>
-                  <input
-                    type="text"
-                    name="rollNo"
-                    value={profile.rollNo}
-                    onChange={handleChange}
-                    placeholder="Enter roll number"
-                    required
-                  />
-                </div>
-                <div className="input-group">
-                  <label>Full Name</label>
-                  <input
-                    type="text"
-                    name="fullName"
-                    value={profile.fullName}
-                    onChange={handleChange}
-                    placeholder="Enter full name"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="input-row">
-                <div className="input-group">
-                  <label>Contact No</label>
-                  <input
-                    type="tel"
-                    name="contactNo"
-                    value={profile.contactNo}
-                    onChange={handleChange}
-                    placeholder="Enter contact number"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="input-row">
-                <div className="input-group">
-                  <label>Official Email ID</label>
-                  <input
-                    type="email"
-                    name="officialEmail"
-                    value={profile.officialEmail}
-                    onChange={handleChange}
-                    placeholder="Enter official email"
-                    required
-                  />
-                </div>
-                <div className="input-group">
-                  <label>Personal Email ID</label>
-                  <input
-                    type="email"
-                    name="personalEmail"
-                    value={profile.personalEmail}
-                    onChange={handleChange}
-                    placeholder="Enter personal email"
-                    required
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Academic Details Card */}
-          <div className="form-card">
-            <div className="card-header">
-              <div className="icon-wrapper">
-                <GraduationCap size={24} />
-              </div>
-              <h3>Academic Details</h3>
-            </div>
-            <div className="card-content">
-              <div className="input-row">
-                <div className="input-group">
-                  <label>10th Percentage</label>
-                  <input
-                    type="number"
-                    name="academics.tenthPercentage"
-                    value={profile.academics.tenthPercentage}
-                    onChange={handleChange}
-                    placeholder="Enter 10th percentage"
-                    step="0.01"
-                    min="0"
-                    max="100"
-                    required
-                  />
-                </div>
-                <div className="input-group">
-                  <label>12th Percentage</label>
-                  <input
-                    type="number"
-                    name="academics.twelfthPercentage"
-                    value={profile.academics.twelfthPercentage}
-                    onChange={handleChange}
-                    placeholder="Enter 12th percentage"
-                    step="0.01"
-                    min="0"
-                    max="100"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="input-row">
-                <div className="input-group">
-                  <label>Graduation Stream</label>
-                  <select
-                    name="academics.graduationStream"
-                    value={profile.academics.graduationStream}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">Select Stream</option>
-                    <option value="Computer Science">Computer Science</option>
-                    <option value="Information Technology">Information Technology</option>
-                    <option value="Mechanical Engineering">Mechanical Engineering</option>
-                    <option value="Civil Engineering">Civil Engineering</option>
-                    <option value="Electronics Engineering">Electronics Engineering</option>
-                    <option value="Commerce">Commerce</option>
-                    <option value="Science">Science</option>
-                    <option value="Arts">Arts</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-                <div className="input-group">
-                  <label>Graduation Degree</label>
-                  <select
-                    name="academics.graduationDegree"
-                    value={profile.academics.graduationDegree}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">Select Degree</option>
-                    <option value="B.Tech">B.Tech</option>
-                    <option value="B.E.">B.E.</option>
-                    <option value="BCA">BCA</option>
-                    <option value="B.Sc">B.Sc</option>
-                    <option value="B.Com">B.Com</option>
-                    <option value="BA">BA</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-              </div>
-              <div className="input-row">
-                <div className="input-group">
-                  <label>University</label>
-                  <input
-                    type="text"
-                    name="academics.university"
-                    value={profile.academics.university}
-                    onChange={handleChange}
-                    placeholder="Enter university name"
-                    required
-                  />
-                </div>
-                <div className="input-group">
-                  <label>Graduation CGPA</label>
-                  <input
-                    type="number"
-                    name="academics.graduationCGPA"
-                    value={profile.academics.graduationCGPA}
-                    onChange={handleChange}
-                    placeholder="Enter graduation CGPA"
-                    step="0.01"
-                    min="0"
-                    max="10"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="input-row">
-                <div className="input-group">
-                  <label>MBA First Year CGPA</label>
-                  <input
-                    type="number"
-                    name="academics.mbaFirstYearCGPA"
-                    value={profile.academics.mbaFirstYearCGPA}
-                    onChange={handleChange}
-                    placeholder="Enter MBA first year CGPA"
-                    step="0.01"
-                    min="0"
-                    max="10"
-                    required
-                  />
-                </div>
-                <div className="input-group">
-                  <label>MBA Specialization</label>
-                  <select
-                    name="academics.mbaSpecialization"
-                    value={profile.academics.mbaSpecialization}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">Select Specialization</option>
-                    <option value="Finance">Finance</option>
-                    <option value="Marketing">Marketing</option>
-                    <option value="HR">HR</option>
-                    <option value="Operations">Operations</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-
           {/* Placement Preferences Card */}
           <div className="form-card">
             <div className="card-header">
@@ -556,7 +347,47 @@ const CompleteProfile = ({ onProfileComplete }) => {
             </div>
           </div>
 
-          {/* Resume Upload */}
+          {/* Resume Building Instructions Card - Moved before Resume Upload */}
+          <div className="form-card">
+            <div className="card-header">
+              <div className="icon-wrapper">
+                <FileText size={24} />
+              </div>
+              <h3>Resume Building Instructions</h3>
+            </div>
+            <div className="card-content">
+              <div className="instructions-list">
+                <ol>
+                  <li>
+                    Download the Professional Resume Builder App:
+                    <a 
+                      href="https://play.google.com/store/apps/details?id=com.hightech.professionalresumes"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="app-link"
+                    >
+                      <FaGooglePlay /> Get Resume Builder App
+                    </a>
+                  </li>
+                  <li>Open the app and select <span className="template-highlight">Template #6</span></li>
+                  <li>Set the accent color to <span className="color-preview">Dark Red</span></li>
+                  <li>Fill in your details in the following sections:
+                    <ul className="resume-sections">
+                      <li>Personal Information</li>
+                      <li>Education Details</li>
+                      <li>Skills & Expertise</li>
+                      <li>Projects/Internships</li>
+                      <li>Achievements & Certifications</li>
+                      <li>Extra-curricular Activities</li>
+                    </ul>
+                  </li>
+                  <li>Review and download your resume in PDF format</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          {/* Resume Upload Card - Moved after instructions */}
           <div className="form-card">
             <div className="card-header">
               <div className="icon-wrapper">
@@ -571,12 +402,12 @@ const CompleteProfile = ({ onProfileComplete }) => {
                   id="resumeFile"
                   name="resumeFile"
                   onChange={handleFileChange}
-                  accept=".pdf,.doc,.docx"
+                  accept=".pdf" // Changed to accept only PDF files
                   style={{ display: 'none' }}
                 />
                 <label htmlFor="resumeFile" className="upload-label">
                   <Upload size={32} className="upload-icon" />
-                  <p>Click to upload your resume (PDF, DOC, DOCX)</p>
+                  <p>Click to upload your resume (PDF only)</p>
                 </label>
               </div>
               {profile.resumeFile && (
@@ -588,7 +419,7 @@ const CompleteProfile = ({ onProfileComplete }) => {
           </div>
 
           {error && <div className="error-message">{error}</div>}
-
+          
           <div className="form-actions">
             <button type="submit" className="btn-primary">
               Complete Profile

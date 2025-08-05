@@ -7,6 +7,7 @@ import AdminMenu             from '../components/Admin/AdminMenu';
 import Overview              from '../components/Admin/Overview';
 import StudentManagement     from '../components/Admin/StudentManagement';
 import CreatePlacementDrive  from '../components/Admin/CreatePlacementDrive';
+import PlacementDrives       from '../components/Admin/PlacementDrives';
 import EmailNotification     from '../components/Admin/EmailNotification';
 
 import './AdminDashboard.css';
@@ -42,6 +43,7 @@ const AdminDashboard = ({ onLogout }) => {
         isLoggedIn
         onLogoutClick={handleLogout}
         profileLogo="https://ui-avatars.com/api/?name=Admin&background=random"
+        simplified={true}
       />
 
       <div className="dashboard-container">

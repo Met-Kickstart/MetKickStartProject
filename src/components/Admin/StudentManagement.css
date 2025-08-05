@@ -56,7 +56,7 @@
 
 .search-box svg {
   position: absolute;
-  left: 1rem;
+  left: 0.2rem;
   top: 50%;
   transform: translateY(-50%);
   color: var(--light-text);
@@ -64,7 +64,7 @@
 
 .search-box input {
   width: 100%;
-  padding: 0.9rem 1rem 0.9rem 2.5rem;
+  padding: 0.9rem 1rem 0.9rem 3.5rem;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-md);
   font-size: 1rem;
@@ -127,15 +127,17 @@
 }
 
 .students-table {
+  overflow-x: auto;
   background: var(--white-card);
   border-radius: var(--border-radius-md);
   box-shadow: var(--card-shadow);
-  overflow: hidden;
+  margin-top: 1rem;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 1200px;
 }
 
 th {
@@ -144,11 +146,18 @@ th {
   text-align: left;
   font-weight: 600;
   color: var(--dark-text);
+  white-space: nowrap;
 }
 
 td {
   padding: 1rem;
   border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+td:nth-child(8) {
+  white-space: normal;
+  min-width: 200px;
 }
 
 .status-badge {
@@ -241,6 +250,19 @@ td {
   .filter-group {
     flex: 1;
     min-width: 200px;
+  }
+
+  .students-table {
+    margin: 1rem -1rem;
+    border-radius: 0;
+  }
+  
+  table {
+    font-size: 0.875rem;
+  }
+  
+  th, td {
+    padding: 0.75rem;
   }
 }
 
@@ -361,4 +383,69 @@ tbody tr:hover {
 
 .import-btn svg {
   font-size: 1.2rem;
+}
+
+.companies-applied {
+  min-width: 200px;
+}
+
+.companies-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.company-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--light-gray-bg);
+  padding: 0.5rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.875rem;
+}
+
+.company-status {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.company-status.selected {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.company-status.in-progress {
+  background: var(--warning-light);
+  color: var(--warning);
+}
+
+.company-status.rejected {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+.no-companies {
+  color: var(--medium-gray);
+  font-style: italic;
+  font-size: 0.875rem;
+}
+
+.companies-count {
+  text-align: center;
+}
+
+.count-badge {
+  background: var(--primary-red-light);
+  color: var(--primary-red);
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.count-badge:empty {
+  display: none;
 }

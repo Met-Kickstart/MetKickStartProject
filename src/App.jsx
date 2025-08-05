@@ -8,7 +8,7 @@ import {
   Navigate,
 } from 'react-router-dom';
 
-import Welcome           from './pages/Welcome';
+import Welcome           from './pages/welcome';
 import StudentDashboard  from './pages/StudentDashboard';
 import AdminDashboard    from './pages/AdminDashboard';
 

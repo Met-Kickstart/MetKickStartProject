@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaUsers, FaBuilding, FaChartBar, FaCheckCircle, FaGraduationCap, FaBriefcase } from 'react-icons/fa';
+import { FaUsers, FaUserGraduate, FaBuilding, FaBook, FaCalculator, FaChartBar } from 'react-icons/fa';
 import './Overview.css';
 
 const Overview = () => {
@@ -8,55 +8,76 @@ const Overview = () => {
       icon: <FaUsers />,
       number: '240',
       label: 'Total Students',
-      color: '#d32f2f'
+      color: '#d32f2f'  // Light red
+    },
+    {
+      icon: <FaUserGraduate />,
+      number: '180',
+      label: 'Placed Students',
+      color: '#1e88e5'  // Blue
     },
     {
       icon: <FaBuilding />,
+      number: '25',
+      label: 'Companies Arrived',
+      color: '#43a047'  // Green
+    },
+    {
+      icon: <FaBook />,
+      number: '42',
+      label: 'Prep Sessions',
+      color: '#ffa000'  // Yellow
+    },
+    {
+      icon: <FaCalculator />,
       number: '15',
-      label: 'Active Drives',
-      color: '#1e88e5'
-    },
-    {
-      icon: <FaCheckCircle />,
-      number: '180',
-      label: 'Placed Students',
-      color: '#43a047'
-    },
-    {
-      icon: <FaBriefcase />,
-      number: '₹8.5L',
-      label: 'Average Package',
-      color: '#fb8c00'
+      label: 'Aptitude Tests',
+      color: '#ff5722'  // Orange/Float color
     }
   ];
 
   const recentDrives = [
     {
-      company: 'Google India',
-      role: 'Software Engineer',
-      applicants: 142,
-      deadline: '2025-08-15'
+      company: "TCS",
+      role: "Software Engineer",
+      applicants: 45,
+      deadline: "2024-09-15",
+      status: "Active"
     },
     {
-      company: 'Microsoft',
-      role: 'Cloud Engineer',
-      applicants: 98,
-      deadline: '2025-08-20'
+      company: "Infosys",
+      role: "Systems Engineer",
+      applicants: 38,
+      deadline: "2024-09-20",
+      status: "Active"
+    },
+    {
+      company: "Microsoft",
+      role: "SDE",
+      applicants: 52,
+      deadline: "2024-09-25",
+      status: "Active"
     }
   ];
 
   return (
     <div className="overview-page">
       <div className="overview-container">
-        {/* Stats Grid */}
         <div className="stats-grid">
           {stats.map((stat, index) => (
-            <div className="stat-card" key={index}>
+            <div 
+              className="stat-card" 
+              key={index}
+              style={{ 
+                borderLeft: `4px solid ${stat.color}`,
+                background: `${stat.color}08` // Very light version of the color
+              }}
+            >
               <div className="stat-icon" style={{ backgroundColor: `${stat.color}15`, color: stat.color }}>
                 {stat.icon}
               </div>
               <div className="stat-details">
-                <h3>{stat.number}</h3>
+                <h3 style={{ color: stat.color }}>{stat.number}</h3>
                 <p>{stat.label}</p>
               </div>
             </div>

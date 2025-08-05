@@ -1,6 +1,151 @@
 /* Import variables from CreateDrive.css */
 @import url('../Admin/CreateDrive.css');
 
+:root {
+  /* Zoho Colors */
+  --zoho-primary: #E33939;      /* Red */
+  --zoho-secondary: #F37E3D;    /* Orange */
+  --zoho-accent: #1BAD4B;       /* Green */
+  --zoho-dark: #282C3F;         /* Dark Gray */
+  --zoho-light: #F7F7F7;        /* Light Gray */
+  --zoho-white: #FFFFFF;
+  --zoho-border: #E5E5E5;
+  --zoho-text: #424242;
+  --zoho-success: #1BAD4B;
+  --zoho-hover: #CC3333;
+}
+
+/* Update input styles */
+.input-group input {
+  padding: 0.75rem;
+  border: 1px solid var(--zoho-border);
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background: var(--zoho-white);
+  color: var(--zoho-text);
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--zoho-primary);
+  box-shadow: 0 0 0 3px rgba(227, 57, 57, 0.1);
+}
+
+.input-group label {
+  color: var(--zoho-dark);
+}
+
+.input-group label svg {
+  color: var(--zoho-primary);
+}
+
+/* Update select styles */
+select {
+  padding: 0.75rem;
+  border: 1px solid var(--zoho-border);
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  background: var(--zoho-white);
+  color: var(--zoho-text);
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--zoho-primary);
+  box-shadow: 0 0 0 3px rgba(227, 57, 57, 0.1);
+}
+
+/* Update checkbox styles */
+.checkbox-group input[type="checkbox"]:checked {
+  background-color: var(--zoho-primary);
+  border-color: var(--zoho-primary);
+}
+
+/* Update button styles */
+.submit-btn, .verify-btn {
+  background: var(--zoho-primary);
+  color: var(--zoho-white);
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: var(--border-radius-md);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover, .verify-btn:hover:not(:disabled) {
+  background: var(--zoho-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(227, 57, 57, 0.2);
+}
+
+/* Update form card styles */
+.form-card {
+  background: var(--zoho-white);
+  border-top: 4px solid var(--zoho-primary);
+}
+
+.card-header {
+  background: var(--zoho-light);
+}
+
+.card-header svg {
+  color: var(--zoho-primary);
+}
+
+/* Update success states */
+.verification-success {
+  color: var(--zoho-success);
+}
+
+.verify-btn.verified {
+  background: var(--zoho-success);
+}
+
+/* Update file upload area */
+.file-upload-area {
+  border: 2px dashed var(--zoho-border);
+}
+
+.file-upload-area:hover {
+  border-color: var(--zoho-primary);
+  background-color: rgba(227, 57, 57, 0.05);
+}
+
+.upload-icon {
+  color: var(--zoho-primary);
+}
+
+/* Update link styles */
+.app-link {
+  background: var(--zoho-accent);
+  color: var(--zoho-white);
+}
+
+.app-link:hover {
+  background: #158f3e;
+}
+
+/* Update instruction list styles */
+.instructions-list ol > li::before {
+  background: var(--zoho-primary);
+  color: var(--zoho-white);
+}
+
+.template-highlight {
+  color: var(--zoho-primary);
+  background: rgba(227, 57, 57, 0.1);
+}
+
+.color-preview {
+  color: var(--zoho-primary);
+}
+
+.color-preview::before {
+  background: var(--zoho-primary);
+}
+
 .profile-completion {
   max-width: 900px;
   margin: 2rem auto;
@@ -31,12 +176,11 @@
 }
 
 .form-card {
-  background: var(--white-card);
+  background: var(--zoho-white);
   border-radius: var(--border-radius-md);
   margin-bottom: 1.5rem;
-  box-shadow: var(--card-shadow);
-  border-top: 4px solid var(--primary-red);
-  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-top: 4px solid var(--zoho-primary);
 }
 
 .form-card:hover {
@@ -50,6 +194,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  background: var(--zoho-light);
 }
 
 .card-header svg {
@@ -98,20 +243,38 @@
 
 .input-group input {
   padding: 0.75rem;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--zoho-border);
   border-radius: var(--border-radius-md);
   font-size: 1rem;
   transition: all 0.2s ease;
+  background: var(--zoho-white);
+  color: var(--zoho-text);
 }
 
 .input-group input:focus {
   outline: none;
-  border-color: var(--primary-red);
-  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.15);
+  border-color: var(--zoho-primary);
+  box-shadow: 0 0 0 3px rgba(227, 57, 57, 0.1);
+}
+
+select {
+  padding: 0.75rem;
+  border: 1px solid var(--zoho-border);
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  background: var(--zoho-white);
+  color: var(--zoho-text);
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--zoho-primary);
+  box-shadow: 0 0 0 3px rgba(227, 57, 57, 0.1);
 }
 
 .error-message {
-  color: var(--primary-red);
+  color: var(--zoho-primary);
   text-align: center;
   margin: 1rem 0;
   font-size: 0.9rem;
@@ -158,19 +321,19 @@
 }
 
 .header-content h2 {
-  color: var(--dark-text);
+  color: var(--zoho-dark);
   font-size: 2.2rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
 
 .header-content p {
-  color: var(--light-text);
+  color: var(--zoho-text);
   font-size: 1.1rem;
 }
 
 .file-upload-area {
-  border: 2px dashed var(--border-color);
+  border: 2px dashed var(--zoho-border);
   border-radius: var(--border-radius-md);
   padding: 2.5rem;
   text-align: center;
@@ -179,12 +342,12 @@
 }
 
 .file-upload-area:hover {
-  border-color: var(--primary-red);
-  background-color: var(--light-red-bg);
+  border-color: var(--zoho-primary);
+  background-color: rgba(227, 57, 57, 0.05);
 }
 
 .upload-icon {
-  color: var(--primary-red);
+  color: var(--zoho-primary);
   margin-bottom: 1rem;
 }
 
@@ -200,9 +363,8 @@
   margin-top: 1rem;
   padding: 0.8rem;
   background: #e8f5e9;
-  border: 1px solid #a5d6a7;
-  border-radius: var(--border-radius-md);
-  color: #2e7d32;
+  border: 1px solid var(--zoho-accent);
+  color: var(--zoho-accent);
 }
 
 .linkedin-row {
@@ -228,7 +390,7 @@
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: var(--border-radius-md);
-  background: var(--primary-red);
+  background: var(--zoho-primary);
   color: white;
   cursor: pointer;
   font-weight: 600;
@@ -237,7 +399,7 @@
 }
 
 .verify-btn:hover:not(:disabled) {
-  background: var(--primary-red-dark);
+  background: var(--zoho-hover);
   transform: translateY(-2px);
 }
 
@@ -247,7 +409,7 @@
 }
 
 .verify-btn.verified {
-  background: #4caf50;
+  background: var(--zoho-success);
 }
 
 .verify-btn.verified:hover {
@@ -255,7 +417,7 @@
 }
 
 .verification-success {
-  color: #4caf50;
+  color: var(--zoho-success);
   font-size: 0.9rem;
   margin-top: 0.5rem;
   display: flex;
@@ -266,23 +428,6 @@
 .verification-success::before {
   content: '✓';
   font-weight: bold;
-}
-
-select {
-  padding: 0.75rem;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-md);
-  font-size: 1rem;
-  transition: all 0.2s ease;
-  width: 100%;
-  background: var(--white-card);
-  cursor: pointer;
-}
-
-select:focus {
-  outline: none;
-  border-color: var(--primary-red);
-  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.15);
 }
 
 .checkbox-group {
@@ -304,8 +449,104 @@ select:focus {
   accent-color: var(--primary-red);
 }
 
+.checkbox-group input[type="checkbox"]:checked {
+  background-color: var(--zoho-primary);
+  border-color: var(--zoho-primary);
+}
+
 .checkbox-group:last-child {
   margin-bottom: 0;
+}
+
+.instructions-list {
+  padding: 1rem;
+  color: var(--dark-text);
+}
+
+.instructions-list ol {
+  list-style-position: inside;
+  padding-left: 0;
+  counter-reset: item;
+}
+
+.instructions-list ol > li {
+  margin-bottom: 1.5rem;
+  counter-increment: item;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  line-height: 1.6;
+}
+
+.instructions-list ol > li::before {
+  content: counter(item);
+  background: var(--primary-red);
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.app-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--zoho-accent);
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 25px;
+  text-decoration: none;
+  margin-left: 1rem;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 8px rgba(1, 135, 95, 0.2);
+}
+
+.app-link:hover {
+  background: #158f3e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(1, 135, 95, 0.3);
+}
+
+.template-highlight {
+  color: var(--zoho-primary);
+  background: rgba(227, 57, 57, 0.1);
+  border-radius: 4px;
+}
+
+.color-preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--zoho-primary);
+}
+
+.color-preview::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  background: var(--zoho-primary);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.resume-sections {
+  margin-top: 1rem;
+  margin-left: 2rem;
+  list-style-type: disc;
+}
+
+.resume-sections li {
+  margin-bottom: 0.5rem;
+  color: var(--dark-text);
 }
 
 @media (max-width: 768px) {
@@ -336,5 +577,16 @@ select:focus {
   
   .input-row {
     grid-template-columns: 1fr;
+  }
+
+  .app-link {
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .instructions-list ol > li {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 }
