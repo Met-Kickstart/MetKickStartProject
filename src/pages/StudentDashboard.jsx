@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import CompleteProfile from '../components/Students/CompleteProfile';
-import { FaBriefcase, FaCheckCircle, FaClock } from 'react-icons/fa';
+import { FaCalculator, FaBriefcase, FaBuilding, FaBook } from 'react-icons/fa';
 import './StudentDashboard.css';
 
 const StudentDashboard = ({ onLogout }) => {
@@ -32,49 +32,74 @@ const StudentDashboard = ({ onLogout }) => {
         profileLogo={profile?.profileImage || "https://ui-avatars.com/api/?name=Student&background=random"}
         simplified={true}
       />
-      
       <div className="dashboard-content">
-        <div className="welcome-section">
-          <h1>Welcome, {profile.name}!</h1>
-          <p>Your placement journey starts here</p>
-        </div>
-
-        <div className="dashboard-grid">
-          <div className="dashboard-card">
-            <div className="card-header">
-              <FaBriefcase />
-              <h3>Active Drives</h3>
+        <h2>Welcome, {profile?.name || 'Student'}</h2>
+        <div className="dashboard-stats">
+          <div className="stat-card aptitude">
+            <div className="stat-header">
+              <FaCalculator className="stat-icon" />
+              <h3>Aptitude Tests</h3>
             </div>
-            <div className="card-content">
-              <p className="stat-number">5</p>
-              <p className="stat-label">Open Opportunities</p>
-            </div>
-          </div>
-
-          <div className="dashboard-card">
-            <div className="card-header">
-              <FaCheckCircle />
-              <h3>Applications</h3>
-            </div>
-            <div className="card-content">
-              <p className="stat-number">3</p>
-              <p className="stat-label">Drives Applied</p>
+            <div className="stat-details">
+              <div className="stat-item">
+                <p>Total Tests</p>
+                <h4>15</h4>
+              </div>
+              <div className="stat-item">
+                <p>Tests Appeared</p>
+                <h4>8</h4>
+              </div>
             </div>
           </div>
 
-          <div className="dashboard-card">
-            <div className="card-header">
-              <FaClock />
-              <h3>Upcoming</h3>
+          <div className="stat-card drives">
+            <div className="stat-header">
+              <FaBriefcase className="stat-icon" />
+              <h3>Placement Drives</h3>
             </div>
-            <div className="card-content">
-              <p className="stat-number">2</p>
-              <p className="stat-label">Scheduled Interviews</p>
+            <div className="stat-details">
+              <div className="stat-item">
+                <p>Total Drives</p>
+                <h4>25</h4>
+              </div>
+              <div className="stat-item">
+                <p>Eligible For</p>
+                <h4>18</h4>
+              </div>
+            </div>
+          </div>
+
+          <div className="stat-card companies">
+            <div className="stat-header">
+              <FaBuilding className="stat-icon" />
+              <h3>Companies</h3>
+            </div>
+            <div className="stat-details">
+              <div className="stat-item">
+                <p>Total Companies</p>
+                <h4>42</h4>
+              </div>
+            </div>
+          </div>
+
+          <div className="stat-card sessions">
+            <div className="stat-header">
+              <FaBook className="stat-icon" />
+              <h3>Prep Sessions</h3>
+            </div>
+            <div className="stat-details">
+              <div className="stat-item">
+                <p>Total Sessions</p>
+                <h4>18</h4>
+              </div>
+              <div className="stat-item">
+                <p>Sessions Attended</p>
+                <h4>12</h4>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      
       <Footer />
     </div>
   );
