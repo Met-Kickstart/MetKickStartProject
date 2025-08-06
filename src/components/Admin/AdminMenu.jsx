@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaUsers, FaBuilding, FaChartBar, FaBriefcase, FaGraduationCap, FaChartPie, FaMailBulk,  } from 'react-icons/fa';
+import { FaUsers, FaBuilding, FaChartBar, FaBriefcase, FaGraduationCap, FaChartPie, FaMailBulk } from 'react-icons/fa';
 
 const AdminMenu = ({ activeTab, setActiveTab }) => {
   const menuItems = [
@@ -12,18 +12,19 @@ const AdminMenu = ({ activeTab, setActiveTab }) => {
   ];
 
   return (
-    <div className="admin-menu">
+    <nav className="admin-menu" role="navigation" aria-label="Admin navigation">
       {menuItems.map((item) => (
         <button
           key={item.id}
           className={`menu-item ${activeTab === item.id ? 'active' : ''}`}
           onClick={() => setActiveTab(item.id)}
+          aria-current={activeTab === item.id ? 'page' : undefined}
         >
-          <span className="menu-icon">{item.icon}</span>
+          <span className="menu-icon" aria-hidden="true">{item.icon}</span>
           <span className="menu-label">{item.label}</span>
         </button>
       ))}
-    </div>
+    </nav>
   );
 };
 
