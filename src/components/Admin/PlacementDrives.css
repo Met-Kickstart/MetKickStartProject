@@ -10,7 +10,7 @@
   --dark-text: #212529;
   --light-text: #6c757d;
   --border-color: #dee2e6;
-  --success-green: #28a745;
+  --success-color: #43a047;
   --danger-red: #dc3545;
   --warning-orange: #fd7e14;
   --info-blue: #17a2b8;
@@ -19,6 +19,10 @@
   --border-radius-lg: 16px;
   --border-radius-md: 8px;
   --font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+  --stat-red: #d32f2f;
+  --stat-blue: #1e88e5;
+  --stat-green: #43a047;
+  --stat-yellow: #ffa000;
 }
 
 * {
@@ -36,9 +40,13 @@ body {
    Main Container
    ========================================= */
 .placement-drive-container {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 1.5rem;
-  background-color: var(--light-gray-bg);
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 /* =========================================
@@ -48,18 +56,17 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .page-header h1 {
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--dark-text);
   margin: 0;
-  letter-spacing: 0.5px;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .btn-primary {
@@ -69,19 +76,19 @@ body {
   padding: 0.75rem 1.5rem;
   border-radius: var(--border-radius-md);
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1rem;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(211, 47, 47, 0.2);
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(211, 47, 47, 0.2);
 }
 
 .btn-primary:hover {
   background: var(--primary-red-dark);
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(211, 47, 47, 0.3);
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
 }
 
 /* =========================================
@@ -89,45 +96,46 @@ body {
    ========================================= */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .stat-card {
   background: var(--white-card);
-  padding: 2rem;
   border-radius: var(--border-radius-md);
-  box-shadow: var(--card-shadow);
+  padding: 1.5rem;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
+  box-shadow: var(--card-shadow);
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .stat-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-5px);
   box-shadow: var(--card-hover-shadow);
 }
 
 .stat-icon {
-  font-size: 2rem;
-  padding: 1rem;
-  background-color: var(--light-red-bg);
-  color: var(--primary-red);
-  border-radius: var(--border-radius-md);
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 50px;
-  min-height: 50px;
+  font-size: 1.5rem;
+  background-color: var(--light-red-bg);
+  color: var(--primary-red);
 }
 
 .stat-info h3 {
   font-size: 1.8rem;
   font-weight: 700;
-  color: var(0, 0, 0, 0.1);
   margin: 0 0 0.25rem 0;
+  color: var(--dark-text);
 }
 
 .stat-info p {
@@ -151,6 +159,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
+  border-top: 4px solid var(--primary-red);
 }
 
 .filter-tabs {
@@ -202,34 +211,36 @@ body {
 }
 
 /* =========================================
-   Table Styles
+   Table Container
    ========================================= */
 .table-container {
   background: var(--white-card);
   border-radius: var(--border-radius-md);
   overflow: hidden;
   box-shadow: var(--card-shadow);
-  margin-top: 1rem;
+  border-top: 4px solid var(--primary-red);
 }
 
+/* =========================================
+   Table Styles
+   ========================================= */
 .placement-table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.placement-table th,
-.placement-table td {
-  padding: 1rem;
-  text-align: left;
-  border-bottom: 1px solid var(--border-color);
-}
-
 .placement-table th {
-  background-color: var(--light-gray-bg);
+  text-align: left;
+  padding: 1rem;
   font-weight: 600;
   color: var(--dark-text);
-  font-size: 0.9rem;
-  white-space: nowrap;
+  background: var(--light-gray-bg);
+}
+
+.placement-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--light-text);
 }
 
 .placement-table tbody tr {
@@ -248,7 +259,7 @@ body {
 
 .package {
   font-weight: 600;
-  color: var(--success-green);
+  color: var(--success-color);
   font-size: 1rem;
 }
 
@@ -326,7 +337,7 @@ body {
 }
 
 .btn-action:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 .btn-action.view {
@@ -369,6 +380,7 @@ body {
   background: var(--white-card);
   border-radius: var(--border-radius-md);
   box-shadow: var(--card-shadow);
+  border-top: 4px solid var(--primary-red);
 }
 
 .no-data h3 {
@@ -450,10 +462,6 @@ body {
     gap: 1rem;
   }
 
-  .stat-card {
-    padding: 1.5rem;
-  }
-
   .filters-section {
     padding: 1rem;
   }
@@ -466,10 +474,6 @@ body {
   .filter-tabs button {
     padding: 0.6rem 1rem;
     font-size: 0.8rem;
-  }
-
-  .table-container {
-    overflow-x: auto;
   }
 
   .placement-table {
@@ -509,10 +513,6 @@ body {
     padding: 0.8rem;
   }
 
-  .filters-section {
-    padding: 1rem;
-  }
-
   .placement-table {
     min-width: 600px;
     font-size: 0.75rem;
@@ -522,4 +522,64 @@ body {
   .placement-table td {
     padding: 0.5rem;
   }
+}
+/* Enhanced Stats Grid Styling */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Your provided stat-card styles are perfect! */
+.stat-card {
+  background: var(--white-card);
+  border-radius: var(--border-radius-md);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--card-hover-shadow);
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.stat-details h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+  transition: all 0.3s ease;
+}
+
+.stat-details p {
+  color: var(--light-text);
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Make sure these color variables are defined in your CSS */
+:root {
+  --stat-red: #d32f2f;
+  --stat-blue: #1e88e5;
+  --stat-green: #43a047;
+  --stat-yellow: #ffa000;
+  --stat-orange: #ff5722;
 }

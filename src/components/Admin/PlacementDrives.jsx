@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FaBuilding, FaCheckCircle, FaUsers, FaBullseye, FaFileExcel } from 'react-icons/fa';
 import './PlacementDrives.css';
 
 const PlacementDrive = () => {
@@ -92,6 +93,37 @@ const PlacementDrive = () => {
     setPlacements(demoPlacementData);
   }, []);
 
+  const stats = [
+    {
+      icon: <FaBuilding />,
+      number: placements.length,
+      label: 'Total Drives',
+      color: 'var(--stat-red)'
+    },
+    {
+      icon: <FaCheckCircle />,
+      number: placements.filter(p => p.status === 'Active').length,
+      label: 'Active Drives',
+      color: 'var(--stat-green)'
+    },
+    {
+      icon: <FaUsers />,
+      number: placements.reduce((sum, p) => sum + p.applicants, 0),
+      label: 'Total Applicants',
+      color: 'var(--stat-blue)'
+    },
+    {
+      icon: <FaBullseye />,
+      number: placements.reduce((sum, p) => sum + p.selected, 0),
+      label: 'Total Selected',
+      color: 'var(--stat-yellow)'
+    }
+  ];
+
+  const handleImportExcel = () => {
+    alert('Import from Excel functionality would be implemented here');
+  };
+
   const filteredPlacements = placements.filter(placement => {
     const matchesFilter = filter === 'all' || placement.status.toLowerCase() === filter;
     const matchesSearch = placement.companyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -104,130 +136,131 @@ const PlacementDrive = () => {
     return <span className={`status-badge ${statusClass}`}>{status}</span>;
   };
 
-  const getTypeBadge = (type) => {
-    return <span className={`type-badge type-${type.toLowerCase().replace(' ', '-')}`}>{type}</span>;
-  };
-
   return (
     <div className="placement-drive-container">
       <div className="page-header">
-        <h1>Placement Drives</h1>
-        <button className="btn-primary">Add New Drive</button>
+        <h1>
+          <FaBuilding />
+          Placement Drives
+        </h1>
+        <button className="btn-primary" onClick={handleImportExcel}>
+          <FaFileExcel /> Import Data from Excel
+        </button>
       </div>
 
-      {/* Stats Cards */}
+      {/* Stats Cards - Updated to match Overview */}
       <div className="stats-grid">
-        <div className="stat-card">
-          <div className="stat-icon">🏢</div>
-          <div className="stat-info">
-            <h3>{placements.length}</h3>
-            <p>Total Drives</p>
+        {stats.map((stat, index) => (
+          <div 
+            className="stat-card" 
+            key={index}
+            style={{ 
+              borderLeft: `4px solid ${stat.color}`,
+              background: `${stat.color}08` // Very light version of the color
+            }}
+          >
+            <div className="stat-icon" style={{ backgroundColor: `${stat.color}15`, color: stat.color }}>
+              {stat.icon}
+            </div>
+            <div className="stat-details">
+              <h3 style={{ color: stat.color }}>{stat.number}</h3>
+              <p>{stat.label}</p>
+            </div>
           </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon">✅</div>
-          <div className="stat-info">
-            <h3>{placements.filter(p => p.status === 'Active').length}</h3>
-            <p>Active Drives</p>
-          </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon">👥</div>
-          <div className="stat-info">
-            <h3>{placements.reduce((sum, p) => sum + p.applicants, 0)}</h3>
-            <p>Total Applicants</p>
-          </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon">🎯</div>
-          <div className="stat-info">
-            <h3>{placements.reduce((sum, p) => sum + p.selected, 0)}</h3>
-            <p>Total Selected</p>
-          </div>
-        </div>
+        ))}
       </div>
 
-      {/* Filters and Search */}
+      {/* Filters Section */}
       <div className="filters-section">
         <div className="filter-tabs">
-          <button 
-            className={filter === 'all' ? 'active' : ''} 
+          <button
+            className={filter === 'all' ? 'active' : ''}
             onClick={() => setFilter('all')}
           >
             All Drives
           </button>
-          <button 
-            className={filter === 'active' ? 'active' : ''} 
+          <button
+            className={filter === 'active' ? 'active' : ''}
             onClick={() => setFilter('active')}
           >
             Active
           </button>
-          <button 
-            className={filter === 'closed' ? 'active' : ''} 
+          <button
+            className={filter === 'closed' ? 'active' : ''}
             onClick={() => setFilter('closed')}
           >
             Closed
           </button>
         </div>
+
         <div className="search-box">
           <input
             type="text"
-            placeholder="Search by company or position..."
+            placeholder="Search companies or positions..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
       </div>
 
-      {/* Placement Drives Table */}
+      {/* Table Container */}
       <div className="table-container">
-        <table className="placement-table">
-          <thead>
-            <tr>
-              <th>Company Name</th>
-              <th>Job Tittle</th>
-              <th>CTC</th>
-              <th>Location</th>
-              <th>Last Date</th>
-              <th>Status</th>
-              <th>Applicants</th>
-              <th>Selected</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredPlacements.map((placement) => (
-              <tr key={placement.id}>
-                <td>
-                  <div className="company-info">
-                    <strong>{placement.companyName}</strong>
-                  </div>
-                </td>
-                <td>{placement.position}</td>
-                <td className="package">{placement.package}</td>
-                <td>{placement.location}</td>
-                <td>{new Date(placement.lastDate).toLocaleDateString()}</td>
-                <td>{getStatusBadge(placement.status)}</td>
-                <td className="text-center">{placement.applicants}</td>
-                <td className="text-center">{placement.selected}</td>
-                <td>
-                  <div className="action-buttons">
-                    <button className="btn-action view" title="View Details">👁️</button>
-                    <button className="btn-action edit" title="Edit">✏️</button>
-                    <button className="btn-action delete" title="Delete">🗑️</button>
-                  </div>
-                </td>
+        {filteredPlacements.length > 0 ? (
+          <table className="placement-table">
+            <thead>
+              <tr>
+                <th>Company Name</th>
+                <th>Job Title</th>
+                <th>CTC</th>
+                <th>Location</th>
+                <th>Last Date</th>
+                <th>Status</th>
+                <th>Applicants</th>
+                <th>Selected</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredPlacements.map((placement) => (
+                <tr key={placement.id}>
+                  <td>
+                    <div className="company-info">
+                      <strong>{placement.companyName}</strong>
+                    </div>
+                  </td>
+                  <td>{placement.position}</td>
+                  <td>
+                    <span className="package">{placement.package}</span>
+                  </td>
+                  <td>{placement.location}</td>
+                  <td>{new Date(placement.lastDate).toLocaleDateString()}</td>
+                  <td>{getStatusBadge(placement.status)}</td>
+                  <td>{placement.applicants}</td>
+                  <td>{placement.selected}</td>
+                  <td>
+                    <div className="action-buttons">
+                      <button className="btn-action view" title="View Details">
+                        👁️
+                      </button>
+                      <button className="btn-action edit" title="Edit">
+                        ✏️
+                      </button>
+                      <button className="btn-action delete" title="Delete">
+                        🗑️
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div className="no-data">
+            <h3>No placement drives found</h3>
+            <p>No placement drives found matching your criteria.</p>
+          </div>
+        )}
       </div>
-
-      {filteredPlacements.length === 0 && (
-        <div className="no-data">
-          <p>No placement drives found matching your criteria.</p>
-        </div>
-      )}
     </div>
   );
 };

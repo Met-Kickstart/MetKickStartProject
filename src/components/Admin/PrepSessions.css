@@ -127,3 +127,186 @@ th {
   background-color: #ffebee;
   color: #d32f2f;
 }
+/* Stats Grid similar to other components */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: var(--white-card);
+  border-radius: var(--border-radius-md);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--card-hover-shadow);
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.stat-details h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+  transition: all 0.3s ease;
+}
+
+.stat-details p {
+  color: var(--light-text);
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Enhanced header */
+.sessions-header h1 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--dark-text);
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+/* Button styling */
+.add-session-btn {
+  background-color: var(--primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.add-session-btn:hover {
+  background-color: var(--primary-red-dark);
+  transform: translateY(-2px);
+}
+
+/* Form styling */
+.session-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
+}
+
+.session-form h3 {
+  margin: 0 0 1.5rem 0;
+  color: var(--dark-text);
+  font-size: 1.3rem;
+}
+
+/* Form actions */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.submit-btn {
+  background-color: var(--primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn {
+  background-color: var(--light-gray);
+  color: var(--dark-text);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: var(--primary-red-dark);
+}
+
+.cancel-btn:hover {
+  background-color: var(--border-color);
+}
+
+/* Enhanced action buttons */
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  transition: all 0.3s ease;
+}
+
+.action-btn.edit {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.action-btn.delete {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+.action-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Select dropdown styling */
+select {
+  padding: 0.75rem;
+  border: 1px solid var(--light-gray);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  background-color: white;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.1);
+}

@@ -7,8 +7,8 @@ const AdminMenu = ({ activeTab, setActiveTab }) => {
     { id: 'create-drive', label: 'Create Drive', icon: <FaBriefcase /> },
     { id: 'student-management', label: 'Student Management', icon: <FaUsers /> },
     { id: 'placement-drives', label: 'Placement Drives', icon: <FaBuilding /> },
-    { id: 'prep-session', label: 'Prep Session', icon: <FaGraduationCap /> },
-    { id: 'amplitude-test', label: 'Amplitude Test', icon: <FaBook /> },
+    { id: 'prep-sessions', label: 'Prep Session', icon: <FaGraduationCap /> },
+    { id: 'mock-aptitude-test', label: 'Mock Aptitude Test', icon: <FaBook /> },
     { id: 'statistics', label: 'Statistics', icon: <FaChartPie /> }
   ];
 
