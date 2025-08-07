@@ -64,15 +64,7 @@
   min-height: calc(100vh - 140px);
 }
 
-/* Rest of your existing CSS remains unchanged */
-.stats-grid,
-.student-filters,
-.stat-card,
-.form-group,
-table,
-.status-badge {
-  /* All your existing component styles remain the same */
-}
+
 
 @media (max-width: 1024px) {
   .admin-menu {

@@ -22,6 +22,8 @@ const StudentManagement = () => {
         mbaFirstYearCGPA: "8.2",
         mbaSpecialization: "Finance"
       },
+      prepSessionsAttended: 12, // Add this field
+      aptitudeTestsAttended: 8, // Add this field
       companiesAppeared: [
         { name: "TCS", date: "2024-02-15", round: "Technical" },
         { name: "Infosys", date: "2024-02-10", round: "HR" }
@@ -45,6 +47,8 @@ const StudentManagement = () => {
         mbaFirstYearCGPA: "7.5",
         mbaSpecialization: "Marketing"
       },
+      prepSessionsAttended: 10, // Add this field
+      aptitudeTestsAttended: 6, // Add this field
       companiesApplied: [
         { name: "Microsoft", status: "In Progress" }
       ],
@@ -130,7 +134,9 @@ const StudentManagement = () => {
               date: row[`${company.trim()} Date`] || new Date().toISOString().split('T')[0],
               round: row[`${company.trim()} Round`] || 'Not Specified'
             })) : [],
-          status: row['Status'] || 'Not Placed'
+          status: row['Status'] || 'Not Placed',
+          prepSessionsAttended: parseInt(row['Prep Sessions Attended']) || 0,
+          aptitudeTestsAttended: parseInt(row['Aptitude Tests Attended']) || 0
         }));
         
         setStudents(prevStudents => [...prevStudents, ...newStudents]);
@@ -230,6 +236,8 @@ const StudentManagement = () => {
               <th>Grad CGPA</th>
               <th>MBA CGPA</th>
               <th>Specialization</th>
+              <th>Prep Sessions</th>
+              <th>Aptitude Tests</th>
               <th>Companies Appeared</th>
               <th>Status</th>
             </tr>
@@ -251,6 +259,8 @@ const StudentManagement = () => {
                 <td>{student.academics.graduationCGPA}</td>
                 <td>{student.academics.mbaFirstYearCGPA}</td>
                 <td>{student.academics.mbaSpecialization}</td>
+                <td>{student.prepSessionsAttended || 0}</td>
+                <td>{student.aptitudeTestsAttended || 0}</td>
                 <td>
                   <div className="companies-count">
                     <span className="count-badge">

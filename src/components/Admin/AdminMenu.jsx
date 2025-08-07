@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaUsers, FaBuilding, FaChartBar, FaBriefcase, FaGraduationCap, FaChartPie, FaMailBulk } from 'react-icons/fa';
+import { FaUsers, FaBuilding, FaChartBar, FaBriefcase, FaGraduationCap, FaChartPie, FaMailBulk,FaBook } from 'react-icons/fa';
 
 const AdminMenu = ({ activeTab, setActiveTab }) => {
   const menuItems = [
@@ -7,6 +7,8 @@ const AdminMenu = ({ activeTab, setActiveTab }) => {
     { id: 'create-drive', label: 'Create Drive', icon: <FaBriefcase /> },
     { id: 'student-management', label: 'Student Management', icon: <FaUsers /> },
     { id: 'placement-drives', label: 'Placement Drives', icon: <FaBuilding /> },
+    { id: 'prep-session', label: 'Prep Session', icon: <FaGraduationCap /> },
+    { id: 'amplitude-test', label: 'Amplitude Test', icon: <FaBook /> },
     { id: 'statistics', label: 'Statistics', icon: <FaChartPie /> },
     { id: 'email-notification', label: 'Email Notification', icon: <FaMailBulk /> }
   ];
