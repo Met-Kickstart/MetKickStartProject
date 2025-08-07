@@ -1,0 +1,345 @@
+.placement-drives {
+  padding: 1.5rem;
+}
+
+.drives-header {
+  margin-bottom: 2rem;
+}
+
+.drives-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+}
+
+.drive-tabs {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.tab-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: none;
+  color: #6c757d;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: #1a1a1a;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.tab-btn.active {
+  background: #ffffff;
+  color: #d32f2f;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.drives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.drive-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-top: 4px solid #d32f2f;
+}
+
+.drive-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.drive-card.upcoming {
+  border-top-color: #2196f3;
+}
+
+.drive-card.applied {
+  border-top-color: #4caf50;
+}
+
+.drive-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.company-info h3 {
+  margin: 0 0 0.25rem 0;
+  color: #1a1a1a;
+  font-size: 1.25rem;
+}
+
+.role {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-badge.applications-open {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.status-badge.coming-soon {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.status-badge.in-progress {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.drive-details {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #666;
+}
+
+.detail-icon {
+  color: #d32f2f;
+  font-size: 1rem;
+}
+
+.eligibility-section {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.eligibility-section h4 {
+  margin: 0 0 1rem 0;
+  color: #1a1a1a;
+  font-size: 1rem;
+}
+
+.eligibility-details {
+  display: grid;
+  gap: 1rem;
+}
+
+.eligibility-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.eligibility-icon {
+  color: #d32f2f;
+  margin-right: 0.5rem;
+}
+
+.label {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.branch-badge, .skill-badge {
+  padding: 0.35rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.branch-badge {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.skill-badge {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.rounds-section {
+  margin: 1.5rem 0;
+}
+
+.rounds-section h4 {
+  margin: 0 0 1rem 0;
+  color: #1a1a1a;
+  font-size: 1rem;
+}
+
+.rounds-timeline {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.round-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  position: relative;
+}
+
+.round-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -0.5rem;
+  top: 50%;
+  width: 1rem;
+  height: 2px;
+  background: #e0e0e0;
+}
+
+.round-number {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #d32f2f;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.apply-btn, .notify-btn, .view-details-btn {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.apply-btn {
+  background: #d32f2f;
+  color: white;
+}
+
+.apply-btn:hover {
+  background: #b71c1c;
+}
+
+.notify-btn {
+  background: #2196f3;
+  color: white;
+}
+
+.notify-btn:hover {
+  background: #1976d2;
+}
+
+.view-details-btn {
+  background: #4caf50;
+  color: white;
+}
+
+.view-details-btn:hover {
+  background: #388e3c;
+}
+
+.application-status {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.application-status h4 {
+  margin: 0 0 1rem 0;
+  color: #1a1a1a;
+  font-size: 1rem;
+}
+
+.status-details {
+  display: grid;
+  gap: 1rem;
+}
+
+.status-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status-item .value {
+  font-weight: 500;
+}
+
+.status-item .highlight {
+  color: #d32f2f;
+}
+
+@media (max-width: 768px) {
+  .placement-drives {
+    padding: 1rem;
+  }
+
+  .drives-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .drive-tabs {
+    overflow-x: auto;
+    padding: 0.5rem;
+  }
+
+  .tab-btn {
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+  }
+
+  .rounds-timeline {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .round-item:not(:last-child)::after {
+    right: auto;
+    top: auto;
+    bottom: -0.5rem;
+    left: 12px;
+    width: 2px;
+    height: 1rem;
+  }
+}

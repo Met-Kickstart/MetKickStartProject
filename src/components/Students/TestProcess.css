@@ -1,0 +1,258 @@
+.test-process {
+  padding: 1rem;
+}
+
+.test-process-header {
+  margin-bottom: 2rem;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 1rem;
+  background: var(--white-card);
+  padding: 0.5rem;
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+}
+
+.tab-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: var(--light-text);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tab-btn:hover {
+  background: var(--light-gray-bg);
+  color: var(--primary-red);
+}
+
+.tab-btn.active {
+  background: var(--primary-red);
+  color: white;
+}
+
+.section-header {
+  margin-bottom: 1.5rem;
+}
+
+.section-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--dark-text);
+  margin: 0;
+}
+
+.section-icon {
+  color: var(--primary-red);
+}
+
+/* Prep Sessions Styles */
+.sessions-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.upcoming-sessions,
+.completed-sessions {
+  background: var(--white-card);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+}
+
+.sessions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.session-card {
+  background: var(--white);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+}
+
+.session-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.session-tag {
+  background: var(--light-blue-bg);
+  color: var(--primary-blue);
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.session-date {
+  color: var(--light-text);
+  font-size: 0.875rem;
+}
+
+.session-card h5 {
+  margin: 0 0 1rem 0;
+  color: var(--dark-text);
+}
+
+.session-details {
+  margin-bottom: 1rem;
+}
+
+.session-details p {
+  margin: 0.5rem 0;
+  color: var(--light-text);
+}
+
+.register-btn,
+.feedback-btn {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.register-btn {
+  background: var(--primary-red);
+  color: white;
+}
+
+.feedback-btn {
+  background: var(--light-gray-bg);
+  color: var(--primary-red);
+}
+
+.register-btn:hover,
+.feedback-btn:hover {
+  opacity: 0.9;
+}
+
+/* Aptitude Tests Styles */
+.aptitude-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.aptitude-card {
+  background: var(--white-card);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.card-header h4 {
+  margin: 0;
+  color: var(--dark-text);
+}
+
+.badge {
+  background: var(--light-blue-bg);
+  color: var(--primary-blue);
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.tests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.test-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: var(--light-gray-bg);
+  border-radius: 6px;
+}
+
+.test-name {
+  margin: 0;
+  color: var(--dark-text);
+  font-weight: 500;
+}
+
+.test-count {
+  color: var(--light-text);
+  font-size: 0.875rem;
+}
+
+.progress-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 150px;
+}
+
+.progress-text {
+  color: var(--light-text);
+  font-size: 0.875rem;
+  text-align: right;
+}
+
+.progress-bar {
+  height: 6px;
+  background: var(--border-color);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: var(--primary-red);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .test-process {
+    padding: 0.5rem;
+  }
+
+  .tab-buttons {
+    padding: 0.25rem;
+  }
+
+  .tab-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .sessions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .aptitude-stats {
+    grid-template-columns: 1fr;
+  }
+}

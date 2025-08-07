@@ -1,0 +1,147 @@
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.stat-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.07);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.stat-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-icon {
+  font-size: 1.75rem;
+}
+
+.stat-header h3 {
+  margin: 0;
+  color: #212529;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.stat-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-item {
+  flex: 1;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(4px);
+}
+
+.stat-item p {
+  color: #6c757d;
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.stat-item h4 {
+  color: #212529;
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+/* Card specific colors and backgrounds */
+.stat-card.aptitude {
+  border-top: 4px solid #d32f2f;
+  background: linear-gradient(135deg, rgba(211, 47, 47, 0.15) 0%, rgba(211, 47, 47, 0.05) 100%);
+  background-color: rgba(211, 47, 47, 0.08);
+}
+
+.stat-card.drives {
+  border-top: 4px solid #1e88e5;
+  background: linear-gradient(135deg, rgba(30, 136, 229, 0.15) 0%, rgba(30, 136, 229, 0.05) 100%);
+  background-color: rgba(30, 136, 229, 0.08);
+}
+
+.stat-card.companies {
+  border-top: 4px solid #43a047;
+  background: linear-gradient(135deg, rgba(67, 160, 71, 0.15) 0%, rgba(67, 160, 71, 0.05) 100%);
+  background-color: rgba(67, 160, 71, 0.08);
+}
+
+.stat-card.sessions {
+  border-top: 4px solid #ffa000;
+  background: linear-gradient(135deg, rgba(255, 160, 0, 0.15) 0%, rgba(255, 160, 0, 0.05) 100%);
+  background-color: rgba(255, 160, 0, 0.08);
+}
+
+.stat-card.aptitude .stat-icon {
+  color: #d32f2f;
+}
+
+.stat-card.drives .stat-icon {
+  color: #1e88e5;
+}
+
+.stat-card.companies .stat-icon {
+  color: #43a047;
+}
+
+.stat-card.sessions .stat-icon {
+  color: #ffa000;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .dashboard-stats {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+
+  .stat-card {
+    padding: 1.5rem;
+  }
+
+  .stat-header {
+    margin-bottom: 1rem;
+  }
+
+  .stat-icon {
+    font-size: 1.5rem;
+  }
+
+  .stat-header h3 {
+    font-size: 1.125rem;
+  }
+
+  .stat-item {
+    padding: 0.75rem;
+  }
+
+  .stat-item h4 {
+    font-size: 1.5rem;
+  }
+}

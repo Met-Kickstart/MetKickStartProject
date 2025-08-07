@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaSignInAlt } from 'react-icons/fa';
 import metLogo from '../assets/met-iom-logo.png'; // Add this import
 
-const Header = ({ onLoginClick, isLoggedIn, onLogoutClick, profileLogo, simplified = false, userRole }) => {
+const Header = ({ onLoginClick, isLoggedIn, onLogoutClick, simplified = false, userRole }) => {
   return (
     <header className="header">
       <div className="header-container">
@@ -47,13 +47,6 @@ const Header = ({ onLoginClick, isLoggedIn, onLogoutClick, profileLogo, simplifi
           {/* Auth section remains unchanged */}
           {isLoggedIn ? (
             <div className="auth-section">
-              {profileLogo && (
-                <img
-                  src={profileLogo}
-                  alt="Profile Logo"
-                  className="profile-logo"
-                />
-              )}
               <Link to="/" className="login-btn" onClick={onLogoutClick}>
                 Logout
               </Link>

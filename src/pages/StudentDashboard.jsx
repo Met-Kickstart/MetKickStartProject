@@ -2,16 +2,107 @@ import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import CompleteProfile from '../components/Students/CompleteProfile';
-import { FaCalculator, FaBriefcase, FaBuilding, FaBook } from 'react-icons/fa';
+import StudentMenu from '../components/Students/StudentMenu';
+import Overview from '../components/Students/Overview';
+import StudentProfile from '../components/Students/StudentProfile';
+import PlacementDrives from '../components/Students/PlacementDrives';
+import TestProcess from '../components/Students/TestProcess';
+import { FaUser, FaCalculator, FaBriefcase, FaBuilding } from 'react-icons/fa';
 import './StudentDashboard.css';
 
 const StudentDashboard = ({ onLogout }) => {
   const [profileCompleted, setProfileCompleted] = useState(false);
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState({
+    fullName: '',
+    email: '',
+    rollNo: '',
+    contactNo: '',
+    officialEmail: '',
+    personalEmail: '',
+    profileImage: 'https://ui-avatars.com/api/?name=Student&background=random',
+    address: '',
+    dateOfBirth: '',
+    academics: {
+      tenthPercentage: '',
+      twelfthPercentage: '',
+      graduationStream: '',
+      graduationDegree: '',
+      university: '',
+      graduationCGPA: '',
+      mbaFirstYearCGPA: '',
+      mbaSpecialization: ''
+    },
+    ojt: {
+      companyName: '',
+      projectTitle: '',
+      joiningDate: '',
+      companyGuide: {
+        name: '',
+        contactNo: '',
+        emailId: ''
+      },
+      collegeGuideName: ''
+    },
+    linkedinUrl: '',
+    resumeFile: null,
+    companiesApplied: [],
+    status: 'Not Placed',
+    prepSessionsAttended: 0,
+    aptitudeTestsAttended: 0,
+    companiesAppliedCount: 0
+  });
+  const [activeMenu, setActiveMenu] = useState('overview');
 
   const handleProfileComplete = (profileData) => {
-    setProfile(profileData);
+    // Validate required fields
+    const requiredFields = [
+      'fullName',
+      'rollNo',
+      'contactNo',
+      'officialEmail',
+      'personalEmail',
+      'address',
+      'dateOfBirth',
+      'academics.tenthPercentage',
+      'academics.twelfthPercentage',
+      'academics.graduationStream',
+      'academics.graduationDegree',
+      'academics.university',
+      'academics.graduationCGPA',
+      'academics.mbaFirstYearCGPA',
+      'academics.mbaSpecialization',
+      'ojt.companyName',
+      'ojt.projectTitle',
+      'ojt.joiningDate',
+      'ojt.companyGuide.name',
+      'ojt.companyGuide.contactNo',
+      'ojt.companyGuide.emailId',
+      'ojt.collegeGuideName',
+      'linkedinUrl'
+    ];
+
+    const hasAllRequiredFields = requiredFields.every(field => {
+      const value = field.split('.').reduce((obj, key) => obj?.[key], profileData);
+      return value !== undefined && value !== '';
+    });
+
+    if (!hasAllRequiredFields) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    if (!profileData.resumeFile) {
+      alert('Please upload your resume');
+      return;
+    }
+
+    setProfile(prevProfile => ({
+      ...prevProfile,
+      ...profileData,
+      name: profileData.fullName // Ensure name is set for header display
+    }));
     setProfileCompleted(true);
+    // You might want to save this data to your backend here
   };
 
   if (!profileCompleted) {
@@ -32,72 +123,23 @@ const StudentDashboard = ({ onLogout }) => {
         profileLogo={profile?.profileImage || "https://ui-avatars.com/api/?name=Student&background=random"}
         simplified={true}
       />
-      <div className="dashboard-content">
-        <h2>Welcome, {profile?.name || 'Student'}</h2>
-        <div className="dashboard-stats">
-          <div className="stat-card aptitude">
-            <div className="stat-header">
-              <FaCalculator className="stat-icon" />
-              <h3>Aptitude Tests</h3>
+      <div className="dashboard-container">
+        <StudentMenu activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
+        <div className="dashboard-content">
+          <h2>{profile?.fullName || 'Welcome'}</h2>
+          {activeMenu === 'overview' && <Overview />}
+          {activeMenu === 'profile' && (
+            <StudentProfile profile={profile} />
+          )}
+          {activeMenu === 'test-process' && <TestProcess />}
+          {activeMenu === 'placement-drives' && <PlacementDrives />}
+          {activeMenu !== 'overview' && activeMenu !== 'profile' && 
+           activeMenu !== 'test-process' && activeMenu !== 'placement-drives' && (
+            <div className="section-content">
+              <h3>{menuItems.find(item => item.id === activeMenu)?.label}</h3>
+              <p>Content for {menuItems.find(item => item.id === activeMenu)?.label} will be displayed here.</p>
             </div>
-            <div className="stat-details">
-              <div className="stat-item">
-                <p>Total Tests</p>
-                <h4>15</h4>
-              </div>
-              <div className="stat-item">
-                <p>Tests Appeared</p>
-                <h4>8</h4>
-              </div>
-            </div>
-          </div>
-
-          <div className="stat-card drives">
-            <div className="stat-header">
-              <FaBriefcase className="stat-icon" />
-              <h3>Placement Drives</h3>
-            </div>
-            <div className="stat-details">
-              <div className="stat-item">
-                <p>Total Drives</p>
-                <h4>25</h4>
-              </div>
-              <div className="stat-item">
-                <p>Eligible For</p>
-                <h4>18</h4>
-              </div>
-            </div>
-          </div>
-
-          <div className="stat-card companies">
-            <div className="stat-header">
-              <FaBuilding className="stat-icon" />
-              <h3>Companies</h3>
-            </div>
-            <div className="stat-details">
-              <div className="stat-item">
-                <p>Total Companies</p>
-                <h4>42</h4>
-              </div>
-            </div>
-          </div>
-
-          <div className="stat-card sessions">
-            <div className="stat-header">
-              <FaBook className="stat-icon" />
-              <h3>Prep Sessions</h3>
-            </div>
-            <div className="stat-details">
-              <div className="stat-item">
-                <p>Total Sessions</p>
-                <h4>18</h4>
-              </div>
-              <div className="stat-item">
-                <p>Sessions Attended</p>
-                <h4>12</h4>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
       </div>
       <Footer />
