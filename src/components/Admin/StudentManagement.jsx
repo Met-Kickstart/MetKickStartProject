@@ -50,9 +50,9 @@ const StudentManagement = () => {
       prepSessionsAttended: 10, // Add this field
       aptitudeTestsAttended: 6, // Add this field
       companiesApplied: [
-        { name: "Microsoft", status: "In Progress" }
+        { name: "Microsoft", status: "Placed" }
       ],
-      status: "In Progress"
+      status: "Placed"
     }
   ]);
 
@@ -63,7 +63,7 @@ const StudentManagement = () => {
   });
 
   const specializations = ['Finance', 'Marketing', 'HR', 'Operations'];
-  const statuses = ['Placed', 'In Progress', 'Not Placed'];
+  const statuses = ['Placed',  'Not Placed'];
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -149,8 +149,6 @@ const StudentManagement = () => {
     switch (status) {
       case 'Placed':
         return 'status-placed';
-      case 'In Progress':
-        return 'status-in-progress';
       case 'Not Placed':
         return 'status-not-placed';
       default:
@@ -231,7 +229,8 @@ const StudentManagement = () => {
               <th>Personal Email</th>
               <th>10th %</th>
               <th>12th %</th>
-              <th>Graduation</th>
+              <th>Graduation Stream</th>
+              <th>Graduation Degree</th>
               <th>University</th>
               <th>Grad CGPA</th>
               <th>MBA CGPA</th>
@@ -252,9 +251,8 @@ const StudentManagement = () => {
                 <td>{student.personalEmail}</td>
                 <td>{student.academics.tenthPercentage}%</td>
                 <td>{student.academics.twelfthPercentage}%</td>
-                <td>
-                  {student.academics.graduationDegree} in {student.academics.graduationStream}
-                </td>
+                <td>{student.academics.graduationDegree}</td>
+                <td> {student.academics.graduationStream}</td>
                 <td>{student.academics.university}</td>
                 <td>{student.academics.graduationCGPA}</td>
                 <td>{student.academics.mbaFirstYearCGPA}</td>

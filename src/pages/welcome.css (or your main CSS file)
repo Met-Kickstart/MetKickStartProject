@@ -1,8 +1,0 @@
-.drive-card .company-logo svg {
-  color: #666 !important; /* or your default logo color */
-  transition: none;
-}
-.drive-card:hover .company-logo svg,
-.drive-card .company-logo:hover svg {
-  color: #666 !important; /* Prevent color change on hover */
-}

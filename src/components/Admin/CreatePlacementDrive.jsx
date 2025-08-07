@@ -19,7 +19,7 @@ const CreateDrive = () => {
     location: "",
     driveDate: "",
     applicationDeadline: "",
-    salary: "",
+    CTC: "",
     tenthPercentage: '',
     twelfthPercentage: '',
     graduationCGPA: "",
@@ -209,13 +209,13 @@ const CreateDrive = () => {
                   />
                 </div>
                 <div className="input-group">
-                  <label>Salary Package</label>
+                  <label>CTC</label>
                   <input
                     type="text"
-                    name="salary"
-                    value={formData.salary}
+                    name="CTC"
+                    value={formData.CTC}
                     onChange={handleInputChange}
-                    placeholder="e.g., 8-12 LPA"
+                    placeholder="e.g., 8-12"
                   />
                 </div>
               </div>
@@ -224,7 +224,7 @@ const CreateDrive = () => {
                   <label>Vacancy</label>
                   <input
                     type="text"
-                    name="salary"
+                    name="CTC"
                     value={formData.vacancy}
                     onChange={handleInputChange}
                     placeholder="0...10, 20, etc."

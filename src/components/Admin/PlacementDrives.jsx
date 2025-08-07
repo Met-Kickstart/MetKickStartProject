@@ -186,7 +186,7 @@ const PlacementDrive = () => {
             <tr>
               <th>Company Name</th>
               <th>Job Tittle</th>
-              <th>Salary</th>
+              <th>CTC</th>
               <th>Location</th>
               <th>Last Date</th>
               <th>Status</th>
