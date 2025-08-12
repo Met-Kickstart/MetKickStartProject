@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PrepSessions from '../components/Admin/PrepSessions';
 
 import Header                from '../components/Header';
 import Footer                from '../components/Footer';
@@ -9,6 +8,8 @@ import Overview              from '../components/Admin/Overview';
 import StudentManagement     from '../components/Admin/StudentManagement';
 import CreatePlacementDrive  from '../components/Admin/CreatePlacementDrive';
 import PlacementDrives       from '../components/Admin/PlacementDrives';
+import PrepSessions          from '../components/Admin/PrepSessions';
+import MockAptitude          from '../components/Admin/MockAptitude'; // Add this import
 
 import './AdminDashboard.css';
 
@@ -68,7 +69,13 @@ const AdminDashboard = ({ onLogout }) => {
               onEditDrive={handleEditDrive}
             />
           )}
-
+          
+          {/* Prep session */}
+          {activeTab === 'prep-sessions' && <PrepSessions />}
+          
+          {/* Mock Aptitude */}
+          {activeTab === 'mock-aptitude-test' && <MockAptitude />}  {/* Add this line */}
+          
           {/* Statistics (static demo) */}
           {activeTab === 'statistics' && (
             <div className="statistics-section">
