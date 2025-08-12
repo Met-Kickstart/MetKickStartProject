@@ -15,46 +15,63 @@
   --zoho-hover: #CC3333;
 }
 
-/* Update input styles */
-.input-group input {
-  padding: 0.75rem;
+/* Form controls */
+.input-group input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
   border: 1px solid var(--zoho-border);
   border-radius: var(--border-radius-md);
-  font-size: 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
   transition: all 0.2s ease;
   background: var(--zoho-white);
   color: var(--zoho-text);
 }
 
-.input-group input:focus {
+.input-group input:hover,
+select:hover,
+textarea:hover {
+  border-color: var(--zoho-secondary);
+}
+
+.input-group input:focus,
+select:focus,
+textarea:focus {
   outline: none;
   border-color: var(--zoho-primary);
   box-shadow: 0 0 0 3px rgba(227, 57, 57, 0.1);
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .input-group label {
   color: var(--zoho-dark);
+  font-weight: 500;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .input-group label svg {
   color: var(--zoho-primary);
-}
-
-/* Update select styles */
-select {
-  padding: 0.75rem;
-  border: 1px solid var(--zoho-border);
-  border-radius: var(--border-radius-md);
   font-size: 1rem;
-  background: var(--zoho-white);
-  color: var(--zoho-text);
-  cursor: pointer;
 }
 
-select:focus {
-  outline: none;
-  border-color: var(--zoho-primary);
-  box-shadow: 0 0 0 3px rgba(227, 57, 57, 0.1);
+select {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23424242' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  cursor: pointer;
 }
 
 /* Update checkbox styles */
@@ -80,14 +97,46 @@ select:focus {
   box-shadow: 0 4px 12px rgba(227, 57, 57, 0.2);
 }
 
-/* Update form card styles */
+/* Form layout and spacing */
+.form-section {
+  padding: 1.25rem 1.5rem;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  flex: 1 1 calc(50% - 0.75rem);
+  min-width: 240px;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--dark-text);
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+/* Card styles */
 .form-card {
   background: var(--zoho-white);
   border-top: 4px solid var(--zoho-primary);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.5rem;
 }
 
 .card-header {
   background: var(--zoho-light);
+  border-top-left-radius: var(--border-radius-lg);
+  border-top-right-radius: var(--border-radius-lg);
 }
 
 .card-header svg {
@@ -189,23 +238,41 @@ select:focus {
 }
 
 .card-header {
-  padding: 1.5rem;
+  padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
-  gap: 1rem;
   background: var(--zoho-light);
+  text-align: left;
+  position: relative;
 }
 
-.card-header svg {
-  font-size: 1.5rem;
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(227, 57, 57, 0.1);
+  border-radius: 6px;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.icon-wrapper svg {
   color: var(--primary-red);
+  font-size: 1.125rem;
 }
 
 .card-header h3 {
   color: var(--dark-text);
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex: 1;
 }
 
 .card-content {
@@ -305,31 +372,67 @@ select:focus {
 
 .create-drive-page {
   min-height: 100vh;
-  padding: 0;
+  padding: 1rem 0;
   background-color: var(--light-gray-bg);
 }
 
 .form-container {
-  max-width: 900px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 2rem 1.5rem;
 }
 
+.drive-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
 .page-header {
-  text-align: left;
+  background: var(--zoho-white);
+  padding: 1.5rem;
+  border-radius: var(--border-radius-md);
   margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid var(--zoho-primary);
+  text-align: left;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
 }
 
 .header-content h2 {
   color: var(--zoho-dark);
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.header-content h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--zoho-primary);
+  border-radius: 2px;
+  display: block;
 }
 
 .header-content p {
   color: var(--zoho-text);
-  font-size: 1.1rem;
+  font-size: 1rem;
+  margin: 0;
+  padding-left: 1rem;
 }
 
 .file-upload-area {
@@ -551,32 +654,48 @@ select:focus {
 
 @media (max-width: 768px) {
   .profile-completion {
+    padding: 0.5rem;
+  }
+
+  .form-container {
     padding: 1rem;
   }
 
-  .input-row {
-    grid-template-columns: 1fr;
+  .page-header {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .header-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .header-content p {
+    font-size: 0.9rem;
   }
 
   .form-card {
     margin-bottom: 1rem;
   }
 
-  .card-header,
+  .card-header {
+    padding: 1rem;
+  }
+
+  .icon-wrapper {
+    width: 32px;
+    height: 32px;
+    margin-right: 0.75rem;
+  }
+
   .card-content {
     padding: 1rem;
   }
-  
-  .header-content h2 {
-    font-size: 1.8rem;
-  }
-  
-  .form-container {
-    padding: 1rem;
-  }
-  
+
   .input-row {
     grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
   }
 
   .app-link {
@@ -588,5 +707,18 @@ select:focus {
   .instructions-list ol > li {
     flex-direction: column;
     gap: 0.5rem;
+  }
+
+  .linkedin-input-group {
+    flex-direction: column;
+  }
+
+  .verify-btn {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .drive-form {
+    gap: 1rem;
   }
 }

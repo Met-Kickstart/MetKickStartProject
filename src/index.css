@@ -305,42 +305,7 @@ body {
     opacity: 0.9;
 }
 
-.stats-container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 40px;
-    flex-wrap: wrap;
-}
 
-.stat-box {
-    background: rgba(255, 255, 255, 0.15);
-    padding: 25px;
-    border-radius: 10px;
-    text-align: center;
-    backdrop-filter: blur(5px);
-    width: 200px;
-    transition: all 0.3s;
-    transform-style: preserve-3d;
-}
-
-.stat-box:hover {
-    transform: translateY(-5px) scale(1.05);
-    background: rgba(255, 255, 255, 0.25);
-}
-
-.stat-box .number {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 5px;
-    color: var(--white);
-}
-
-.stat-box .label {
-    font-size: 1rem;
-    opacity: 0.9;
-    color: var(--white);
-}
 
 .cta-button {
   display: inline-flex;
@@ -455,7 +420,7 @@ body {
 }
 
 .drive-date {
-  background: #9C27B0;
+  background: #0F9D58;
   color: white;
   padding: 0.25rem 0.75rem;
   border-radius: 12px;
@@ -490,20 +455,20 @@ body {
 }
 
 .drive-card:hover .company-logo {
-    background: var(--primary);
-    box-shadow: 0 4px 8px rgba(211, 47, 47, 0.4);
+    background: #DB4437;
+    box-shadow: 0 4px 8px rgba(219, 68, 55, 0.4);
 }
 
 .company-logo i {
     font-size: 32px;
-    color: var(--primary);
+    color: #DB4437;
     transition: all 0.3s;
 }
 
 .company-logo svg {
   width: 24px;
   height: 24px;
-  color: var(--primary);
+  color: #DB4437;
   transition: all 0.3s;
 }
 
@@ -534,7 +499,7 @@ body {
 }
 
 .detail-item i {
-    color: var(--primary);
+    color: #0F9D58;
     min-width: 24px;
     margin-right: 12px;
     margin-top: 4px;
@@ -563,7 +528,7 @@ body {
 }
 
 .view-btn {
-    background: var(--primary);
+    background: #4285F4;
     color: white;
     padding: 10px 25px;
     border-radius: 5px;
@@ -576,74 +541,87 @@ body {
 }
 
 .view-btn:hover {
-    background: var(--primary-dark);
+    background: #3367d6;
     transform: translateY(-2px);
 }
 
+/* Update the placement-stats section to use flexbox */
 .placement-stats {
-    padding: 100px 20px;
-    background: var(--white);
-    position: relative;
-    transition: background 0.3s ease;
+  padding: 100px 20px; /* Aligned with other main sections like .active-drives */
+  background: var(--light-gray);
+  position: relative;
+  transition: background 0.3s ease;
 }
 
-.stats-container-full {
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-}
-
+/* Make the grid container a flexbox */
 .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    margin-top: 60px;
+  display: flex;
+  flex-wrap: wrap; /* Allows items to wrap to the next line on smaller screens */
+  justify-content: center; /* Center the stat boxes horizontally */
+  align-items: stretch;
+  gap: 2rem; /* Use a consistent gap */
+  max-width: 1200px;
+  margin: 0 auto; /* Center the grid container */
+  padding: 1rem 0; /* Adjust padding for better spacing */
 }
 
-.stat-item {
-    background: var(--white);
-    border-radius: 12px;
-    padding: 40px 30px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    border: 1px solid var(--medium-gray);
-    transition: all 0.4s;
+/* Adjust the individual stat boxes to be more flexible */
+.stat-box {
+  flex: 1 1 250px; /* Allow boxes to grow, shrink, and have a base width of 250px */
+  background: var(--white);
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.stat-item:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+.stat-box:hover {
+  transform: translateY(-5px); /* Changed to translateY to match other hover effects */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: var(--light);
+  border-left: 3px solid var(--primary);
 }
 
-.stat-icon {
-    width: 70px;
-    height: 70px;
-    background: var(--light-gray);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 25px;
-    color: var(--primary);
-    font-size: 28px;
-    transition: all 0.3s;
+.stat-box .number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
 }
 
-.stat-item:hover .stat-icon {
-    background: var(--primary);
-    color: white;
+.stat-box .label {
+  font-size: 1.1rem;
+  color: var(--gray);
+  font-weight: 500;
 }
 
-.stat-number {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--dark);
-    margin-bottom: 10px;
+/* Media query to handle smaller screens */
+@media (max-width: 992px) {
+  .stat-box {
+    flex-basis: calc(50% - 1rem); /* Two boxes per row on tablets */
+  }
 }
 
-.stat-label {
-    color: var(--gray);
-    font-size: 1.05rem;
+@media (max-width: 576px) {
+  .stats-grid {
+    flex-direction: column; /* Stack boxes vertically on mobile */
+    gap: 1.5rem;
+  }
+  
+  .stat-box {
+    width: 100%;
+    transform: none; /* Reset the transform to prevent issues */
+  }
+
+  .stat-box:hover {
+    transform: translateY(-5px);
+    border-left: 3px solid var(--primary); /* Keep consistent hover effect */
+    border-bottom: none;
+  }
 }
 
 .testimonials {
@@ -946,15 +924,15 @@ body {
 }
 
 .drive-status-column.completed .column-header {
-  background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+  background: #DB4437;
 }
 
 .drive-status-column.active .column-header {
-  background: linear-gradient(135deg, #2196F3, #1976D2);
+  background: #0F9D58;
 }
 
 .drive-status-column.process .column-header {
-  background: linear-gradient(135deg, #2196F3, #1976D2);
+  background: #4285F4;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -963,7 +941,7 @@ body {
 }
 
 .drive-status-column.nomination .column-header {
-  background: linear-gradient(135deg, #4CAF50, #45a049);
+  background: #0F9D58;
 }
 
 .column-header h3 {
@@ -995,19 +973,19 @@ body {
 }
 
 .drive-date.completed {
-  background: #43a047;
+  background: #DB4437;
 }
 
 .drive-date.active {
-  background: #2196F3;
+  background: #0F9D58;
 }
 
 .drive-date.process {
-  background: #ff9800;
+  background: #4285F4;
 }
 
 .drive-date.nomination {
-  background: #4CAF50;
+  background: #0F9D58;
   color: white;
   padding: 0.25rem 0.75rem;
   border-radius: 12px;
@@ -1056,11 +1034,13 @@ body {
   border-radius: 15px;
   padding: 25px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
+  transition: all 0.3s;
+  border: 1px solid var(--medium-gray);
 }
 
 .session-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 .session-header {
@@ -1071,11 +1051,11 @@ body {
 }
 
 .session-type {
-  background: var(--light-gray);
+  background: #DB4437;
   padding: 5px 12px;
   border-radius: 20px;
   font-size: 0.9rem;
-  color: var(--dark);
+  color: white;
 }
 
 .session-status {
@@ -1086,12 +1066,12 @@ body {
 }
 
 .session-status.active {
-  background: #4CAF50;
+  background: #0F9D58;
   color: white;
 }
 
 .session-status.upcoming {
-  background: #9121f3;
+  background: #4285F4;
   color: white;
 }
 
@@ -1119,6 +1099,12 @@ body {
   gap: 8px;
   color: var(--gray);
   font-size: 0.9rem;
+}
+
+.session-info i {
+  color: #0F9D58;
+  min-width: 24px;
+  font-size: 1.1rem;
 }
 
 .met-shines {

@@ -4,6 +4,19 @@ import './StudentProfile.css';
 
 const StudentProfile = ({ profile }) => {
   const [activeTab, setActiveTab] = useState('personal');
+  const [profileImage, setProfileImage] = useState(profile?.profileImage || defaultProfile.profileImage);
+
+  // Handle image selection
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        setProfileImage(ev.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const defaultProfile = {
     id: '',
@@ -50,12 +63,24 @@ const StudentProfile = ({ profile }) => {
   return (
     <div className="student-profile">
       <div className="profile-header">
-        <div className="profile-image-container">
-          <img 
-            src={studentData.profileImage} 
-            alt={studentData.fullName} 
-            className="profile-image"
-          />
+        <div className="profile-image-upload-wrap">
+          <label htmlFor="profile-image-upload" className="profile-image-upload-label">
+            <img 
+              src={profileImage} 
+              alt={studentData.fullName} 
+              className="profile-image"
+              style={{ cursor: 'pointer' }}
+              title="Click to change profile picture"
+            />
+            <input
+              id="profile-image-upload"
+              type="file"
+              accept="image/*"
+              style={{ display: 'none' }}
+              onChange={handleImageChange}
+            />
+         
+          </label>
           <div className="profile-status">
             <span className={`status-badge ${studentData.status.toLowerCase().replace(' ', '-')}`}>
               {studentData.status}

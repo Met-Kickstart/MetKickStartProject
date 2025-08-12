@@ -3,7 +3,7 @@ import './PlacementDrives.css';
 
 const PlacementDrive = () => {
   const [placements, setPlacements] = useState([]);
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState('nomination');
   const [searchTerm, setSearchTerm] = useState('');
 
   // Demo placement data
@@ -16,7 +16,7 @@ const PlacementDrive = () => {
       location: "Mumbai",
       eligibility: "60% in 10th, 12th, B.Tech",
       lastDate: "2024-09-15",
-      status: "Active",
+      status: "nomination",
       applicants: 45,
       selected: 12,
       createdDate: "2024-08-20"
@@ -29,7 +29,7 @@ const PlacementDrive = () => {
       location: "Bangalore",
       eligibility: "65% in academics",
       lastDate: "2024-09-20",
-      status: "Active",
+      status: "active",
       applicants: 62,
       selected: 18,
       createdDate: "2024-08-22"
@@ -42,7 +42,7 @@ const PlacementDrive = () => {
       location: "Pune",
       eligibility: "No backlogs",
       lastDate: "2024-08-30",
-      status: "Closed",
+      status: "completed",
       applicants: 38,
       selected: 8,
       createdDate: "2024-08-10"
@@ -55,9 +55,9 @@ const PlacementDrive = () => {
       location: "Hyderabad",
       eligibility: "70% in academics, No backlogs",
       lastDate: "2024-10-05",
-      status: "Active",
+      status: "nomination",
       applicants: 28,
-      selected: 5,
+      selected: 0,
       createdDate: "2024-08-25"
     },
     {
@@ -68,7 +68,7 @@ const PlacementDrive = () => {
       location: "Remote",
       eligibility: "3rd year students",
       lastDate: "2024-09-10",
-      status: "Active",
+      status: "active",
       applicants: 15,
       selected: 2,
       createdDate: "2024-08-28"
@@ -81,7 +81,7 @@ const PlacementDrive = () => {
       location: "Chennai",
       eligibility: "60% in academics",
       lastDate: "2024-09-25",
-      status: "Active",
+      status: "completed",
       applicants: 52,
       selected: 14,
       createdDate: "2024-08-18"
@@ -100,8 +100,12 @@ const PlacementDrive = () => {
   });
 
   const getStatusBadge = (status) => {
-    const statusClass = status === 'Active' ? 'status-active' : 'status-closed';
-    return <span className={`status-badge ${statusClass}`}>{status}</span>;
+    const statusLabels = {
+      'nomination': 'Open for Nomination',
+      'active': 'Active',
+      'completed': 'Completed'
+    };
+    return <span className={`status-badge status-${status}`}>{statusLabels[status]}</span>;
   };
 
   const getTypeBadge = (type) => {
@@ -117,32 +121,32 @@ const PlacementDrive = () => {
 
       {/* Stats Cards */}
       <div className="stats-grid">
-        <div className="stat-card">
-          <div className="stat-icon">🏢</div>
+        <div className="stat-card nomination">
+          <div className="stat-icon">📝</div>
           <div className="stat-info">
-            <h3>{placements.length}</h3>
-            <p>Total Drives</p>
+            <h3>{placements.filter(p => p.status === 'nomination').length}</h3>
+            <p>Open for Nomination</p>
           </div>
         </div>
-        <div className="stat-card">
-          <div className="stat-icon">✅</div>
+        <div className="stat-card active">
+          <div className="stat-icon">🚀</div>
           <div className="stat-info">
-            <h3>{placements.filter(p => p.status === 'Active').length}</h3>
+            <h3>{placements.filter(p => p.status === 'active').length}</h3>
             <p>Active Drives</p>
           </div>
         </div>
-        <div className="stat-card">
-          <div className="stat-icon">👥</div>
+        <div className="stat-card completed">
+          <div className="stat-icon">✅</div>
           <div className="stat-info">
-            <h3>{placements.reduce((sum, p) => sum + p.applicants, 0)}</h3>
-            <p>Total Applicants</p>
+            <h3>{placements.filter(p => p.status === 'completed').length}</h3>
+            <p>Completed Drives</p>
           </div>
         </div>
-        <div className="stat-card">
+        <div className="stat-card total">
           <div className="stat-icon">🎯</div>
           <div className="stat-info">
             <h3>{placements.reduce((sum, p) => sum + p.selected, 0)}</h3>
-            <p>Total Selected</p>
+            <p>Total Placed</p>
           </div>
         </div>
       </div>
@@ -151,22 +155,22 @@ const PlacementDrive = () => {
       <div className="filters-section">
         <div className="filter-tabs">
           <button 
-            className={filter === 'all' ? 'active' : ''} 
-            onClick={() => setFilter('all')}
+            className={filter === 'nomination' ? 'active' : ''} 
+            onClick={() => setFilter('nomination')}
           >
-            All Drives
+            Open for Nomination
           </button>
           <button 
             className={filter === 'active' ? 'active' : ''} 
             onClick={() => setFilter('active')}
           >
-            Active
+            Active Drives
           </button>
           <button 
-            className={filter === 'closed' ? 'active' : ''} 
-            onClick={() => setFilter('closed')}
+            className={filter === 'completed' ? 'active' : ''} 
+            onClick={() => setFilter('completed')}
           >
-            Closed
+            Completed
           </button>
         </div>
         <div className="search-box">

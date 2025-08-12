@@ -142,25 +142,6 @@ const Welcome = ({ onLoginSuccess }) => {
               </a>
             </div>
             <p>MET Bhujbal Knowledge City provides world-class education and industry-focused training to prepare students for successful careers in the global workforce.</p>
-            
-            <div className="stats-container">
-              <div className="stat-box">
-                <div className="number">96%</div>
-                <div className="label">Placement Rate</div>
-              </div>
-              <div className="stat-box">
-                <div className="number">300+</div>
-                <div className="label">Recruiting Companies</div>
-              </div>
-              <div className="stat-box">
-                <div className="number">₹15 LPA</div>
-                <div className="label">Highest Package</div>
-              </div>
-              <div className="stat-box">
-                <div className="number">₹7.2 LPA</div>
-                <div className="label">Average Package</div>
-              </div>
-            </div>
           </div>
         </section>
         
@@ -212,7 +193,7 @@ const Welcome = ({ onLoginSuccess }) => {
               {/* Selection Process Started */}
               <div className="drive-status-column process">
                 <div className="column-header process">
-                  <h3>Selection Process Started</h3>
+                  <h3>Active Drives </h3>
                   <span className="drive-count">5</span>
                 </div>
                 <div className="drives-list">
@@ -247,7 +228,7 @@ const Welcome = ({ onLoginSuccess }) => {
               {/* Process Completed */}
               <div className="drive-status-column completed">
                 <div className="column-header">
-                  <h3>Process Completed</h3>
+                  <h3> Completed</h3>
                   <span className="drive-count">12</span>
                 </div>
                 <div className="drives-list">
