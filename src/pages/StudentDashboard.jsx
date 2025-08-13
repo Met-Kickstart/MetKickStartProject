@@ -105,6 +105,21 @@ const StudentDashboard = ({ onLogout }) => {
     // You might want to save this data to your backend here
   };
 
+  const renderContent = () => {
+    switch (activeMenu) {
+      case 'overview':
+        return <Overview />;
+      case 'profile':
+        return <StudentProfile profile={profile} />;
+      case 'test-process':
+        return <TestProcess />;
+      case 'placement-drives':
+        return <PlacementDrives />;
+      default:
+        return <Overview />;
+    }
+  };
+
   if (!profileCompleted) {
     return (
       <div className="student-dashboard">
@@ -127,19 +142,7 @@ const StudentDashboard = ({ onLogout }) => {
         <StudentMenu activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
         <div className="dashboard-content">
           <h2>{profile?.fullName || 'Welcome'}</h2>
-          {activeMenu === 'overview' && <Overview />}
-          {activeMenu === 'profile' && (
-            <StudentProfile profile={profile} />
-          )}
-          {activeMenu === 'test-process' && <TestProcess />}
-          {activeMenu === 'placement-drives' && <PlacementDrives />}
-          {activeMenu !== 'overview' && activeMenu !== 'profile' && 
-           activeMenu !== 'test-process' && activeMenu !== 'placement-drives' && (
-            <div className="section-content">
-              <h3>{menuItems.find(item => item.id === activeMenu)?.label}</h3>
-              <p>Content for {menuItems.find(item => item.id === activeMenu)?.label} will be displayed here.</p>
-            </div>
-          )}
+          {renderContent()}
         </div>
       </div>
       <Footer />

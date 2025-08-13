@@ -17,8 +17,13 @@ import PlacementPolicy    from '../pages/PlacementPolicy';
 import Login              from '../pages/Login';
 import Dashboard          from '../pages/Dashboard';
 import NotFound           from '../pages/NotFound';
+import Welcome            from '../pages/welcome';
+import AdminDashboard     from '../pages/AdminDashboard';
+import StudentDashboard   from '../pages/StudentDashboard';
 
 import ProtectedRoute     from './ProtectedRoute';   // optional
+import AdminRoute         from './AdminRoute';
+import StudentRoute       from './StudentRoute';
 
 const AppRoutes = ({ isLoggedIn }) => (
   <Routes>
@@ -46,6 +51,24 @@ const AppRoutes = ({ isLoggedIn }) => (
           <Dashboard />
         </ProtectedRoute>
       }
+    />
+
+    {/* Admin and Student routes */}
+    <Route 
+      path="/admin/dashboard/*" 
+      element={
+        <AdminRoute>
+          <AdminDashboard />
+        </AdminRoute>
+      } 
+    />
+    <Route 
+      path="/student/dashboard/*" 
+      element={
+        <StudentRoute>
+          <StudentDashboard />
+        </StudentRoute>
+      } 
     />
 
     {/* fallback 404 */}

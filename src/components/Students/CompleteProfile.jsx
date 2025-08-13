@@ -67,6 +67,13 @@ const CompleteProfile = ({ onProfileComplete }) => {
     'Other'
   ];
 
+  const mbaSpecializations = [
+  'HR',
+  'Finance',
+  'Marketing',
+  'Operations'
+];
+
   const verifyLinkedinUrl = async () => {
     setVerifyingLinkedin(true);
     setError('');
@@ -422,14 +429,19 @@ const CompleteProfile = ({ onProfileComplete }) => {
                 </div>
                 <div className="input-group">
                   <label>MBA Specialization</label>
-                  <input
-                    type="text"
+                  <select
                     name="academics.mbaSpecialization"
                     value={profile.academics.mbaSpecialization}
                     onChange={handleChange}
-                    placeholder="Enter MBA specialization"
                     required
-                  />
+                  >
+                    <option value="">Select Specialization</option>
+                    {mbaSpecializations.map(specialization => (
+                      <option key={specialization} value={specialization}>
+                        {specialization}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
             </div>

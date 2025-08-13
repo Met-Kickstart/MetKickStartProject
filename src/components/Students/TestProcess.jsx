@@ -33,52 +33,64 @@ const TestProcess = () => {
             
             <div className="sessions-overview">
               <div className="upcoming-sessions">
-                <h4>Upcoming Sessions</h4>
+                <h4>Scheduled Sessions</h4>
                 <div className="sessions-grid">
                   <div className="session-card">
                     <div className="session-header">
-                      <span className="session-tag">Interview Prep</span>
+                      <div className="header-labels">
+                        <span className="label-text">Company Name:</span>
+                        <h4 className="company-name">Tech Solutions Inc.</h4>
+                      </div>
                       <span className="session-date">Aug 10, 2025</span>
                     </div>
-                    <h5>HR Interview Techniques</h5>
-                    <div className="session-details">
-                      <p><strong>Time:</strong> 2:00 PM - 4:00 PM</p>
-                      <p><strong>Venue:</strong> Seminar Hall 1</p>
-                      <p><strong>Speaker:</strong> Ms. Sarah Johnson</p>
+                    <div className="session-main-info">
+                      <div className="info-label-group">
+                        <span className="label-text">Session on:</span>
+                        <span className="specialization-tag">Software Development</span>
+                      </div>
                     </div>
-                    <button className="register-btn">Register Now</button>
+                    <div className="session-details">
+                      <div className="detail-row">
+                        <p><strong>Time:</strong> 2:00 PM - 4:00 PM</p>
+                        <p><strong>Instructor:</strong> Ms. Sarah Johnson</p>
+                      </div>
+                      <div className="mode-section">
+                        <p><strong>Mode:</strong> Online</p>
+                        <div className="online-link">
+                          <input 
+                            type="text" 
+                            value="https://meet.google.com/abc-defg-hij"
+                            readOnly
+                            className="meeting-link"
+                          />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div className="session-card">
                     <div className="session-header">
-                      <span className="session-tag">Technical</span>
+                      <div className="header-labels">
+                        <span className="label-text">Company Name:</span>
+                        <h4 className="company-name">Global Analytics Ltd</h4>
+                      </div>
                       <span className="session-date">Aug 15, 2025</span>
                     </div>
-                    <h5>System Design Principles</h5>
+                    <div className="session-main-info">
+                      <div className="info-label-group">
+                        <span className="label-text">Session on:</span>
+                        <span className="specialization-tag">Data Science</span>
+                      </div>
+                    </div>
                     <div className="session-details">
-                      <p><strong>Time:</strong> 10:00 AM - 12:00 PM</p>
-                      <p><strong>Venue:</strong> Virtual Session</p>
-                      <p><strong>Speaker:</strong> Mr. David Clark</p>
+                      <div className="detail-row">
+                        <p><strong>Time:</strong> 10:00 AM - 12:00 PM</p>
+                        <p><strong>Instructor:</strong> Mr. David Clark</p>
+                      </div>
+                      <div className="mode-section">
+                        <p><strong>Mode:</strong> Offline</p>
+                        <p className="venue"><strong>Venue:</strong> Seminar Hall 2, Block A</p>
+                      </div>
                     </div>
-                    <button className="register-btn">Register Now</button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="completed-sessions">
-                <h4>Completed Sessions</h4>
-                <div className="sessions-grid">
-                  <div className="session-card completed">
-                    <div className="session-header">
-                      <span className="session-tag">Aptitude</span>
-                      <span className="session-date">Aug 5, 2025</span>
-                    </div>
-                    <h5>Quantitative Aptitude Workshop</h5>
-                    <div className="session-details">
-                      <p><strong>Duration:</strong> 2 hours</p>
-                      <p><strong>Attended:</strong> Yes</p>
-                      <p><strong>Resources:</strong> <a href="#">Download Materials</a></p>
-                    </div>
-                    <button className="feedback-btn">Provide Feedback</button>
                   </div>
                 </div>
               </div>

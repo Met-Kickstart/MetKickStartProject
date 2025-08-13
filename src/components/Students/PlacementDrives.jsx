@@ -3,72 +3,107 @@ import { FaBriefcase, FaBuilding, FaCalendar, FaGraduationCap, FaRupeeSign } fro
 import './PlacementDrives.css';
 
 const PlacementDrives = () => {
-  const [activeTab, setActiveTab] = useState('active');
+  const [activeTab, setActiveTab] = useState('nomination');
   
   // Example data - in real app, this would come from props or API
   const drives = {
-    active: [
+    nomination: [
       {
         id: 1,
         companyName: "Tech Solutions Inc",
-        role: "Software Developer",
-        package: "8-12 LPA",
+        jobTitle: "Software Development Engineer",
+        jobDescription: "We are looking for a passionate Software Development Engineer to design, develop and maintain scalable applications. You will work with cutting-edge technologies and collaborate with cross-functional teams.",
+        ctc: "12-15 LPA",
         location: "Pune",
-        deadline: "2025-08-15",
-        eligibility: {
-          cgpa: "7.5",
-          branches: ["Computer Science", "Information Technology"],
-          backlogs: "No active backlogs",
-          skills: ["Java", "Python", "Web Development"]
-        },
-        rounds: ["Online Test", "Technical Interview", "HR Interview"],
+        startDate: "2025-09-01",
+        endDate: "2025-08-20",
+        vacancies: 15,
+        numberOfRounds: 3,
+        rounds: ["Online Assessment", "Technical Interview", "HR Discussion"],
         status: "Applications Open"
       },
       {
         id: 2,
         companyName: "Global Analytics Ltd",
-        role: "Data Analyst",
-        package: "7-9 LPA",
+        jobTitle: "Data Scientist",
+        jobDescription: "Join our analytics team to drive data-driven decisions. You'll work on complex data problems, develop predictive models, and create actionable insights for business stakeholders.",
+        ctc: "10-14 LPA",
         location: "Mumbai",
-        deadline: "2025-08-20",
-        eligibility: {
-          cgpa: "7.0",
-          branches: ["Computer Science", "Data Science"],
-          backlogs: "No active backlogs",
-          skills: ["SQL", "Python", "Data Analysis"]
-        },
-        rounds: ["Aptitude Test", "Technical Round", "HR Discussion"],
+        startDate: "2025-09-15",
+        endDate: "2025-08-25",
+        vacancies: 8,
+        numberOfRounds: 4,
+        rounds: ["Aptitude Test", "Technical Assessment", "Case Study", "HR Round"],
         status: "Applications Open"
       }
     ],
-    upcoming: [
+    active: [
       {
         id: 3,
         companyName: "Cloud Systems Corp",
-        role: "Cloud Engineer",
-        package: "10-14 LPA",
-        location: "Bangalore",
-        expectedDate: "2025-09-01",
-        eligibility: {
-          cgpa: "7.5",
-          branches: ["Computer Science", "Information Technology"],
-          backlogs: "No backlogs",
-          skills: ["AWS", "Azure", "DevOps"]
-        },
-        status: "Coming Soon"
+        jobTitle: "Cloud Engineer",
+        roundStatus: [
+          { name: "Shortlisted", status: "completed", date: "2025-08-01" },
+          { name: "Round 1", status: "completed", date: "2025-08-03" },
+          { name: " Round 2", status: "completed", date: "2025-08-05" },
+          { name: "Round 3", status: "current", date: "2025-08-07" },
+          { name: "Round 4", status: "upcoming" },
+          { name: "Round 5", status: "upcoming" },
+          { name: "HR Round", status: "upcoming" }
+        ],
+        currentRound: "Technical Round 1",
+        status: "In Progress"
+      },
+      {
+        id: 4,
+        companyName: "Data Analytics Pro",
+        jobTitle: "Data Scientist",
+        roundStatus: [
+          { name: "Shortlisted", status: "completed", date: "2025-08-02" },
+          { name: "Round 1", status: "completed", date: "2025-08-04" },
+          { name: "Round 2", status: "completed", date: "2025-08-06" },
+          { name: "Round 3", status: "current", date: "2025-08-07" },
+          { name: "Round 4", status: "upcoming" },
+          { name: "Round 5", status: "upcoming" },
+          { name: "HR Round", status: "upcoming" }
+        ],
+        currentRound: "Group Discussion",
+        status: "In Progress"
       }
     ],
-    applied: [
+    completed: [
       {
         id: 4,
         companyName: "Innovation Tech",
-        role: "Full Stack Developer",
-        package: "9-11 LPA",
+        jobTitle: "Full Stack Developer",
+        ctc: "9-11 LPA",
         location: "Pune",
-        appliedDate: "2025-07-25",
-        currentRound: "Technical Interview",
-        nextRound: "HR Interview",
-        status: "In Progress"
+        completedDate: "2025-07-25",
+        rounds: [
+          { name: "Online Test", status: "Passed", score: "85/100" },
+          { name: "Technical Interview", status: "Passed", feedback: "Good technical knowledge" },
+          { name: "HR Interview", status: "Passed", feedback: "Cultural fit" }
+        ],
+        finalStatus: "Selected",
+        offerDetails: {
+          ctc: "10.5 LPA",
+          joiningDate: "2025-10-01",
+          location: "Pune"
+        }
+      },
+      {
+        id: 5,
+        companyName: "TechCorp Solutions",
+        jobTitle: "Software Engineer",
+        ctc: "8-10 LPA",
+        location: "Mumbai",
+        completedDate: "2025-07-20",
+        rounds: [
+          { name: "Aptitude Test", status: "Passed", score: "75/100" },
+          { name: "Technical Round", status: "Not Cleared", feedback: "Need improvement in system design concepts" }
+        ],
+        finalStatus: "Not Selected",
+        feedback: "Need more experience with system design patterns"
       }
     ]
   };
@@ -79,45 +114,52 @@ const PlacementDrives = () => {
         <h2><FaBriefcase /> Placement Drives</h2>
         <div className="drive-tabs">
           <button 
+            className={`tab-btn ${activeTab === 'nomination' ? 'active' : ''}`}
+            onClick={() => setActiveTab('nomination')}
+          >
+            Open for Nomination
+          </button>
+          <button 
             className={`tab-btn ${activeTab === 'active' ? 'active' : ''}`}
             onClick={() => setActiveTab('active')}
           >
             Active Drives
           </button>
           <button 
-            className={`tab-btn ${activeTab === 'upcoming' ? 'active' : ''}`}
-            onClick={() => setActiveTab('upcoming')}
+            className={`tab-btn ${activeTab === 'completed' ? 'active' : ''}`}
+            onClick={() => setActiveTab('completed')}
           >
-            Upcoming Drives
-          </button>
-          <button 
-            className={`tab-btn ${activeTab === 'applied' ? 'active' : ''}`}
-            onClick={() => setActiveTab('applied')}
-          >
-            Applied Drives
+            Completed
           </button>
         </div>
       </div>
 
       <div className="drives-content">
-        {activeTab === 'active' && (
+        {activeTab === 'nomination' && (
           <div className="drives-grid">
-            {drives.active.map(drive => (
+            {drives.nomination.map(drive => (
               <div key={drive.id} className="drive-card">
                 <div className="drive-header">
                   <div className="company-info">
+                    <label className="section-label">Company Name</label>
                     <h3>{drive.companyName}</h3>
-                    <span className="role">{drive.role}</span>
                   </div>
-                  <span className={`status-badge ${drive.status.toLowerCase().replace(' ', '-')}`}>
-                    {drive.status}
-                  </span>
+                </div>
+
+                <div className="job-title-section">
+                  <label className="section-label">Job Title</label>
+                  <h3 className="job-title-header">{drive.jobTitle}</h3>
+                </div>
+
+                <div className="job-description">
+                  <h4>Job Description</h4>
+                  <p>{drive.jobDescription}</p>
                 </div>
 
                 <div className="drive-details">
                   <div className="detail-item">
                     <FaRupeeSign className="detail-icon" />
-                    <span>Package: {drive.package}</span>
+                    <span>CTC: {drive.ctc}</span>
                   </div>
                   <div className="detail-item">
                     <FaBuilding className="detail-icon" />
@@ -125,45 +167,22 @@ const PlacementDrives = () => {
                   </div>
                   <div className="detail-item">
                     <FaCalendar className="detail-icon" />
-                    <span>Deadline: {new Date(drive.deadline).toLocaleDateString()}</span>
+                    <span>Start Date: {new Date(drive.startDate).toLocaleDateString()}</span>
+                  </div>
+                  <div className="detail-item">
+                    <FaCalendar className="detail-icon" />
+                    <span>Last Date to Apply: {new Date(drive.endDate).toLocaleDateString()}</span>
                   </div>
                 </div>
 
-                <div className="eligibility-section">
-                  <h4>Eligibility Criteria</h4>
-                  <div className="eligibility-details">
-                    <div className="eligibility-item">
-                      <FaGraduationCap className="eligibility-icon" />
-                      <span>Min. CGPA: {drive.eligibility.cgpa}</span>
-                    </div>
-                    <div className="eligibility-item">
-                      <span className="label">Branches:</span>
-                      <div className="badges">
-                        {drive.eligibility.branches.map((branch, index) => (
-                          <span key={index} className="branch-badge">{branch}</span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="eligibility-item">
-                      <span className="label">Required Skills:</span>
-                      <div className="badges">
-                        {drive.eligibility.skills.map((skill, index) => (
-                          <span key={index} className="skill-badge">{skill}</span>
-                        ))}
-                      </div>
-                    </div>
+                <div className="drive-stats">
+                  <div className="stat-item">
+                    <span className="stat-label">Vacancies</span>
+                    <span className="stat-value">{drive.vacancies}</span>
                   </div>
-                </div>
-
-                <div className="rounds-section">
-                  <h4>Selection Process</h4>
-                  <div className="rounds-timeline">
-                    {drive.rounds.map((round, index) => (
-                      <div key={index} className="round-item">
-                        <div className="round-number">{index + 1}</div>
-                        <span>{round}</span>
-                      </div>
-                    ))}
+                  <div className="stat-item">
+                    <span className="stat-label">Selection Rounds</span>
+                    <span className="stat-value">{drive.numberOfRounds}</span>
                   </div>
                 </div>
 
@@ -173,81 +192,73 @@ const PlacementDrives = () => {
           </div>
         )}
 
-        {activeTab === 'upcoming' && (
+        {activeTab === 'active' && (
           <div className="drives-grid">
-            {drives.upcoming.map(drive => (
-              <div key={drive.id} className="drive-card upcoming">
+            {drives.active.map(drive => (
+              <div key={drive.id} className="drive-card active">
                 <div className="drive-header">
                   <div className="company-info">
+                    <label className="section-label">Company Name</label>
                     <h3>{drive.companyName}</h3>
-                    <span className="role">{drive.role}</span>
                   </div>
-                  <span className="status-badge coming-soon">Coming Soon</span>
+                  {/* <span className="status-badge in-progress">In Progress</span> */}
                 </div>
 
-                <div className="drive-details">
-                  <div className="detail-item">
-                    <FaRupeeSign className="detail-icon" />
-                    <span>Package: {drive.package}</span>
-                  </div>
-                  <div className="detail-item">
-                    <FaBuilding className="detail-icon" />
-                    <span>Location: {drive.location}</span>
-                  </div>
-                  <div className="detail-item">
-                    <FaCalendar className="detail-icon" />
-                    <span>Expected Date: {new Date(drive.expectedDate).toLocaleDateString()}</span>
-                  </div>
+                <div className="job-title-section">
+                  <label className="section-label">Job Title</label>
+                  <h3 className="job-title-header">{drive.jobTitle}</h3>
                 </div>
 
-                <div className="eligibility-section">
-                  <h4>Eligibility Criteria</h4>
-                  <div className="eligibility-details">
-                    <div className="eligibility-item">
-                      <FaGraduationCap className="eligibility-icon" />
-                      <span>Min. CGPA: {drive.eligibility.cgpa}</span>
-                    </div>
-                    <div className="eligibility-item">
-                      <span className="label">Branches:</span>
-                      <div className="badges">
-                        {drive.eligibility.branches.map((branch, index) => (
-                          <span key={index} className="branch-badge">{branch}</span>
-                        ))}
+                <div className="round-progress-section">
+                  <h4>Selection Process Status</h4>
+                  <div className="round-progress-list">
+                    {drive.roundStatus.map((round, index) => (
+                      <div key={index} className={`round-status-item ${round.status}`}>
+                        <div className="round-status-content">
+                          <div className="round-info">
+                            <span className="round-name">{round.name}</span>
+                            {round.date && (
+                              <span className="round-date">
+                                {new Date(round.date).toLocaleDateString()}
+                              </span>
+                            )}
+                          </div>
+                          <div className="status-indicator">
+                            {round.status === 'completed' && '✓'}
+                            {round.status === 'current' && '→'}
+                            {round.status === 'upcoming' && '•'}
+                          </div>
+                        </div>
+                        {index < drive.roundStatus.length - 1 && <div className="round-connector" />}
                       </div>
-                    </div>
-                    <div className="eligibility-item">
-                      <span className="label">Required Skills:</span>
-                      <div className="badges">
-                        {drive.eligibility.skills.map((skill, index) => (
-                          <span key={index} className="skill-badge">{skill}</span>
-                        ))}
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
 
-                <button className="notify-btn">Notify Me</button>
+                {/* <button className="view-status-btn">View Detailed Status</button> */}
               </div>
             ))}
           </div>
         )}
 
-        {activeTab === 'applied' && (
+        {activeTab === 'completed' && (
           <div className="drives-grid">
-            {drives.applied.map(drive => (
-              <div key={drive.id} className="drive-card applied">
+            {drives.completed.map(drive => (
+              <div key={drive.id} className={`drive-card completed ${drive.finalStatus.toLowerCase()}`}>
                 <div className="drive-header">
                   <div className="company-info">
                     <h3>{drive.companyName}</h3>
-                    <span className="role">{drive.role}</span>
+                    <span className="role">{drive.jobTitle}</span>
                   </div>
-                  <span className="status-badge in-progress">In Progress</span>
+                  <span className={`status-badge ${drive.finalStatus.toLowerCase()}`}>
+                    {drive.finalStatus}
+                  </span>
                 </div>
 
                 <div className="drive-details">
                   <div className="detail-item">
                     <FaRupeeSign className="detail-icon" />
-                    <span>Package: {drive.package}</span>
+                    <span>Package: {drive.ctc}</span>
                   </div>
                   <div className="detail-item">
                     <FaBuilding className="detail-icon" />
@@ -255,25 +266,60 @@ const PlacementDrives = () => {
                   </div>
                   <div className="detail-item">
                     <FaCalendar className="detail-icon" />
-                    <span>Applied: {new Date(drive.appliedDate).toLocaleDateString()}</span>
+                    <span>Completed: {new Date(drive.completedDate).toLocaleDateString()}</span>
                   </div>
                 </div>
 
-                <div className="application-status">
-                  <h4>Application Status</h4>
-                  <div className="status-details">
-                    <div className="status-item">
-                      <span className="label">Current Round:</span>
-                      <span className="value highlight">{drive.currentRound}</span>
-                    </div>
-                    <div className="status-item">
-                      <span className="label">Next Round:</span>
-                      <span className="value">{drive.nextRound}</span>
-                    </div>
+                <div className="completion-summary">
+                  <h4>Selection Process Summary</h4>
+                  <div className="rounds-progress">
+                    {drive.rounds.map((round, index) => (
+                      <div key={index} className={`round-result ${round.status.toLowerCase()}`}>
+                        <div className="round-result-header">
+                          <span className="round-name">{round.name}</span>
+                          <span className={`round-status ${round.status.toLowerCase()}`}>
+                            {round.status}
+                          </span>
+                        </div>
+                        {round.score && (
+                          <div className="round-score">Score: {round.score}</div>
+                        )}
+                        {round.feedback && (
+                          <div className="round-feedback">{round.feedback}</div>
+                        )}
+                      </div>
+                    ))}
                   </div>
                 </div>
 
-                <button className="view-details-btn">View Details</button>
+                {drive.finalStatus === "Selected" && drive.offerDetails && (
+                  <div className="offer-details">
+                    <h4>Offer Details</h4>
+                    <div className="offer-info">
+                      <div className="offer-item">
+                        <span className="label">Final CTC:</span>
+                        <span className="value">{drive.offerDetails.ctc}</span>
+                      </div>
+                      <div className="offer-item">
+                        <span className="label">Joining Date:</span>
+                        <span className="value">
+                          {new Date(drive.offerDetails.joiningDate).toLocaleDateString()}
+                        </span>
+                      </div>
+                      <div className="offer-item">
+                        <span className="label">Location:</span>
+                        <span className="value">{drive.offerDetails.location}</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {drive.finalStatus === "Not Selected" && drive.feedback && (
+                  <div className="feedback-section">
+                    <h4>Feedback</h4>
+                    <p className="feedback-text">{drive.feedback}</p>
+                  </div>
+                )}
               </div>
             ))}
           </div>

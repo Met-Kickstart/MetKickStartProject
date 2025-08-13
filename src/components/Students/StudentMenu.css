@@ -1,112 +1,52 @@
-.student-side-menu {
-  background: var(--white-card);
+.student-menu {
+  background: white;
   padding: 1rem;
   border-radius: 8px;
-  box-shadow: var(--card-shadow);
-  position: sticky;
-  top: 100px;
-  height: calc(100vh - 140px);
-  overflow-y: auto;
-  width: 250px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 250px;
+  height: fit-content;
 }
 
-.student-side-menu .menu-item {
+.student-menu nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.menu-item {
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  width: 100%;
   border: none;
   background: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  color: var(--light-text);
+  width: 100%;
   text-align: left;
+  transition: all 0.2s ease;
 }
 
-.student-side-menu .menu-item:hover {
-  background: var(--light-gray-bg);
-  color: var(--primary-red);
+.menu-item:hover {
+  background-color: #f5f5f5;
 }
 
-.student-side-menu .menu-item.active {
-  background: var(--primary-red);
-  color: var(--white-card);
+.menu-item.active {
+  background-color: #1976d2;
+  color: white;
 }
 
-.student-side-menu .menu-item .icon {
+.menu-item .icon {
   font-size: 1.2rem;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.student-side-menu .menu-item .label {
-  font-weight: 500;
-}
-
-@media (max-width: 1024px) {
-  .student-side-menu {
-    width: 80px;
-    padding: 1rem 0;
-  }
-
-  .student-side-menu .menu-item .label {
-    display: none;
-  }
-
-  .student-side-menu .menu-item {
-    justify-content: center;
-    padding: 1rem;
-  }
+.menu-item .label {
+  font-size: 1rem;
 }
 
 @media (max-width: 768px) {
-  .dashboard-container {
-    flex-direction: column;
-    padding-bottom: 80px;
-  }
-
-  .student-side-menu {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    top: auto;
-    width: 100%;
-    height: auto;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 0.5rem;
-    z-index: 1000;
-    border-radius: 0;
-    background: var(--white-card);
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  }
-
-  .dashboard-content {
-    padding-bottom: 2rem;
-    margin-top: 0;
-  }
-
-  .student-side-menu .menu-item {
-    padding: 0.5rem;
-    flex-direction: column;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-  }
-
-  .student-side-menu .menu-item .icon {
-    font-size: 1rem;
-  }
-
-  .student-side-menu .menu-item .label {
-    display: block;
-    font-size: 0.75rem;
+  .student-menu {
+    min-width: 100%;
+    margin-bottom: 1rem;
   }
 }
