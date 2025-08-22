@@ -1,7 +1,5 @@
 import React from 'react';
-import { FaHome, FaUser, FaCalculator, FaBriefcase, FaBook } from 'react-icons/fa';
-import './StudentMenu.css';
-
+import { FaHome, FaUser, FaCalculator, FaBriefcase, FaBook } from 'react-icons/fa'; 
 const StudentMenu = ({ activeMenu, setActiveMenu }) => {
   const menuItems = [
     { id: 'overview', label: 'Overview', icon: <FaHome /> },

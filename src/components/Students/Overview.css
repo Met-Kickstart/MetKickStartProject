@@ -55,8 +55,6 @@
   background: rgba(255, 255, 255, 0.95);
   border-radius: 8px;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  backdrop-filter: blur(4px);
 }
 
 .stat-item p {
@@ -72,48 +70,33 @@
   font-weight: 600;
 }
 
-/* Card specific colors and backgrounds */
+/* Stat card colors */
 .stat-card.aptitude {
-  border-top: 4px solid #d32f2f;
+  border-left: 4px solid var(--stat-red);
   background: linear-gradient(135deg, rgba(211, 47, 47, 0.15) 0%, rgba(211, 47, 47, 0.05) 100%);
-  background-color: rgba(211, 47, 47, 0.08);
 }
 
 .stat-card.drives {
-  border-top: 4px solid #1e88e5;
+  border-left: 4px solid var(--stat-blue);
   background: linear-gradient(135deg, rgba(30, 136, 229, 0.15) 0%, rgba(30, 136, 229, 0.05) 100%);
-  background-color: rgba(30, 136, 229, 0.08);
 }
 
 .stat-card.companies {
-  border-top: 4px solid #43a047;
+  border-left: 4px solid var(--stat-green);
   background: linear-gradient(135deg, rgba(67, 160, 71, 0.15) 0%, rgba(67, 160, 71, 0.05) 100%);
-  background-color: rgba(67, 160, 71, 0.08);
 }
 
 .stat-card.sessions {
-  border-top: 4px solid #ffa000;
+  border-left: 4px solid var(--stat-yellow);
   background: linear-gradient(135deg, rgba(255, 160, 0, 0.15) 0%, rgba(255, 160, 0, 0.05) 100%);
-  background-color: rgba(255, 160, 0, 0.08);
 }
 
-.stat-card.aptitude .stat-icon {
-  color: #d32f2f;
-}
+/* Icon colors */
+.stat-card.aptitude .stat-icon { color: var(--stat-red); }
+.stat-card.drives .stat-icon { color: var(--stat-blue); }
+.stat-card.companies .stat-icon { color: var(--stat-green); }
+.stat-card.sessions .stat-icon { color: var(--stat-yellow); }
 
-.stat-card.drives .stat-icon {
-  color: #1e88e5;
-}
-
-.stat-card.companies .stat-icon {
-  color: #43a047;
-}
-
-.stat-card.sessions .stat-icon {
-  color: #ffa000;
-}
-
-/* Responsive styles */
 @media (max-width: 768px) {
   .dashboard-stats {
     grid-template-columns: 1fr;
@@ -135,13 +118,5 @@
 
   .stat-header h3 {
     font-size: 1.125rem;
-  }
-
-  .stat-item {
-    padding: 0.75rem;
-  }
-
-  .stat-item h4 {
-    font-size: 1.5rem;
   }
 }

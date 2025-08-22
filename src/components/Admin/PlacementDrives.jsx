@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { FaBuilding, FaCheckCircle, FaUsers, FaBullseye, FaFileExcel, FaUpload, FaTimes, FaEye, FaChevronDown } from 'react-icons/fa';
 import './PlacementDrives.css';
 
-const PlacementDrive = () => {
+// Change component name from PlacementDrive to PlacementDrives
+const PlacementDrives = () => {
   const [placements, setPlacements] = useState([]);
   const [filter, setFilter] = useState('nomination');
   const [searchTerm, setSearchTerm] = useState('');
@@ -100,16 +101,21 @@ const PlacementDrive = () => {
   ];
 
   useEffect(() => {
-    setPlacements(demoPlacementData);
-    // Initialize round-wise data
-    const initialRoundData = {};
-    demoPlacementData.forEach(drive => {
-      initialRoundData[drive.id] = {};
-      drive.rounds.forEach(round => {
-        initialRoundData[drive.id][round] = { passed: 0, students: [] };
+    // Add null check for demoPlacementData
+    if (demoPlacementData && demoPlacementData.length > 0) {
+      setPlacements(demoPlacementData);
+      // Initialize round-wise data
+      const initialRoundData = {};
+      demoPlacementData.forEach(drive => {
+        if (drive.rounds) {  // Add check for rounds property
+          initialRoundData[drive.id] = {};
+          drive.rounds.forEach(round => {
+            initialRoundData[drive.id][round] = { passed: 0, students: [] };
+          });
+        }
       });
-    });
-    setRoundWiseData(initialRoundData);
+      setRoundWiseData(initialRoundData);
+    }
   }, []);
 
   const stats = [
@@ -250,28 +256,36 @@ const PlacementDrive = () => {
       {/* Stats Grid */}
       <div className="stats-grid">
         <div className="stat-card">
-          <div className="stat-icon">🏢</div>
+          <div className="stat-icon">
+            <FaBuilding className="icon-red" />
+          </div>
           <div className="stat-info">
             <h3>{placements.length}</h3>
             <p>Total Drives</p>
           </div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon">✅</div>
+          <div className="stat-icon">
+            <FaCheckCircle className="icon-blue" />
+          </div>
           <div className="stat-info">
             <h3>{placements.filter(p => p.status === 'Active').length}</h3>
             <p>Active Drives</p>
           </div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon">👥</div>
+          <div className="stat-icon">
+            <FaUsers className="icon-green" />
+          </div>
           <div className="stat-info">
             <h3>{placements.reduce((sum, p) => sum + p.applicants, 0)}</h3>
             <p>Total Applicants</p>
           </div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon">🎯</div>
+          <div className="stat-icon">
+            <FaBullseye className="icon-yellow" />
+          </div>
           <div className="stat-info">
             <h3>{placements.reduce((sum, p) => sum + p.selected, 0)}</h3>
             <p>Total Selected</p>
@@ -484,4 +498,5 @@ const PlacementDrive = () => {
   );
 };
 
-export default PlacementDrive;
+// Change export name to match component name
+export default PlacementDrives;

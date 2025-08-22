@@ -26,21 +26,31 @@ const Header = ({ onLoginClick, isLoggedIn, onLogoutClick, simplified = false, u
                 const el = document.getElementById('drives');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}>Placement Drives</Link>
+
               <Link to="/" onClick={(e) => {
                 e.preventDefault();
-                const el = document.getElementById('stats');
+                const el = document.getElementById('statistics'); // Update to match section ID
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}>Placement Stats</Link>
+
               <Link to="/" onClick={(e) => {
                 e.preventDefault();
                 const el = document.getElementById('met-shines');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}>MET Shines</Link>
+
               <Link to="/" onClick={(e) => {
                 e.preventDefault();
                 const el = document.getElementById('prep-sessions');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}>Prep Sessions</Link>
+
+               {/* Add new Our Recruiters tab */}
+              <Link to="/" onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById('top-recruiters');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}>Our Recruiters</Link>
             </>
           )}
 

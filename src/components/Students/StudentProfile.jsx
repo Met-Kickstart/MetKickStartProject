@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaUser, FaGraduationCap, FaBriefcase, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { FaUser, FaGraduationCap, FaBriefcase, FaEnvelope, FaPhone, FaDownload } from 'react-icons/fa';
 import './StudentProfile.css';
 
 const StudentProfile = ({ profile }) => {
@@ -15,6 +15,17 @@ const StudentProfile = ({ profile }) => {
         setProfileImage(ev.target.result);
       };
       reader.readAsDataURL(file);
+    }
+  };
+
+  const handleResumeDownload = () => {
+    if (studentData.resumeFile) {
+      const link = document.createElement('a');
+      link.href = studentData.resumeFile;
+      link.download = `${studentData.fullName}_Resume.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   };
 
@@ -94,6 +105,15 @@ const StudentProfile = ({ profile }) => {
             <span><FaEnvelope /> {studentData.officialEmail}</span>
             <span><FaPhone /> {studentData.contactNo}</span>
           </div>
+          {studentData.resumeFile && (
+            <button 
+              className="resume-download-btn"
+              onClick={handleResumeDownload}
+              title="Download Resume"
+            >
+              <FaDownload /> Resume
+            </button>
+          )}
         </div>
       </div>
 
@@ -221,28 +241,48 @@ const StudentProfile = ({ profile }) => {
             <div className="info-card ojt-card">
               <h3>OJT Details</h3>
               <div className="ojt-grid">
-                <div className="info-item">
-                  <label>Company Name</label>
-                  <p>{studentData.ojt.companyName || 'Not provided'}</p>
+                {/* Company Details Column */}
+                <div className="ojt-column">
+                  <h4>Company Details</h4>
+                  <div className="info-item">
+                    <label>Company Name</label>
+                    <p>{studentData.ojt.companyName || 'Not provided'}</p>
+                  </div>
+                  <div className="info-item">
+                    <label>Joining Date</label>
+                    <p>{studentData.ojt.joiningDate || 'Not provided'}</p>
+                  </div>
                 </div>
-                <div className="info-item">
-                  <label>Project Title</label>
-                  <p>{studentData.ojt.projectTitle || 'Not provided'}</p>
+
+                {/* Project Details Column */}
+                <div className="ojt-column">
+                  <h4>Project Details</h4>
+                  <div className="info-item">
+                    <label>Project Title</label>
+                    <p>{studentData.ojt.projectTitle || 'Not provided'}</p>
+                  </div>
+                  <div className="info-item">
+                    <label>College Guide</label>
+                    <p>{studentData.ojt.collegeGuideName || 'Not provided'}</p>
+                  </div>
                 </div>
-                <div className="info-item">
-                  <label>Joining Date</label>
-                  <p>{studentData.ojt.joiningDate || 'Not provided'}</p>
-                </div>
-                <div className="info-item">
-                  <label>College Guide</label>
-                  <p>{studentData.ojt.collegeGuideName || 'Not provided'}</p>
-                </div>
-                <div className="info-item full-width">
-                  <label>Company Guide Details</label>
+
+                {/* Company Guide Column */}
+                <div className="ojt-column">
+                  <h4>Company Guide</h4>
                   <div className="guide-details">
-                    <p><strong>Name:</strong> {studentData.ojt.companyGuide.name || 'Not provided'}</p>
-                    <p><strong>Contact:</strong> {studentData.ojt.companyGuide.contactNo || 'Not provided'}</p>
-                    <p><strong>Email:</strong> {studentData.ojt.companyGuide.emailId || 'Not provided'}</p>
+                    <div className="info-item">
+                      <label>Name</label>
+                      <p>{studentData.ojt.companyGuide.name || 'Not provided'}</p>
+                    </div>
+                    <div className="info-item">
+                      <label>Contact</label>
+                      <p>{studentData.ojt.companyGuide.contactNo || 'Not provided'}</p>
+                    </div>
+                    <div className="info-item">
+                      <label>Email</label>
+                      <p>{studentData.ojt.companyGuide.emailId || 'Not provided'}</p>
+                    </div>
                   </div>
                 </div>
               </div>

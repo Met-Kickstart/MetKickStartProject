@@ -10,6 +10,7 @@ import CreatePlacementDrive  from '../components/Admin/CreatePlacementDrive';
 import PlacementDrives       from '../components/Admin/PlacementDrives';
 import PrepSessions          from '../components/Admin/PrepSessions';
 import MockAptitude          from '../components/Admin/MockAptitude'; // Add this import
+import MetShines             from '../components/Admin/MetShines';
 
 import './AdminDashboard.css';
 
@@ -76,6 +77,9 @@ const AdminDashboard = ({ onLogout }) => {
           {/* Mock Aptitude */}
           {activeTab === 'mock-aptitude-test' && <MockAptitude />}  {/* Add this line */}
           
+          {/* MetShines */}
+          {activeTab === 'met-shines' && <MetShines />}
+
           {/* Statistics (static demo) */}
           {activeTab === 'statistics' && (
             <div className="statistics-section">

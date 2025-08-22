@@ -281,6 +281,134 @@
   max-width: 300px;
 }
 
+.join-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #1976d2;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.join-link:hover {
+  background-color: #1565c0;
+}
+
+.test-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #2e7d32;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.test-link:hover {
+  background-color: #1b5e20;
+}
+
+.test-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.test-status {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.venue {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+}
+
+/* Add these new styles for aptitude test cards */
+.aptitude-tests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.aptitude-test-card {
+  background: var(--white-card);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.test-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.test-card-header h4 {
+  margin: 0;
+  color: var(--dark-text);
+  font-size: 1.2rem;
+}
+
+.company-badge {
+  background: var(--light-blue-bg);
+  color: var(--primary-blue);
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.test-description {
+  color: var(--light-text);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.test-meta {
+  font-size: 0.875rem;
+  color: var(--gray);
+}
+
+.available-until {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background: var(--light-gray-bg);
+  border-radius: 4px;
+}
+
+.practice-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--primary-red);
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.practice-link:hover {
+  background-color: var(--primary-red-dark);
+}
+
+.test-actions {
+  margin-top: auto;
+}
+
 @media screen and (max-width: 768px) {
   .test-process-container {
     padding: 1rem;
@@ -437,5 +565,13 @@
     padding-left: 0;
     width: 100%;
     text-align: left;
+  }
+
+  .aptitude-tests-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .aptitude-test-card {
+    padding: 1rem;
   }
 }

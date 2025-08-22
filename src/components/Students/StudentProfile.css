@@ -187,8 +187,9 @@
 
 .placement-stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: none;
   gap: 1.5rem;
+  padding: 0px;
 }
 
 .placement-stats .stat-item {
@@ -247,21 +248,29 @@
 
 .ojt-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
   padding: 1rem;
 }
 
-.ojt-grid .info-item.full-width {
-  grid-column: span 2;
+.ojt-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ojt-column h4 {
+  color: var(--dark);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #dee2e6;
 }
 
 .guide-details {
-  display: grid;
-  gap: 0.5rem;
-  padding: 1rem;
-  background: var(--zoho-light-purple);
-  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .stat-label {
@@ -299,6 +308,32 @@
   font-size: 0.875rem;
 }
 
+/* Update resume button styles */
+.resume-download-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  margin-top: 1rem;
+  background: #d32f2f; /* Changed from var(--zoho-blue) to var(--zoho-red) */
+  color: white;
+  border: 2px solid var(--zoho-red); /* Added border */
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(255, 65, 65, 0.2); /* Updated shadow color */
+}
+
+.resume-download-btn:hover {
+  background: transparent; /* Changed to transparent */
+  color: #d32f2f; /* Text color changes to red on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 65, 65, 0.3); /* Updated shadow color */
+}
+
+/* Update media query for mobile responsiveness */
 @media (max-width: 768px) {
   .profile-header {
     flex-direction: column;
@@ -322,5 +357,58 @@
 
   .placement-stats {
     grid-template-columns: 1fr;
+  }
+
+  .resume-download-btn {
+    margin: 1rem auto 0;
+  }
+}
+
+/* Update OJT Grid styles - make padding consistent */
+.ojt-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Remove the guide-details specific padding and background */
+.guide-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Make all info-items consistent across columns */
+.ojt-column .info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Remove any duplicate guide-details styles */
+.guide-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Update media query */
+@media (max-width: 992px) {
+  .ojt-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ojt-column:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .ojt-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ojt-column {
+    gap: 1rem;
   }
 }

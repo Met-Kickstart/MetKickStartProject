@@ -5,7 +5,7 @@ import './PlacementDrives.css';
 const PlacementDrives = () => {
   const [activeTab, setActiveTab] = useState('nomination');
   
-  // Example data - in real app, this would come from props or API
+  // Updated drives data to match admin's structure
   const drives = {
     nomination: [
       {
@@ -43,15 +43,15 @@ const PlacementDrives = () => {
         companyName: "Cloud Systems Corp",
         jobTitle: "Cloud Engineer",
         roundStatus: [
-          { name: "Shortlisted", status: "completed", date: "2025-08-01" },
-          { name: "Round 1", status: "completed", date: "2025-08-03" },
-          { name: " Round 2", status: "completed", date: "2025-08-05" },
-          { name: "Round 3", status: "current", date: "2025-08-07" },
-          { name: "Round 4", status: "upcoming" },
-          { name: "Round 5", status: "upcoming" },
-          { name: "HR Round", status: "upcoming" }
+          { name: "Shortlist", status: "completed", date: "2025-08-01" },
+          { name: "Aptitude/Written Test", status: "completed", date: "2025-08-03" },
+          { name: "Group Discussion", status: "current", date: "2025-08-05" },
+          { name: "Round 1", status: "upcoming" },
+          { name: "Round 2", status: "upcoming" },
+          { name: "Round 3", status: "upcoming" },
+          { name: "Round 4", status: "upcoming" }
         ],
-        currentRound: "Technical Round 1",
+        currentRound: "Group Discussion",
         status: "In Progress"
       },
       {
@@ -59,13 +59,11 @@ const PlacementDrives = () => {
         companyName: "Data Analytics Pro",
         jobTitle: "Data Scientist",
         roundStatus: [
-          { name: "Shortlisted", status: "completed", date: "2025-08-02" },
-          { name: "Round 1", status: "completed", date: "2025-08-04" },
-          { name: "Round 2", status: "completed", date: "2025-08-06" },
-          { name: "Round 3", status: "current", date: "2025-08-07" },
-          { name: "Round 4", status: "upcoming" },
-          { name: "Round 5", status: "upcoming" },
-          { name: "HR Round", status: "upcoming" }
+          { name: "Shortlist", status: "completed", date: "2025-08-02" },
+          { name: "Aptitude/Written Test", status: "completed", date: "2025-08-04" },
+          { name: "Group Discussion", status: "current", date: "2025-08-06" },
+          { name: "Round 1", status: "upcoming" },
+          { name: "Round 2", status: "upcoming" }
         ],
         currentRound: "Group Discussion",
         status: "In Progress"
@@ -80,9 +78,11 @@ const PlacementDrives = () => {
         location: "Pune",
         completedDate: "2025-07-25",
         rounds: [
-          { name: "Online Test", status: "Passed", score: "85/100" },
-          { name: "Technical Interview", status: "Passed", feedback: "Good technical knowledge" },
-          { name: "HR Interview", status: "Passed", feedback: "Cultural fit" }
+          { name: "Shortlist", status: "Passed", score: "Selected" },
+          { name: "Aptitude/Written Test", status: "Passed", score: "85/100" },
+          { name: "Group Discussion", status: "Passed", feedback: "Good communication skills" },
+          { name: "Round 1", status: "Passed", feedback: "Strong technical knowledge" },
+          { name: "Round 2", status: "Passed", feedback: "Excellent problem-solving" }
         ],
         finalStatus: "Selected",
         offerDetails: {
@@ -99,8 +99,10 @@ const PlacementDrives = () => {
         location: "Mumbai",
         completedDate: "2025-07-20",
         rounds: [
-          { name: "Aptitude Test", status: "Passed", score: "75/100" },
-          { name: "Technical Round", status: "Not Cleared", feedback: "Need improvement in system design concepts" }
+          { name: "Shortlist", status: "Passed", score: "Selected" },
+          { name: "Aptitude/Written Test", status: "Passed", score: "75/100" },
+          { name: "Group Discussion", status: "Passed", feedback: "Good team player" },
+          { name: "Round 1", status: "Not Cleared", feedback: "Need improvement in system design concepts" }
         ],
         finalStatus: "Not Selected",
         feedback: "Need more experience with system design patterns"
@@ -278,48 +280,13 @@ const PlacementDrives = () => {
                         <div className="round-result-header">
                           <span className="round-name">{round.name}</span>
                           <span className={`round-status ${round.status.toLowerCase()}`}>
-                            {round.status}
+                            {round.status === "Passed" ? "Cleared" : "Not Cleared"}
                           </span>
                         </div>
-                        {round.score && (
-                          <div className="round-score">Score: {round.score}</div>
-                        )}
-                        {round.feedback && (
-                          <div className="round-feedback">{round.feedback}</div>
-                        )}
                       </div>
                     ))}
                   </div>
                 </div>
-
-                {drive.finalStatus === "Selected" && drive.offerDetails && (
-                  <div className="offer-details">
-                    <h4>Offer Details</h4>
-                    <div className="offer-info">
-                      <div className="offer-item">
-                        <span className="label">Final CTC:</span>
-                        <span className="value">{drive.offerDetails.ctc}</span>
-                      </div>
-                      <div className="offer-item">
-                        <span className="label">Joining Date:</span>
-                        <span className="value">
-                          {new Date(drive.offerDetails.joiningDate).toLocaleDateString()}
-                        </span>
-                      </div>
-                      <div className="offer-item">
-                        <span className="label">Location:</span>
-                        <span className="value">{drive.offerDetails.location}</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {drive.finalStatus === "Not Selected" && drive.feedback && (
-                  <div className="feedback-section">
-                    <h4>Feedback</h4>
-                    <p className="feedback-text">{drive.feedback}</p>
-                  </div>
-                )}
               </div>
             ))}
           </div>

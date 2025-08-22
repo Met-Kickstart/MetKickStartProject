@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaSearch, FaUserGraduate, FaEdit, FaFileExcel } from 'react-icons/fa';
+import { FaSearch, FaUserGraduate, FaEdit, FaFileExcel, FaFileDownload } from 'react-icons/fa';
 import * as XLSX from 'xlsx';
 import './StudentManagement.css';
 
@@ -100,49 +100,38 @@ const StudentManagement = () => {
     }
   };
 
-  const handleFileImport = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (evt) => {
-        const data = evt.target.result;
-        const workbook = XLSX.read(data, { type: 'array' });
-        const sheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[sheetName];
-        const jsonData = XLSX.utils.sheet_to_json(worksheet);
-        
-        const newStudents = jsonData.map((row, index) => ({
-          id: students.length + index + 1,
-          rollNo: row['Roll No'] || '',
-          fullName: row['Full Name'] || '',
-          contactNo: row['Contact No'] || '',
-          officialEmail: row['Official Email ID'] || '',
-          personalEmail: row['Personal Email ID'] || '',
-          academics: {
-            tenthPercentage: row['10th Percentage'] || '',
-            twelfthPercentage: row['12th Percentage'] || '',
-            graduationStream: row['Graduation Stream'] || '',
-            graduationDegree: row['Graduation Degree'] || '',
-            university: row['University'] || '',
-            graduationCGPA: row['Graduation CGPA'] || '',
-            mbaFirstYearCGPA: row['MBA First Year CGPA'] || '',
-            mbaSpecialization: row['MBA Specialization'] || ''
-          },
-          companiesApplied: row['Companies Applied'] ? 
-            row['Companies Applied'].split(',').map(company => ({
-              name: company.trim(),
-              date: row[`${company.trim()} Date`] || new Date().toISOString().split('T')[0],
-              round: row[`${company.trim()} Round`] || 'Not Specified'
-            })) : [],
-          status: row['Status'] || 'Not Placed',
-          prepSessionsAttended: parseInt(row['Prep Sessions Attended']) || 0,
-          aptitudeTestsAttended: parseInt(row['Aptitude Tests Attended']) || 0
-        }));
-        
-        setStudents(prevStudents => [...prevStudents, ...newStudents]);
-      };
-      reader.readAsArrayBuffer(file);
-    }
+  const handleExport = () => {
+    // Create worksheet from students data
+    const worksheet = XLSX.utils.json_to_sheet(students.map(student => ({
+      'Roll No': student.rollNo,
+      'Full Name': student.fullName,
+      'Contact No': student.contactNo,
+      'Official Email ID': student.officialEmail,
+      'Personal Email ID': student.personalEmail,
+      '10th Percentage': student.academics.tenthPercentage,
+      '12th Percentage': student.academics.twelfthPercentage,
+      'Graduation Stream': student.academics.graduationStream,
+      'Graduation Degree': student.academics.graduationDegree,
+      'University': student.academics.university,
+      'Graduation CGPA': student.academics.graduationCGPA,
+      'MBA First Year CGPA': student.academics.mbaFirstYearCGPA,
+      'MBA Specialization': student.academics.mbaSpecialization,
+      'Prep Sessions Attended': student.prepSessionsAttended,
+      'Aptitude Tests Attended': student.aptitudeTestsAttended,
+      'Companies Appeared': student.companiesAppeared?.length || 0,
+      'Status': student.status
+    })));
+
+    // Create workbook and append worksheet
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Students Data');
+
+    // Generate file name with current date
+    const date = new Date().toISOString().split('T')[0];
+    const fileName = `students_data_${date}.xlsx`;
+
+    // Export workbook
+    XLSX.writeFile(workbook, fileName);
   };
 
   const getStatusBadgeClass = (status) => {
@@ -164,16 +153,9 @@ const StudentManagement = () => {
           <p>Manage and track student records</p>
         </div>
         <div className="import-section">
-          <label htmlFor="fileInput" className="import-btn">
-            <FaFileExcel /> Import Excel
-            <input
-              id="fileInput"
-              type="file"
-              accept=".xlsx, .xls"
-              onChange={handleFileImport}
-              style={{ display: 'none' }}
-            />
-          </label>
+          <button onClick={handleExport} className="import-btn">
+            <FaFileDownload /> Export Excel
+          </button>
         </div>
       </div>
 

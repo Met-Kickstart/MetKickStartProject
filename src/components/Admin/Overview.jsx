@@ -8,31 +8,31 @@ const Overview = () => {
       icon: <FaUsers />,
       number: '240',
       label: 'Total Students',
-      color: '#d32f2f'  // Light red
+      className: 'stat-red'
     },
     {
       icon: <FaUserGraduate />,
       number: '180',
       label: 'Placed Students',
-      color: '#1e88e5'  // Blue
+      className: 'stat-blue'
     },
     {
       icon: <FaBuilding />,
       number: '25',
       label: 'Companies Arrived',
-      color: '#43a047'  // Green
+      className: 'stat-green'
     },
     {
       icon: <FaBook />,
       number: '42',
       label: 'Prep Sessions',
-      color: '#ffa000'  // Yellow
+      className: 'stat-yellow'
     },
     {
       icon: <FaCalculator />,
       number: '15',
       label: 'Aptitude Tests',
-      color: '#ff5722'  // Orange/Float color
+      className: 'stat-orange'
     }
   ];
 
@@ -65,19 +65,12 @@ const Overview = () => {
       <div className="overview-container">
         <div className="stats-grid">
           {stats.map((stat, index) => (
-            <div 
-              className="stat-card" 
-              key={index}
-              style={{ 
-                borderLeft: `4px solid ${stat.color}`,
-                background: `${stat.color}08` // Very light version of the color
-              }}
-            >
-              <div className="stat-icon" style={{ backgroundColor: `${stat.color}15`, color: stat.color }}>
+            <div className={`stat-card ${stat.className}`} key={index}>
+              <div className="stat-icon">
                 {stat.icon}
               </div>
               <div className="stat-details">
-                <h3 style={{ color: stat.color }}>{stat.number}</h3>
+                <h3>{stat.number}</h3>
                 <p>{stat.label}</p>
               </div>
             </div>

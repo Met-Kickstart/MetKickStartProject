@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaUsers, FaBuilding, FaChartBar, FaBriefcase, FaGraduationCap, FaChartPie, FaMailBulk,FaBook } from 'react-icons/fa';
+import { FaUsers, FaBuilding, FaChartBar, FaBriefcase, FaGraduationCap, FaChartPie, FaMailBulk, FaBook, FaStar } from 'react-icons/fa';
 
 const AdminMenu = ({ activeTab, setActiveTab }) => {
   const menuItems = [
@@ -13,7 +13,12 @@ const AdminMenu = ({ activeTab, setActiveTab }) => {
       label: 'Mock Aptitude Tests', 
       icon: <FaBook /> 
     },
-    { id: 'statistics', label: 'Statistics', icon: <FaChartPie /> }
+    { id: 'statistics', label: 'Statistics', icon: <FaChartPie /> },
+    {
+      id: 'met-shines',
+      label: 'MET Shines',
+      icon: <FaStar />
+    }
   ];
 
   return (

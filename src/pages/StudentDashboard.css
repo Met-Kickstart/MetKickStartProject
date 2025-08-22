@@ -90,27 +90,23 @@
 
 /* Stat card colors using Overview.css variables */
 .stat-card.aptitude {
-  border-top: 4px solid var(--stat-red);
-  background: linear-gradient(135deg, rgba(var(--stat-red), 0.15) 0%, rgba(var(--stat-red), 0.05) 100%);
-  background-color: rgba(211, 47, 47, 0.08);
+  border-left: 4px solid var(--stat-red);
+  background: linear-gradient(135deg, rgba(211, 47, 47, 0.15) 0%, rgba(211, 47, 47, 0.05) 100%);
 }
 
 .stat-card.drives {
-  border-top: 4px solid var(--stat-blue);
-  background: linear-gradient(135deg, rgba(var(--stat-blue), 0.15) 0%, rgba(var(--stat-blue), 0.05) 100%);
-  background-color: rgba(30, 136, 229, 0.08);
+  border-left: 4px solid var(--stat-blue);
+  background: linear-gradient(135deg, rgba(30, 136, 229, 0.15) 0%, rgba(30, 136, 229, 0.05) 100%);
 }
 
 .stat-card.companies {
-  border-top: 4px solid var(--stat-green);
-  background: linear-gradient(135deg, rgba(var(--stat-green), 0.15) 0%, rgba(var(--stat-green), 0.05) 100%);
-  background-color: rgba(67, 160, 71, 0.08);
+  border-left: 4px solid var(--stat-green);
+  background: linear-gradient(135deg, rgba(67, 160, 71, 0.15) 0%, rgba(67, 160, 71, 0.05) 100%);
 }
 
 .stat-card.sessions {
-  border-top: 4px solid var(--stat-yellow);
-  background: linear-gradient(135deg, rgba(var(--stat-yellow), 0.15) 0%, rgba(var(--stat-yellow), 0.05) 100%);
-  background-color: rgba(255, 160, 0, 0.08);
+  border-left: 4px solid var(--stat-yellow);
+  background: linear-gradient(135deg, rgba(255, 160, 0, 0.15) 0%, rgba(255, 160, 0, 0.05) 100%);
 }
 
 .stat-header {
@@ -590,40 +586,108 @@
   transition: width 0.3s ease;
 }
 
+.student-menu {
+  background: var(--white);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 100px;
+  height: calc(100vh - 140px);
+  overflow-y: auto;
+  width: 250px;
+  flex-shrink: 0;
+}
+
+.student-menu nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.student-menu .menu-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%;
+  border: none;
+  background: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--light-text);  /* Updated from var(--gray) */
+}
+
+.student-menu .menu-item:hover {
+  background: var(--light-gray-bg);  /* Updated from var(--light-gray) */
+  color: var(--primary-red);  /* Updated from var(--primary) */
+}
+
+.student-menu .menu-item.active {
+  background: var(--primary-red);  /* Updated from var(--primary) */
+  color: #ffffff !important;  /* Force white color */
+}
+
+.student-menu .menu-item .icon {
+  font-size: 1.2rem;
+}
+
+.student-menu .menu-item.active .icon,
+.student-menu .menu-item.active .label {
+  color: #ffffff;  /* Ensure both icon and label are white when active */
+}
+
+@media (max-width: 1024px) {
+  .student-menu {
+    width: 80px;
+    padding: 1rem 0;
+  }
+
+  .menu-item .label {
+    display: none;
+  }
+
+  .menu-item {
+    justify-content: center;
+    padding: 1rem;
+  }
+}
+
 @media (max-width: 768px) {
-  .aptitude-stats,
-  .profile-forms,
-  .prep-stats,
-  .drives-stats {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  .student-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    top: auto;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0.5rem;
+    z-index: 1000;
+    border-radius: 0;
   }
-  
-  .session-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
-  
-  .session-item .progress-info {
+
+  .student-menu nav {
+    flex-direction: row;
+    justify-content: space-around;
     width: 100%;
   }
-  
-  .session-item .progress-text {
-    text-align: left;
-  }
-  
-  .test-item {
+
+  .menu-item {
+    padding: 0.5rem;
     flex-direction: column;
-    align-items: flex-start;
     gap: 0.5rem;
+    font-size: 0.8rem;
   }
-  
-  .progress-info {
-    width: 100%;
+
+  .menu-item .icon {
+    font-size: 1rem;
   }
-  
-  .progress-text {
-    text-align: left;
+
+  .menu-item .label {
+    display: block;
+    font-size: 0.75rem;
   }
 }
